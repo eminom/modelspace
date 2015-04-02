@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{AA455A38-F889-4C37-8FA5-A84D13194828}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>ModelTestWin</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>GLEW_STATIC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)\external\libcjson;$(SolutionDir)\;$(SolutionDir)\external\tolua\;$(SolutionDir)\external\lua-5.1.4\src;$(SolutionDir)\ModelTestWin;$(SolutionDir)\external\glm;$(SolutionDir)\external\glew-1.12.0\include;$(SolutionDir)\external\glfw-3.1\include\GLFW;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)\Output\Libs\Debug\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libcjson.lib;lua.lib;glu32.lib;opengl32.lib;glfw3.lib;glewd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ImageHasSafeExceptionHandlers>true</ImageHasSafeExceptionHandlers>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\common\shader.cpp" />
+    <ClCompile Include="..\common\text2D.cpp" />
+    <ClCompile Include="..\common\texture.cpp" />
+    <ClCompile Include="AppController.cpp" />
+    <ClCompile Include="Director.cpp" />
+    <ClCompile Include="InputProcessor.cpp" />
+    <ClCompile Include="InputStdProcessor.cpp" />
+    <ClCompile Include="interop\class\exports.cpp" />
+    <ClCompile Include="interop\class\lextension.c" />
+    <ClCompile Include="interop\lua_access\lua_access.cpp" />
+    <ClCompile Include="interop\lua_access\refobj.cpp" />
+    <ClCompile Include="interop\lua_access\refproto.cpp" />
+    <ClCompile Include="interop\lua_access\refprotobase.cpp" />
+    <ClCompile Include="interop\lua_core\lua_core.cpp" />
+    <ClCompile Include="interop\lua_core\mcore.cpp" />
+    <ClCompile Include="LuaScriptor.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="model\ObjectModel.cpp" />
+    <ClCompile Include="nodes\AxisNode.cpp" />
+    <ClCompile Include="nodes\BlenderNode.cpp" />
+    <ClCompile Include="nodes\BlenderNormal.cpp" />
+    <ClCompile Include="nodes\BoxNode.cpp" />
+    <ClCompile Include="nodes\CubeNode.cpp" />
+    <ClCompile Include="nodes\DDNodes.h" />
+    <ClCompile Include="nodes\EsNode.cpp" />
+    <ClCompile Include="nodes\FieldNode.cpp" />
+    <ClCompile Include="nodes\GridNode.cpp" />
+    <ClCompile Include="nodes\LightNode.cpp" />
+    <ClCompile Include="nodes\MimicNode.cpp" />
+    <ClCompile Include="nodes\PrimitiveNode.cpp" />
+    <ClCompile Include="shaderman\exshader.cc" />
+    <ClCompile Include="shaderman\shadercache.cc" />
+    <ClCompile Include="test\test_lua.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\common\shader.hpp" />
+    <ClInclude Include="..\common\text2D.hpp" />
+    <ClInclude Include="..\common\texture.hpp" />
+    <ClInclude Include="AppController.h" />
+    <ClInclude Include="Director.h" />
+    <ClInclude Include="InputHost.h" />
+    <ClInclude Include="InputProcessor.h" />
+    <ClInclude Include="InputStdProcessor.h" />
+    <ClInclude Include="interop\class\exports.h" />
+    <ClInclude Include="interop\class\lextension.h" />
+    <ClInclude Include="interop\lua_access\lua_access.h" />
+    <ClInclude Include="interop\lua_access\lua_access_macros.h" />
+    <ClInclude Include="interop\lua_access\refobj.h" />
+    <ClInclude Include="interop\lua_access\refproto.h" />
+    <ClInclude Include="interop\lua_access\refprotobase.h" />
+    <ClInclude Include="interop\lua_core\lua_core.h" />
+    <ClInclude Include="interop\lua_core\mcore.h" />
+    <ClInclude Include="LightProtocol.h" />
+    <ClInclude Include="LuaScriptor.h" />
+    <ClInclude Include="model\ObjectModel.h" />
+    <ClInclude Include="nodes\AxisNode.h" />
+    <ClInclude Include="nodes\BlenderNode.h" />
+    <ClInclude Include="nodes\BlenderNormal.h" />
+    <ClInclude Include="nodes\BoxNode.h" />
+    <ClInclude Include="nodes\CubeNode.h" />
+    <ClInclude Include="nodes\EsNode.h" />
+    <ClInclude Include="nodes\FieldNode.h" />
+    <ClInclude Include="nodes\graphics\DDApi.h" />
+    <ClInclude Include="nodes\graphics\DDGraphics.h" />
+    <ClInclude Include="nodes\graphics\DDStruct.h" />
+    <ClInclude Include="nodes\GridNode.h" />
+    <ClInclude Include="nodes\LightNode.h" />
+    <ClInclude Include="nodes\MimicNode.h" />
+    <ClInclude Include="nodes\PrimitiveNode.h" />
+    <ClInclude Include="protocols.h" />
+    <ClInclude Include="shaderman\exshader.h" />
+    <ClInclude Include="shaderman\shadercache.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="interop\class\EsNode.inc" />
+    <None Include="interop\class\inc\EsNode.stru" />
+    <None Include="shaders\Diffuse.vsh" />
+    <None Include="shaders\Diffuse.fsh" />
+    <None Include="shaders\MimicShader.fsh" />
+    <None Include="shaders\MimicShader.vsh" />
+    <None Include="shaders\SimpleFragmentShader.fsh" />
+    <None Include="shaders\SimpleVertexShader.vsh" />
+    <None Include="shaders\TextVertexShader.fsh" />
+    <None Include="shaders\TextVertexShader.vsh" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
