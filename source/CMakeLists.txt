@@ -135,7 +135,7 @@ source_group(test FILES ${SRC_LIST})
 #############################
 
 set(COMM_SRC 
-	../common/controls.cpp
+	#../common/controls.cpp
 	../common/controls.hpp
 	../common/objloader.cpp
 	../common/objloader.hpp
@@ -168,7 +168,7 @@ include_directories(../source)
 
 
 target_link_libraries(modelspace liblua)
-target_link_libraries(modelspace libglew_static)
+target_link_libraries(modelspace libglew_shared)
 target_link_libraries(modelspace glfw)
 target_link_libraries(modelspace libcjson)
 
