@@ -200,5 +200,5 @@ function AppObj:doTest()
 end
 
 math.randomseed(os.time())
-
+-- return 100
 return AppObj

@@ -159,17 +159,26 @@ void AppController::mainLoop()
 	_appObjRef.execVoid("OnAppReady");
 	CheckGL()
 	do{
-		startFramebuffer();
-		glClear( GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT );
-		_appObjRef.execVoid("Update");
-		printText2D(_inPro->info(), 0 , 700, 30);
-		double now = glfwGetTime();
-		float dt = float(now - _lastTime);
-		_lastTime = now;
-		_director->updateNode(dt);
-		glm::mat4 mvp = getMVP();
-		_director->render(mvp);
-		finalizeFramebuffer();
+		auto drawer = [this](){
+			glClear( GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT );
+			_appObjRef.execVoid("Update");
+			printText2D(_inPro->info(), 0 , 700, 30);
+			double now = glfwGetTime();
+			float dt = float(now - _lastTime);
+			_lastTime = now;
+			_director->updateNode(dt);
+			glm::mat4 mvp = getMVP();
+			_director->render(mvp);
+		};
+
+		if(1){
+			startFramebuffer();
+			drawer();
+			finalizeFramebuffer();
+		} else {
+			drawer();
+		}
+
 		glfwSwapBuffers(_window);
 		glfwPollEvents();
 	} while( glfwGetKey(_window, GLFW_KEY_ESCAPE ) != GLFW_PRESS && glfwWindowShouldClose(_window) == 0 );

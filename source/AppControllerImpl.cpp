@@ -5,7 +5,6 @@
 
 void AppController::test()
 {
-	return;
 	// Not opened yet??
 	GLint multisampling = 0;
 	glGetIntegerv(GL_SAMPLE_BUFFERS , &multisampling);
@@ -96,7 +95,7 @@ void AppController::finalizeFramebuffer()
 	glBindTexture(GL_TEXTURE_2D, framebuffer_.texture());
 
 	shader->use();
-	glUniform1f(time, glfwGetTime() * 10.0f);
+	glUniform1f(time, glfwGetTime()*10.0f);
 	glUniform1i(tex, 0);	//~ texture unit0
 
 	glEnableVertexAttribArray(0);
