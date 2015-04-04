@@ -36,7 +36,7 @@
 int main(void)
 {
 	AppController app;
-	if (!app.initAppGL(4,4, GLFW_OPENGL_CORE_PROFILE))
+	if (!app.initAppGL(4,1, GLFW_OPENGL_CORE_PROFILE))
 	{
 		return -1;
 	}
