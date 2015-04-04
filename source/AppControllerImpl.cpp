@@ -26,15 +26,21 @@ void AppController::test()
 	}
 
 	if( glIsEnabled(GL_SCISSOR_TEST) ){
-		printf("Scissor test is enabled");
+		printf("Scissor test is enabled\n");
 		GLint box[4];
 		glGetIntegerv(GL_SCISSOR_BOX, box);
+        
 	} else {
-		printf("Scissor test is disabled");
-		glEnable(GL_SCISSOR_TEST);
-		int h_margin = 0;
-		int v_margin = 0;
-		glScissor(h_margin, v_margin, screen_width_-h_margin * 2, screen_height_ - v_margin * 2);
+		printf("Scissor test is disabled\n");
+		//glEnable(GL_SCISSOR_TEST);
+        //GLint box[4] = {0};
+        //glGetIntegerv(GL_SCISSOR_BOX, box);
+		//int h_margin = 0;
+		//int v_margin = 0;
+		//glScissor(h_margin, v_margin, screen_width_-h_margin * 2, screen_height_ - v_margin * 2);
+        //memset(box, 0, sizeof(box));
+        //glGetIntegerv(GL_SCISSOR_BOX, box);
+        //printf("%f, %f,  %f, %f\n", box[0], box[1], box[2], box[3]);
 	}
 
 	/*  // Weird.
