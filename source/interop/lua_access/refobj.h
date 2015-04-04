@@ -11,19 +11,26 @@ public:
 	RefObject();
 	RefObject(const char *name);
 	virtual ~RefObject();
-	void copy(const RefObject&);
+	RefObject& copy(const RefObject&);
 	void loadRef(const char *name);
-	void loadFromTop();			//Always pop the stack by 1.
 	void loadFromFunc(const char *name);
+	bool require(const char *path);			//Always pop the stack by 1.
 
 public:
 	virtual int tableRef()const override;
 	virtual void createTableRef() override;
 
-private:
-	int _ref;
+	//Now we can copy. and do assignment.
 	RefObject& operator=(const RefObject&);
 	RefObject(const RefObject&);
+
+private:
+	void deinit();
+	void take(int refIndex);
+	
+private:
+	int _ref;
+	int *_ref_count;
 };
 
 

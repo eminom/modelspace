@@ -190,31 +190,7 @@ int AppController::initAppGL(int major, int minor, int hint)
 
 bool AppController::loadObject()
 {
-	_DeclareState()
-
-	int traceback = 0;
-	lua_getglobal(L, _GTrackBack);
-	if( lua_isfunction(L, -1)){
-		traceback = -2;
-	}
-	luaL_loadfile(L, "script.lua");
-	if( lua_pcall(L, 0, 1, traceback) ){
-		lua_pop(L, 2);	/// skip the error message
-		assert( top == lua_gettop(L) );
-		printf("Error executing script\n");
-		assert(0);
-		return false;
-	}
-	if(!lua_istable(L, -1)){
-		printf("I need a table for this\n");
-		lua_pop(L, 2);
-		assert( top == lua_gettop(L));
-		assert( 0 );
-		return false;
-	}
-	_appObjRef.loadFromTop();
-	lua_pop(L, 1);
-	assert( top == lua_gettop(L));	//Balance
+	return _appObjRef.require("script.lua");
 }
 
 void AppController::setDirector(EsDirector *director)

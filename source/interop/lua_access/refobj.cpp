@@ -3,40 +3,97 @@
 #include "refobj.h"
 
 RefObject::RefObject()
-	:_ref(LUA_REFNIL){
-
+	:_ref(LUA_REFNIL),
+	_ref_count(nullptr){
 }
 
-RefObject::~RefObject(){
-	ljReleaseObj(_ref);
-}
-
-RefObject::RefObject(const char *name){
+RefObject::RefObject(const char *name)
+	:_ref(LUA_REFNIL),
+	_ref_count(nullptr)
+{
 	loadRef(name);
 }
 
-void RefObject::loadRef(const char *name) {
-	ljReleaseObj(_ref);
-	_ref = ljLoadObj(name);
-	assert(_ref != LUA_REFNIL);
+RefObject::RefObject(const RefObject& rhs)
+	:_ref(LUA_REFNIL),
+	_ref_count(nullptr)
+{
+	copy(rhs);
 }
 
-void RefObject::loadFromTop(){
-	ljReleaseObj(_ref);
-	
-	_DeclareState()
-	if( !lua_istable(L, -1)){
-		printf("Not a table , sorry !\n");
-		lua_pop(L, 1);   // always balance the stack
-		assert(0);
-		return;
+RefObject& RefObject::copy(const RefObject &rhs)
+{
+	deinit();
+	if(rhs._ref != LUA_REFNIL){
+		_ref = rhs._ref;
+		_ref_count = rhs._ref_count;
+		++(*_ref_count);
 	}
-	_ref = luaL_ref(L, LUA_REGISTRYINDEX);
-	assert(_ref != LUA_REFNIL);
+	return *this;
+}
+
+RefObject& RefObject::operator=(const RefObject&rhs)
+{
+	return copy(rhs);
+}
+
+RefObject::~RefObject(){
+	deinit();
+}
+
+void RefObject::deinit(){
+	if(_ref!=LUA_REFNIL){
+		--(*_ref_count);
+		if(0==*_ref_count){
+			ljReleaseObj(_ref);
+			delete _ref_count;
+			_ref_count = 0;
+		}
+	}
+}
+
+void RefObject::take(int refIndex){
+	assert(LUA_REFNIL == _ref);
+	assert( ! _ref_count);
+	assert( LUA_REFNIL != refIndex);
+	_ref = refIndex;
+	_ref_count = new int(1);
+}
+
+
+void RefObject::loadRef(const char *name) {
+	deinit();	//`!
+	take(ljLoadObj(name));
+}
+
+bool RefObject::require(const char *path){
+	deinit();
+	_DeclareState()
+	int traceback = 0;
+	lua_getglobal(L, _GTrackBack);
+	if( lua_isfunction(L, -1)){
+		traceback = -2;
+	}
+	luaL_loadfile(L, path);
+	if( lua_pcall(L, 0, 1, traceback) ){
+		lua_pop(L, 2);	/// skip the error message and the tracker
+		assert( top == lua_gettop(L) );
+		fprintf(stderr, "Error executing script %s\n", path);
+		return false;
+	}
+	if(!lua_istable(L, -1)){
+		fprintf(stderr, "I need a table for this\n");
+		lua_pop(L, 2); //both result(1) and the tracker
+		assert( top == lua_gettop(L));
+		return false;
+	}
+	take(luaL_ref(L, LUA_REGISTRYINDEX));
+	lua_pop(L, 1);
+	assert( top == lua_gettop(L));
 }
 
 void RefObject::loadFromFunc(const char *name){
-	ljReleaseObj(_ref);
+	deinit();
 	_DeclareState()
 	int traceback = 0;
 	lua_getglobal(L, _GTrackBack);
@@ -45,20 +102,20 @@ void RefObject::loadFromFunc(const char *name){
 	}
 	lua_getglobal(L, name);
 	if(!lua_isfunction(L, -1)){
-		printf("No a function for %s\n", name);
+		fprintf(stderr, "No a function for %s\n", name);
 		lua_pop(L, 2);
 		assert( top == lua_gettop(L));
 		assert(0);
 		return;
 	}
 	if( lua_pcall(L, 0, 1, traceback)){
-		printf("Error running %s\n", name);
+		fprintf(stderr, "Error running %s\n", name);
 		lua_pop(L, 2);
 		assert( top == lua_gettop(L));
 		assert(0);
 		return;
 	}
-	_ref = luaL_ref(L, LUA_REGISTRYINDEX);
+	take(luaL_ref(L, LUA_REGISTRYINDEX));
 	lua_pop(L, 1);
 	assert( top == lua_gettop(L));
 	assert( _ref != LUA_REFNIL);
