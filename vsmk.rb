@@ -1,3 +1,4 @@
+#! /usr/local/bin/ruby
 
 ##################################
 # No copyright
@@ -10,9 +11,19 @@
 
 require "fileutils"
 
+def target_ide
+	if RUBY_PLATFORM =~ /mingw/ then
+		return "Visual Studio 11"
+	elsif RUBY_PLATFORM =~ /linux/ then
+		throw Exception.new("Linux not set yet")
+	elsif RUBY_PLATFORM =~ /darwin/ then
+		return "Xcode"
+	end
+	throw Exception.new("target_ide cannot determine")
+end
+
 build_dir = "build"
 source_dir = "source"
-target_ide = "Visual Studio 11"
 
 #puts __FILE__
 curr_path = File.absolute_path(File.dirname(__FILE__.encode('UTF-8')))
