@@ -39,7 +39,7 @@ void RefObject::loadFromFunc(const char *name){
 	ljReleaseObj(_ref);
 	_DeclareState()
 	int traceback = 0;
-	lua_getglobal(L, "__G__TRACKBACK__");
+	lua_getglobal(L, _GTrackBack);
 	if(lua_isfunction(L, -1)){
 		traceback = -2;
 	}

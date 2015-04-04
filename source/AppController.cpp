@@ -4,6 +4,7 @@
 #include "LuaScriptor.h"
 #include "InputStdProcessor.h"
 #include "InputProcessor.h"
+#include "interop/lua_access/lua_access_macros.h"
 #include <common/text2D.hpp>
 
 
@@ -189,11 +190,10 @@ int AppController::initAppGL(int major, int minor, int hint)
 
 bool AppController::loadObject()
 {
-	lua_State *L = LuaScriptor::sharedInstance()->getLuaState();
-	int top = lua_gettop(L);
+	_DeclareState()
 
 	int traceback = 0;
-	lua_getglobal(L, "__G__TRACKBACK__");
+	lua_getglobal(L, _GTrackBack);
 	if( lua_isfunction(L, -1)){
 		traceback = -2;
 	}

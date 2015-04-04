@@ -12,6 +12,8 @@ struct lua_State;
 #define log(...)	printf(__VA_ARGS__);
 
 
+
+
 #ifndef CCLog
 #define CCLog(...)	{fprintf(stderr, __VA_ARGS__); fprintf(stderr,"\n");}
 #endif
@@ -49,7 +51,7 @@ struct lua_State;
 	_DeclareState()	\
 	int top = lua_gettop(L);\
 	int traceback = 0;\
-	lua_getglobal(L, "__G__TRACKBACK__");\
+	lua_getglobal(L, _GTrackBack);\
 	if(lua_isfunction(L, -1)){\
 		traceback = -2;\
 	}\
@@ -79,7 +81,7 @@ struct lua_State;
 	_DeclareState()		\
 	int top = lua_gettop(L);\
 	int traceback = 0;\
-	lua_getglobal(L, "__G__TRACKBACK__");\
+	lua_getglobal(L, _GTrackBack);\
 	if(lua_isfunction(L, -1)){\
 		traceback = -2;\
 	}\
@@ -110,7 +112,7 @@ struct lua_State;
 	_DeclareState()		\
 	int top = lua_gettop(L);\
 	int traceback = 0;\
-	lua_getglobal(L, "__G__TRACKBACK__");\
+	lua_getglobal(L, _GTrackBack);\
 	if(lua_isfunction(L, -1)){\
 		traceback = -2;\
 	}\
@@ -219,7 +221,7 @@ struct lua_State;
 	\
 	int traceback = 0;\
 	int funcIndex = -(parameterCount+1);\
-    lua_getglobal(L, "__G__TRACKBACK__");\
+    lua_getglobal(L, _GTrackBack);\
     if (!lua_isfunction(L, -1))\
     {\
         lua_pop(L, 1);\

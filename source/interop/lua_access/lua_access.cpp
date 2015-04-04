@@ -221,7 +221,7 @@ void ljRunObjVoidSelfUserData(int ref, const char *name, bool *result, void *p) 
 	int parameterCount = 2;
 	int traceback = 0;
 	int funcIndex = -(parameterCount+1);
-    lua_getglobal(L, "__G__TRACKBACK__");
+    lua_getglobal(L, _GTrackBack);
     if (!lua_isfunction(L, -1))
     {
         lua_pop(L, 1);
@@ -292,7 +292,7 @@ int ljCreateTableFromFuncRef(int ref, int retvals, int(*checker)(lua_State *L, i
         return LUA_REFNIL;
     }
     int traceback = 0;
-    lua_getglobal(L, "__G__TRACKBACK__");                         /* L: ... func arg1 arg2 ... G */
+    lua_getglobal(L, _GTrackBack);                         /* L: ... func arg1 arg2 ... G */
     if (!lua_isfunction(L, -1)) {
         lua_pop(L, 1);                                            /* L: ... func arg1 arg2 ... */
     } else  {
@@ -342,7 +342,7 @@ int ljLoadFuncHandle(const char *name) {
     }
 
     int traceback = 0;
-    lua_getglobal(L, "__G__TRACKBACK__");                         /* L: ... func arg1 arg2 ... G */
+    lua_getglobal(L, _GTrackBack);                         /* L: ... func arg1 arg2 ... G */
     if (!lua_isfunction(L, -1))  {
         lua_pop(L, 1);                                            /* L: ... func arg1 arg2 ... */
     } else {
