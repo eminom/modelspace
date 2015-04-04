@@ -13,13 +13,16 @@ add_subdirectory(../external/cJSON ${CMAKE_BINARY_DIR}/lib/cJSON)
 set(SRC_LIST
 ./AppController.h
 ./Director.h
+./FrameBufferObj.h
 ./InputHost.h
 ./InputProcessor.h
 ./InputStdProcessor.h
 ./LightProtocol.h
 ./LuaScriptor.h
 ./protocols.h
+./FrameBufferObj.cc
 ./AppController.cpp
+./AppControllerImpl.cpp
 ./Director.cpp
 ./InputProcessor.cpp
 ./InputStdProcessor.cpp
@@ -27,6 +30,7 @@ set(SRC_LIST
 ./main.cpp
 )
 set(FULL_SRC_LIST ${FULL_SRC_LIST} ${SRC_LIST})
+source_group(Source FILES ${SRC_LIST})
 
 
 set(SRC_LIST
@@ -122,6 +126,7 @@ set(SRC_LIST
 )
 set(FULL_SRC_LIST ${FULL_SRC_LIST} ${SRC_LIST})
 source_group(test FILES ${SRC_LIST})
+
 
 
 

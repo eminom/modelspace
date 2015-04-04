@@ -32,6 +32,8 @@ Dir.glob("./**/") do |path|
 		if group_name.length > 0 then
 			group_name = group_name.split('/').join('\\\\')
 			outs "source_group(#{group_name} FILES ${#{src_list_name}})"
+		else
+			outs "source_group(Source FILES ${#{src_list_name}})"
 		end
 	end
 	puts ""
