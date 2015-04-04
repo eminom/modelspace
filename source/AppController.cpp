@@ -8,6 +8,8 @@
 
 AppController* _instance = nullptr;
 
+const char* AppController::WindowsTitle = "ModelSpace";
+
 AppController& AppController::sharedInstance()
 {
 	assert(_instance);
@@ -96,7 +98,7 @@ int AppController::initAppGL(int major, int minor, int hint)
 	glfwWindowHint(GLFW_ALPHA_BITS, 8);	//~ suggesting an alpha layer.
 
 	// Open a window and create its OpenGL context
-	GLFWwindow *window = glfwCreateWindow( 1024, 768, "Tutorial 02 - Red triangle", NULL, NULL);
+	GLFWwindow *window = glfwCreateWindow( 1024, 768, AppController::WindowsTitle, NULL, NULL);
 	if (! window) {
 		fprintf( stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n" );
 		glfwTerminate();

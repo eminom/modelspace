@@ -56,6 +56,8 @@ private:
 
 	RefObject _appObjRef;
 	InputHost *_inPro;
+
+	static const char *WindowsTitle;
 };
 
 #endif
