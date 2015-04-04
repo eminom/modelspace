@@ -6,6 +6,10 @@
 #include "InputProcessor.h"
 #include <common/text2D.hpp>
 
+
+#define DefaultScreenWidth	1024
+#define DefaultScreenHeight	768
+
 AppController* _instance = nullptr;
 
 const char* AppController::WindowsTitle = "ModelSpace";
@@ -31,6 +35,9 @@ AppController::AppController()
 	assert(!_instance);
 	_instance = this;
 	_inPro = nullptr;
+
+	screen_width_ = DefaultScreenWidth;
+	screen_height_= DefaultScreenHeight;
 }
 
 
@@ -80,6 +87,52 @@ void AppController::closeCallback(GLFWwindow *window)
 	//
 }
 
+void AppController::test()
+{
+	// Not opened yet??
+	GLint multisampling = 0;
+	glGetIntegerv(GL_SAMPLE_BUFFERS , &multisampling);
+	if (1==multisampling) {
+		printf("Multi-sampling is enabled");
+		glEnable(GL_MULTISAMPLE);
+
+		GLint sampleCount = 0;
+		glGetIntegerv(GL_SAMPLES, &sampleCount);
+		for(int i=0;i<sampleCount;++i){
+			GLfloat pos[4] = {0};   // a float pair indicating the offsets
+			auto ptr = glGetMultisamplefv; // void(unsigned int, unsigned int, float *)
+			if(ptr) {
+				// Which is missing on window platform. (Mine)
+				glGetMultisamplefv(GL_SAMPLE_POSITION, i, pos);
+				printf("Sample[%d] offset is (%f,%f)\n", i, pos[0], pos[1]);
+			}
+		}
+	}
+
+	if( glIsEnabled(GL_SCISSOR_TEST) ){
+		printf("Scissor test is enabled");
+		GLint box[4];
+		glGetIntegerv(GL_SCISSOR_BOX, box);
+	} else {
+		printf("Scissor test is disabled");
+		glEnable(GL_SCISSOR_TEST);
+		int h_margin = 0;
+		int v_margin = 0;
+		glScissor(h_margin, v_margin, screen_width_-h_margin * 2, screen_height_ - v_margin * 2);
+	}
+
+	/*  // Weird.
+	if(glIsEnabled(GL_COLOR_LOGIC_OP)){
+		glLogicOp(GL_OR);
+	} else {
+		printf("Logic op is disabled by default\n");
+		glEnable(GL_COLOR_LOGIC_OP);
+		assert(glIsEnabled(GL_COLOR_LOGIC_OP));
+		glLogicOp(GL_COPY);
+	}
+	*/
+}
+
 
 int AppController::initAppGL(int major, int minor, int hint)
 {
@@ -98,13 +151,16 @@ int AppController::initAppGL(int major, int minor, int hint)
 	glfwWindowHint(GLFW_ALPHA_BITS, 8);	//~ suggesting an alpha layer.
 
 	// Open a window and create its OpenGL context
-	GLFWwindow *window = glfwCreateWindow( 1024, 768, AppController::WindowsTitle, NULL, NULL);
+	GLFWwindow *window = glfwCreateWindow( screen_width_, screen_height_, AppController::WindowsTitle, NULL, NULL);
 	if (! window) {
 		fprintf( stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n" );
 		glfwTerminate();
 		return 0;
 	}
 	glfwMakeContextCurrent(window);
+
+	//
+	test();
 
 	glewExperimental = true; // Needed for core profile
 	if (glewInit() != GLEW_OK) {

@@ -40,6 +40,7 @@ private:
 	glm::mat4 getMVP()const;
 	void setWindow(GLFWwindow *win);
 	GLFWwindow* getWindow();
+	void test();
 	
 private:
 	static void closeCallback(GLFWwindow *window);
@@ -56,6 +57,8 @@ private:
 
 	RefObject _appObjRef;
 	InputHost *_inPro;
+	int screen_width_;
+	int screen_height_;
 
 	static const char *WindowsTitle;
 };
