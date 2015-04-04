@@ -19,6 +19,7 @@ extern "C" {
 }
 
 #include "interop/lua_access/refobj.h"
+#include "FrameBufferObj.h"
 
 class InputHost;
 
@@ -60,7 +61,21 @@ private:
 	int screen_width_;
 	int screen_height_;
 
+private:
+	bool prepareFramebuffer();
+	void startFramebuffer();
+	void finalizeFramebuffer();
+	FrameBufferObj framebuffer_;
+	DD::ArrayBuffer vertex_;
+	
+
+private:
 	static const char *WindowsTitle;
 };
+
+#define CheckGL()\
+	if(auto err = glGetError()){\
+		fprintf(stderr, "OpenGL state error %d, %s in %s of line %d\n", err, __FILE__, __FUNCTION__, __LINE__);\
+	}
 
 #endif

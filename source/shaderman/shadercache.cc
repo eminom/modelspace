@@ -30,6 +30,8 @@ void ShaderCacheEx::init()
 		, ExShader::create("shaders/MimicShader.vsh", "shaders/MimicShader.fsh")));
 	shaders_.insert(std::make_pair(ShaderType::Diffuse
 		, ExShader::create("shaders/Diffuse.vsh", "shaders/Diffuse.fsh")));
+	shaders_.insert(std::make_pair(ShaderType::Wobbler
+		, ExShader::create("shaders/Passthrough.vsh", "shaders/WobblyTexture.fsh")));
 }
 
 ExShader* ShaderCacheEx::shaderFor(ShaderType t)

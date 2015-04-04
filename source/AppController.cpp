@@ -7,7 +7,6 @@
 #include "interop/lua_access/lua_access_macros.h"
 #include <common/text2D.hpp>
 
-
 #define DefaultScreenWidth	1024
 #define DefaultScreenHeight	768
 
@@ -84,56 +83,9 @@ void AppController::mouseCallback(GLFWwindow *window, int key, int action, int m
 
 void AppController::closeCallback(GLFWwindow *window)
 {
-	AppController *self = (AppController*)glfwGetWindowUserPointer(window);
+	//AppController *self = (AppController*)glfwGetWindowUserPointer(window);
 	//
 }
-
-void AppController::test()
-{
-	// Not opened yet??
-	GLint multisampling = 0;
-	glGetIntegerv(GL_SAMPLE_BUFFERS , &multisampling);
-	if (1==multisampling) {
-		printf("Multi-sampling is enabled");
-		glEnable(GL_MULTISAMPLE);
-
-		GLint sampleCount = 0;
-		glGetIntegerv(GL_SAMPLES, &sampleCount);
-		for(int i=0;i<sampleCount;++i){
-			GLfloat pos[4] = {0};   // a float pair indicating the offsets
-			auto ptr = glGetMultisamplefv; // void(unsigned int, unsigned int, float *)
-			if(ptr) {
-				// Which is missing on window platform. (Mine)
-				glGetMultisamplefv(GL_SAMPLE_POSITION, i, pos);
-				printf("Sample[%d] offset is (%f,%f)\n", i, pos[0], pos[1]);
-			}
-		}
-	}
-
-	if( glIsEnabled(GL_SCISSOR_TEST) ){
-		printf("Scissor test is enabled");
-		GLint box[4];
-		glGetIntegerv(GL_SCISSOR_BOX, box);
-	} else {
-		printf("Scissor test is disabled");
-		glEnable(GL_SCISSOR_TEST);
-		int h_margin = 0;
-		int v_margin = 0;
-		glScissor(h_margin, v_margin, screen_width_-h_margin * 2, screen_height_ - v_margin * 2);
-	}
-
-	/*  // Weird.
-	if(glIsEnabled(GL_COLOR_LOGIC_OP)){
-		glLogicOp(GL_OR);
-	} else {
-		printf("Logic op is disabled by default\n");
-		glEnable(GL_COLOR_LOGIC_OP);
-		assert(glIsEnabled(GL_COLOR_LOGIC_OP));
-		glLogicOp(GL_COPY);
-	}
-	*/
-}
-
 
 int AppController::initAppGL(int major, int minor, int hint)
 {
@@ -160,15 +112,18 @@ int AppController::initAppGL(int major, int minor, int hint)
 	}
 	glfwMakeContextCurrent(window);
 
-	//
-	test();
-
 	glewExperimental = true; // Needed for core profile
 	if (glewInit() != GLEW_OK) {
 		fprintf(stderr, "Failed to initialize GLEW\n");
 		return 0;
 	}
 
+	// glGetIntegerv for GL_SAMPLE_BUFFERS will be zero before window's creation.
+	// and some glews will not be initialized.(we've been already 4.1)
+	CheckGL()
+	test();
+	prepareFramebuffer();
+	CheckGL()
 	// Ensure we can capture the escape key being pressed below
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 	glfwSetKeyCallback(window, AppController::keyCallback);
@@ -182,7 +137,6 @@ int AppController::initAppGL(int major, int minor, int hint)
 	glClearColor(0, 0, 0.1f, 0.0f);
 	_lastTime = glfwGetTime();
 	setWindow(window);	//
-
 	initText2D("objects/Holstein.DDS");
 	_inPro = new InputStdProcessor();
 	return 1;
@@ -203,7 +157,9 @@ void AppController::setDirector(EsDirector *director)
 void AppController::mainLoop()
 {
 	_appObjRef.execVoid("OnAppReady");
+	CheckGL()
 	do{
+		startFramebuffer();
 		glClear( GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT );
 		_appObjRef.execVoid("Update");
 		printText2D(_inPro->info(), 0 , 700, 30);
@@ -211,10 +167,9 @@ void AppController::mainLoop()
 		float dt = float(now - _lastTime);
 		_lastTime = now;
 		_director->updateNode(dt);
-
 		glm::mat4 mvp = getMVP();
 		_director->render(mvp);
-
+		finalizeFramebuffer();
 		glfwSwapBuffers(_window);
 		glfwPollEvents();
 	} while( glfwGetKey(_window, GLFW_KEY_ESCAPE ) != GLFW_PRESS && glfwWindowShouldClose(_window) == 0 );
