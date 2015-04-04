@@ -46,7 +46,10 @@ int main(void)
 
 	EsNode* root = FieldNode::create(20);
 	EsDirector::instance()->setRoot(root);
-	app.loadObject();
+	if( !app.loadObject("script.lua") ){
+		fprintf(stderr, "Error loading objects\n");
+		return -1;
+	}
 
 	//root->addSub(AxisNode::create());
 	//for(int i=-5;i<=0;++i){

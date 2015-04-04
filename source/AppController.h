@@ -34,7 +34,7 @@ public:
 	void mainLoop();
 	void setDirector(EsDirector *director);
 
-	bool loadObject();
+	bool loadObject(const char *path);
 
 private:
 	glm::mat4 getMVP()const;

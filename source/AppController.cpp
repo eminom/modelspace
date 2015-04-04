@@ -188,9 +188,9 @@ int AppController::initAppGL(int major, int minor, int hint)
 	return 1;
 }
 
-bool AppController::loadObject()
+bool AppController::loadObject(const char *path)
 {
-	return _appObjRef.require("script.lua");
+	return _appObjRef.require(path);
 }
 
 void AppController::setDirector(EsDirector *director)

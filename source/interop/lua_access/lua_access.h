@@ -9,10 +9,9 @@
 
 struct lua_State;
 
+#ifndef log
 #define log(...)	printf(__VA_ARGS__);
-
-
-
+#endif
 
 #ifndef CCLog
 #define CCLog(...)	{fprintf(stderr, __VA_ARGS__); fprintf(stderr,"\n");}
