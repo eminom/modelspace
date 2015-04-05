@@ -18,6 +18,8 @@ private:
 	virtual void processScroll(double, double)override;
 	virtual void processCursorPos(double,double)override;
 	virtual glm::mat4 getMVP()override;
+	virtual glm::mat4 getView()override;
+	virtual glm::mat4 getProjection()override;
 
 private:
 	glm::vec3 _camera;

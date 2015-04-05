@@ -9,11 +9,14 @@
 #include <utility>
 #include "exshader.h"
 
+//If you find compiling issue on Xcode
+//You should check your project settings first: The compilier specification(C++11)
 enum class ShaderType{
 	Simple,
 	Diffuse,
 	Mimic,
-	Wobbler
+	Wobbler,
+	Particle
 };
 
 class ShaderCacheEx

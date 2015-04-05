@@ -152,3 +152,16 @@ glm::mat4 InputProcessor::getMVP()
 	glm::mat4 mvp = projection * view * model;
 	return mvp;
 }
+
+glm::mat4 InputProcessor::getView()
+{
+	glm::mat4 view = glm::lookAt(_camera, _center, _up);
+	return view;
+}
+
+glm::mat4 InputProcessor::getProjection()
+{
+	glm::mat4 projection = glm::perspective(45.0f, 4.0f / 3.0f, 0.5f, 140.0f);
+	return projection;
+
+}

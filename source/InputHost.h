@@ -13,6 +13,8 @@ public:
 	virtual void processScroll(double, double) = 0;
 	virtual void processCursorPos(double, double) = 0;
 	virtual glm::mat4 getMVP() = 0;
+	virtual glm::mat4 getView() = 0;
+	virtual glm::mat4 getProjection() = 0;
 	virtual void turnPreset(){}
 	virtual const char* info(){return "";}
 };

@@ -12,6 +12,7 @@
 #include "MimicNode.h"
 #include "LightNode.h"
 #include "AxisNode.h"
+#include "effects/ParticleNode.h"
 
 
 #endif

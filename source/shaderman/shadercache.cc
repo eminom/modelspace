@@ -20,18 +20,17 @@ ShaderCacheEx* ShaderCacheEx::instance()
 	return inst_;
 }
 
+#define AddS(k, vsh, fsh)\
+	shaders_.insert(std::make_pair(ShaderType::k, ExShader::create("shaders/" vsh, "shaders/" fsh)));
 
 void ShaderCacheEx::init()
 {
 	deinit();
-	shaders_.insert(std::make_pair(ShaderType::Simple
-		, ExShader::create("shaders/SimpleVertexShader.vsh", "shaders/SimpleFragmentShader.fsh")));
-	shaders_.insert(std::make_pair(ShaderType::Mimic
-		, ExShader::create("shaders/MimicShader.vsh", "shaders/MimicShader.fsh")));
-	shaders_.insert(std::make_pair(ShaderType::Diffuse
-		, ExShader::create("shaders/Diffuse.vsh", "shaders/Diffuse.fsh")));
-	shaders_.insert(std::make_pair(ShaderType::Wobbler
-		, ExShader::create("shaders/Passthrough.vsh", "shaders/WobblyTexture.fsh")));
+	AddS(Simple, "SimpleVertexShader.vsh", "SimpleFragmentShader.fsh")
+	AddS(Mimic, "MimicShader.vsh", "MimicShader.fsh")
+	AddS(Diffuse, "Diffuse.vsh", "Diffuse.fsh")
+	AddS(Wobbler, "Passthrough.vsh", "WobblyTexture.fsh")
+	AddS(Particle, "Particle.vsh", "Particle.fsh")
 }
 
 ExShader* ShaderCacheEx::shaderFor(ShaderType t)

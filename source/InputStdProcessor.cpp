@@ -86,6 +86,29 @@ glm::mat4 InputStdProcessor::getMVP()
 	return projection * view;
 }
 
+glm::mat4 InputStdProcessor::getView()
+{
+	glm::vec3 direction = glm::vec3(
+		cosf(_verticalAngle) * sinf(_horizontalAngle),
+		sinf(_verticalAngle),
+		cosf(_verticalAngle) * cosf(_horizontalAngle)
+	);
+	glm::vec3 right = glm::vec3(
+		sinf(_horizontalAngle - pi / 2),
+		0,
+		cosf(_horizontalAngle - pi / 2)
+	);
+	glm::vec3 up = glm::cross(right, direction);
+	glm::mat4 view = glm::lookAt(_camera, _camera + direction, up);
+	return view;
+}
+
+glm::mat4 InputStdProcessor::getProjection()
+{
+	glm::mat4 projection = glm::perspective(float(_fov / 180.0f * pi), 4/3.0f, 0.1f, 100.0f);
+	return projection;
+}
+
 void InputStdProcessor::processCursorPos(double x, double y)
 {
 	if(_leftPressed){

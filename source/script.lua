@@ -186,7 +186,7 @@ function AppObj:OnAppReady()
 	printDebugInfo('DDGraphics_EsNode')
 	-- local meta = getmetatable(light)
 	-- print('LightNode\'s meta is ', meta.__name)
-	initView()
+	-- initView()
 	print("Finished onAppReady")
 end
 

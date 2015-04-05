@@ -56,6 +56,16 @@ glm::mat4 AppController::getMVP()const
 	return _inPro->getMVP();
 }
 
+glm::mat4 AppController::getView()const
+{
+	return _inPro->getView();
+}
+
+glm::mat4 AppController::getProjection()const
+{
+	return _inPro->getProjection();
+}
+
 void AppController::keyCallback(GLFWwindow *window, int key, int scanCode, int action, int modes) {
 	AppController *self = (AppController*)glfwGetWindowUserPointer(window);
 	self->_inPro->processKeyboard(key, scanCode, action, modes);
@@ -171,7 +181,7 @@ void AppController::mainLoop()
 			_director->render(mvp);
 		};
 
-		if(1){
+		if(0){
 			startFramebuffer();
 			drawer();
 			finalizeFramebuffer();

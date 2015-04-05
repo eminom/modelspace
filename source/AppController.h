@@ -37,6 +37,9 @@ public:
 
 	bool loadObject(const char *path);
 
+	glm::mat4 getView()const;
+	glm::mat4 getProjection()const;
+
 private:
 	glm::mat4 getMVP()const;
 	void setWindow(GLFWwindow *win);
