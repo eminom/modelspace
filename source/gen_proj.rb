@@ -14,7 +14,7 @@ Dir.glob("./**/") do |path|
 	#outs "set(#{src_list_name}"
 	def detect(p, &cb)
 		count = 0
-		for suf in ['.h', '.c', '.cc', '.cpp', '.cxx'] do
+		for suf in ['.h', '.hpp', '.c', '.cc', '.cpp', '.cxx'] do
 			Dir.glob("#{p}*#{suf}") do |one|
 				yield one
 				count += 1

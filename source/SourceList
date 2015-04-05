@@ -1,0 +1,132 @@
+set(SRC_LIST
+./AppController.h
+./Director.h
+./FrameBufferObj.h
+./InputHost.h
+./InputProcessor.h
+./InputStdProcessor.h
+./LightProtocol.h
+./LuaScriptor.h
+./protocols.h
+./FrameBufferObj.cc
+./AppController.cpp
+./AppControllerImpl.cpp
+./Director.cpp
+./InputProcessor.cpp
+./InputStdProcessor.cpp
+./LuaScriptor.cpp
+./main.cpp
+)
+set(FULL_SRC_LIST ${FULL_SRC_LIST} ${SRC_LIST})
+source_group(Source FILES ${SRC_LIST})
+
+
+set(SRC_LIST
+./interop/class/exports.h
+./interop/class/lextension.h
+./interop/class/lextension.c
+./interop/class/exports.cpp
+)
+set(FULL_SRC_LIST ${FULL_SRC_LIST} ${SRC_LIST})
+source_group(interop\\class FILES ${SRC_LIST})
+
+
+set(SRC_LIST
+./interop/lua_access/lua_access.h
+./interop/lua_access/lua_access_macros.h
+./interop/lua_access/refobj.h
+./interop/lua_access/refproto.h
+./interop/lua_access/refprotobase.h
+./interop/lua_access/lua_access.cpp
+./interop/lua_access/refobj.cpp
+./interop/lua_access/refproto.cpp
+./interop/lua_access/refprotobase.cpp
+)
+set(FULL_SRC_LIST ${FULL_SRC_LIST} ${SRC_LIST})
+source_group(interop\\lua_access FILES ${SRC_LIST})
+
+set(SRC_LIST
+./interop/lua_core/lua_core.h
+./interop/lua_core/mcore.h
+./interop/lua_core/lua_core.cpp
+./interop/lua_core/mcore.cpp
+)
+set(FULL_SRC_LIST ${FULL_SRC_LIST} ${SRC_LIST})
+source_group(interop\\lua_core FILES ${SRC_LIST})
+
+set(SRC_LIST
+./model/ObjectModel.h
+./model/ObjectModel.cpp
+)
+set(FULL_SRC_LIST ${FULL_SRC_LIST} ${SRC_LIST})
+source_group(model FILES ${SRC_LIST})
+
+set(SRC_LIST
+./nodes/AxisNode.h
+./nodes/BlenderNode.h
+./nodes/BlenderNormal.h
+./nodes/BoxNode.h
+./nodes/Common.h
+./nodes/CubeNode.h
+./nodes/DDNodes.h
+./nodes/EsNode.h
+./nodes/FieldNode.h
+./nodes/GridNode.h
+./nodes/LightNode.h
+./nodes/MimicNode.h
+./nodes/PrimitiveNode.h
+./nodes/AxisNode.cpp
+./nodes/BlenderNode.cpp
+./nodes/BlenderNormal.cpp
+./nodes/BoxNode.cpp
+./nodes/CubeNode.cpp
+./nodes/EsNode.cpp
+./nodes/FieldNode.cpp
+./nodes/GridNode.cpp
+./nodes/LightNode.cpp
+./nodes/MimicNode.cpp
+./nodes/PrimitiveNode.cpp
+)
+set(FULL_SRC_LIST ${FULL_SRC_LIST} ${SRC_LIST})
+source_group(nodes FILES ${SRC_LIST})
+
+set(SRC_LIST
+./nodes/effects/ParticleNode.h
+./nodes/effects/ParticleNode.cc
+)
+set(FULL_SRC_LIST ${FULL_SRC_LIST} ${SRC_LIST})
+source_group(nodes\\effects FILES ${SRC_LIST})
+
+set(SRC_LIST
+./nodes/graphics/DDApi.h
+./nodes/graphics/DDGraphics.h
+./nodes/graphics/DDStruct.h
+)
+set(FULL_SRC_LIST ${FULL_SRC_LIST} ${SRC_LIST})
+source_group(nodes\\graphics FILES ${SRC_LIST})
+
+
+set(SRC_LIST
+./shaderman/exshader.h
+./shaderman/shadercache.h
+./shaderman/exshader.cc
+./shaderman/shadercache.cc
+)
+set(FULL_SRC_LIST ${FULL_SRC_LIST} ${SRC_LIST})
+source_group(shaderman FILES ${SRC_LIST})
+
+
+set(SRC_LIST
+./test/test_lua.cpp
+)
+set(FULL_SRC_LIST ${FULL_SRC_LIST} ${SRC_LIST})
+source_group(test FILES ${SRC_LIST})
+
+set(SRC_LIST
+./utils/state_saver.h
+./utils/gl_object_wrappers.hpp
+./utils/memo_pool.hpp
+)
+set(FULL_SRC_LIST ${FULL_SRC_LIST} ${SRC_LIST})
+source_group(utils FILES ${SRC_LIST})
+
