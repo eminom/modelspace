@@ -22,12 +22,11 @@ struct Particle
 class ParticleNode:public EsNode
 {
 private:
-	static const int MaxParticles = 1000;
 	ParticleNode();
 	~ParticleNode();
 
 public:
-	static ParticleNode* create();
+	static ParticleNode* create(int particle_count=1000);
 
 private:
 	virtual void update(float dt)override;
@@ -47,6 +46,8 @@ private:
 
 	GLfloat *color_ptr_;
 	GLfloat *poss_ptr_;
+
+	int max_particle_;
 };
 
 

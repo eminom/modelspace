@@ -63,6 +63,7 @@ ParticleNode::ParticleNode()
 	u_cameraRight_ = -1;
 	u_cameraUp_ = -1;
 	u_vp_ = -1;
+	max_particle_ = 0;
 	//initPV();
 }
 
@@ -72,9 +73,10 @@ ParticleNode::~ParticleNode()
 	delete [] poss_ptr_;
 }
 
-ParticleNode* ParticleNode::create()
+ParticleNode* ParticleNode::create(int pc)
 {
 	ParticleNode* rv = new ParticleNode;
+	rv->max_particle_ = pc;
 	rv->init();
 	return rv;
 }
@@ -102,17 +104,17 @@ bool ParticleNode::init()
 	GLuint color = 0;
 	glGenBuffers(1, &color);
 	glBindBuffer(GL_ARRAY_BUFFER, color);
-	glBufferData(GL_ARRAY_BUFFER, MaxParticles * sizeof(GLfloat) * 4, nullptr, GL_STREAM_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, max_particle_ * sizeof(GLfloat) * 4, nullptr, GL_STREAM_DRAW);
 	color_.take(color);
 
 	GLuint poss = 0;
 	glGenBuffers(1, &poss);
 	glBindBuffer(GL_ARRAY_BUFFER, poss);
-	glBufferData(GL_ARRAY_BUFFER, MaxParticles * sizeof(GLfloat) * 4, nullptr, GL_STREAM_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, max_particle_ * sizeof(GLfloat) * 4, nullptr, GL_STREAM_DRAW);
 	poss_.take(poss);
 
-	color_ptr_ = new GLfloat[MaxParticles * 4];
-	poss_ptr_  = new GLfloat[MaxParticles * 4];
+	color_ptr_ = new GLfloat[max_particle_ * 4];
+	poss_ptr_  = new GLfloat[max_particle_ * 4];
 
 	return true;
 }
@@ -120,8 +122,8 @@ bool ParticleNode::init()
 void ParticleNode::update(float dt)
 {
 	int newparticles = (int)(dt*10000.0);
-	if (newparticles > MaxParticles - particles_.size()){
-		newparticles = MaxParticles - particles_.size();
+	if (newparticles > max_particle_ - particles_.size()){
+		newparticles = max_particle_ - particles_.size();
 	}
 
 	// Making new ones
@@ -193,12 +195,12 @@ void ParticleNode::update(float dt)
 	// http://www.opengl.org/wiki/Buffer_Object_Streaming
 
 	glBindBuffer(GL_ARRAY_BUFFER, poss_);
-	glBufferData(GL_ARRAY_BUFFER, MaxParticles * 4 * sizeof(GLfloat), NULL, GL_STREAM_DRAW); // Buffer orphaning, a common way to improve streaming perf. See above link for details.
-	glBufferSubData(GL_ARRAY_BUFFER, 0, MaxParticles * 4 * sizeof(GLfloat), poss_ptr_);
+	glBufferData(GL_ARRAY_BUFFER, max_particle_ * 4 * sizeof(GLfloat), NULL, GL_STREAM_DRAW); // Buffer orphaning, a common way to improve streaming perf. See above link for details.
+	glBufferSubData(GL_ARRAY_BUFFER, 0, max_particle_ * 4 * sizeof(GLfloat), poss_ptr_);
 
 	glBindBuffer(GL_ARRAY_BUFFER, color_);
-	glBufferData(GL_ARRAY_BUFFER, MaxParticles * 4 * sizeof(GLfloat), NULL, GL_STREAM_DRAW); // Buffer orphaning, a common way to improve streaming perf. See above link for details.
-	glBufferSubData(GL_ARRAY_BUFFER, 0, MaxParticles * 4 * sizeof(GLfloat), color_ptr_);
+	glBufferData(GL_ARRAY_BUFFER, max_particle_ * 4 * sizeof(GLfloat), NULL, GL_STREAM_DRAW); // Buffer orphaning, a common way to improve streaming perf. See above link for details.
+	glBufferSubData(GL_ARRAY_BUFFER, 0, max_particle_ * 4 * sizeof(GLfloat), color_ptr_);
 }
 
 void ParticleNode::render(const glm::mat4 &transform)

@@ -51,8 +51,8 @@ int main(void)
 		return -1;
 	}
 
-	ParticleNode *particle = ParticleNode::create();
-	root->addSub(particle);
+	//ParticleNode *particle = ParticleNode::create();
+	//root->addSub(particle);
 
 	//root->addSub(AxisNode::create());
 	//for(int i=-5;i<=0;++i){
