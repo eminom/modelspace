@@ -35,7 +35,7 @@ private:
 	virtual bool init()override;
 
 private:
-	MemoPool<Particle> pool;
+	MemoPool<Particle> pool_;
 	std::list<Particle*> particles_;
 	DD::ArrayBuffer vbo_;
 	DD::ArrayBuffer color_;

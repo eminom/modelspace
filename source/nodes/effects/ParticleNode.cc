@@ -126,14 +126,15 @@ void ParticleNode::update(float dt)
 
 	// Making new ones
 	for(int i=0; i<newparticles; i++){
-		Particle *one = pool.alloc();
+		Particle *one = pool_.alloc();
 		particles_.push_back(one);
 
 		one->life = rand() % 15 + 0.5f; // This particle will live 5 seconds.
-		one->pos = glm::vec3(0,0,-20.0f);
+		//one->pos = glm::vec3(0,0,-20.0f);
+		one->pos = glm::vec3(0,0,0);
 
-		float spread = 1.5f;
-		glm::vec3 maindir = glm::vec3(0.0f, 10.0f, 0.0f);
+		float spread = 0.15f;
+		glm::vec3 maindir = glm::vec3(0.0f, 1.0f, 0.0f);
 		// Very bad way to generate a random direction; 
 		// See for instance http://stackoverflow.com/questions/5408276/python-uniform-spherical-distribution instead,
 		// combined with some user-controlled parameters (main direction, spread, etc)
@@ -150,7 +151,7 @@ void ParticleNode::update(float dt)
 		one->b = rand() % 256;
 		//one->a = (rand() % 256) / 3;
 		one->a = rand() % 256;
-		one->size = (rand()%1000)/2000.0f + 0.1f;
+		one->size = (rand()%1000)/2000.0f * 0.01f + 0.01f;
 	}
 
 	int pcIndex = 0;
@@ -158,7 +159,7 @@ void ParticleNode::update(float dt)
 	for(auto it:particles_){
 		Particle& p = *it; // shortcut
 		p.life -= dt;
-		p.speed += glm::vec3(0.0f,-9.81f, 0.0f) * (float)dt * 0.5f;
+		p.speed += glm::vec3(0.0f,-9.81f, 0.0f) * (float)dt * 0.1f;
 		p.pos += p.speed * (float)dt;
 		//printf("position up to %f, %f, %f\n", p.pos.x, p.pos.y, p.pos.z);
 		//p.cameradistance = glm::length2( p.pos - CameraPosition );
@@ -179,7 +180,7 @@ void ParticleNode::update(float dt)
 		Particle* one = *it;
 		if(one->life <= 0){
 			particles_.erase(it++);
-			pool.free(one);
+			pool_.free(one);
 		} else {
 			++it;
 		}

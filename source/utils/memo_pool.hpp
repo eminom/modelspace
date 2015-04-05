@@ -43,7 +43,7 @@ public:
 	T* alloc()
 	{
 		if(!_headfree) {
-			alloc_memo(32);
+			alloc_memo(512);
 		}
 		assert(_headfree);
 		T *rv = (T*)_headfree;
@@ -53,7 +53,7 @@ public:
 
 private:
 	void alloc_memo(int count) {
-		printf("alloc_memo: more at %f \n", glfwGetTime());
+		//printf("alloc_memo: more at %f \n", glfwGetTime());
 		size_t nodesize = sizeof(MemoNode);//Default chunk size is 
 		if (nodesize < sizeof(T)) {
 			nodesize = sizeof(T);
