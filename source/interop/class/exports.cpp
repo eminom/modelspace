@@ -49,6 +49,7 @@ void doExports()
 	loadFieldNodeTmpIndex();
 	loadMimicNodeTmpIndex();
 	loadCubeNodeTmpIndex();
+    loadParticleNodeTmpIndex();
 
 	load_ddStatics();
 	_DeclareState()

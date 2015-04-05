@@ -4,7 +4,7 @@
 
 //////////////////
 //These codes shall be generated automatically.
-//Sat Mar 28 2015 16:56:46 GMT+0800 (CST)
+//Mon Apr 06 2015 00:20:57 GMT+0800 (CST)
 
 #define _EsNodeMetaString	"DDGraphics_EsNode"
 
@@ -181,7 +181,54 @@ void loadEsNodeTmpIndex()
 
 //////////////////
 //These codes shall be generated automatically.
-//Sat Mar 28 2015 16:56:46 GMT+0800 (CST)
+//Mon Apr 06 2015 00:20:57 GMT+0800 (CST)
+
+#define _ParticleNodeMetaString	"DDGraphics_ParticleNode"
+
+struct ParticleNodeWrapper
+ : public EsNodeWrapper 
+{
+
+  static const char* MetaName;
+};
+
+
+const char* ParticleNodeWrapper::MetaName = _ParticleNodeMetaString;
+
+static luaL_Reg ParticleNodeTmpIndex[] = {
+  {NULL, NULL}
+};
+
+//This is the only thing you need to code yourself.
+
+void loadParticleNodeTmpIndex()
+{
+	_DeclareState()
+	luaL_newmetatable(L, _ParticleNodeMetaString);	
+
+	// If it is necessary to get a GC for our class.
+	// lua_pushvalue(L, -1);
+	// lua_pushcfunction(L, __gcEsNode);
+	// lua_setfield(L, -2, "__gc");	
+
+	lua_pushvalue(L, -1);
+	lua_setfield(L, -2, "__index");
+	luaL_register(L, NULL, ParticleNodeTmpIndex);
+
+	// Or this code will not compile without _EsNodeMetaString
+#if 1
+	luaL_getmetatable(L, _EsNodeMetaString);
+	lua_setmetatable(L, -2);
+#endif
+}
+
+
+
+
+
+//////////////////
+//These codes shall be generated automatically.
+//Mon Apr 06 2015 00:20:57 GMT+0800 (CST)
 
 #define _BlenderNodeMetaString	"DDGraphics_BlenderNode"
 
@@ -251,7 +298,7 @@ void loadBlenderNodeTmpIndex()
 
 //////////////////
 //These codes shall be generated automatically.
-//Sat Mar 28 2015 16:56:46 GMT+0800 (CST)
+//Mon Apr 06 2015 00:20:57 GMT+0800 (CST)
 
 #define _BlenderNormalMetaString	"DDGraphics_BlenderNormal"
 
@@ -298,7 +345,7 @@ void loadBlenderNormalTmpIndex()
 
 //////////////////
 //These codes shall be generated automatically.
-//Sat Mar 28 2015 16:56:46 GMT+0800 (CST)
+//Mon Apr 06 2015 00:20:57 GMT+0800 (CST)
 
 #define _AxisNodeMetaString	"DDGraphics_AxisNode"
 
@@ -345,7 +392,7 @@ void loadAxisNodeTmpIndex()
 
 //////////////////
 //These codes shall be generated automatically.
-//Sat Mar 28 2015 16:56:46 GMT+0800 (CST)
+//Mon Apr 06 2015 00:20:57 GMT+0800 (CST)
 
 #define _FieldNodeMetaString	"DDGraphics_FieldNode"
 
@@ -392,7 +439,7 @@ void loadFieldNodeTmpIndex()
 
 //////////////////
 //These codes shall be generated automatically.
-//Sat Mar 28 2015 16:56:46 GMT+0800 (CST)
+//Mon Apr 06 2015 00:20:57 GMT+0800 (CST)
 
 #define _LightNodeMetaString	"DDGraphics_LightNode"
 
@@ -459,7 +506,7 @@ void loadLightNodeTmpIndex()
 
 //////////////////
 //These codes shall be generated automatically.
-//Sat Mar 28 2015 16:56:46 GMT+0800 (CST)
+//Mon Apr 06 2015 00:20:57 GMT+0800 (CST)
 
 #define _MimicNodeMetaString	"DDGraphics_MimicNode"
 
@@ -506,7 +553,7 @@ void loadMimicNodeTmpIndex()
 
 //////////////////
 //These codes shall be generated automatically.
-//Sat Mar 28 2015 16:56:46 GMT+0800 (CST)
+//Mon Apr 06 2015 00:20:57 GMT+0800 (CST)
 
 #define _CubeNodeMetaString	"DDGraphics_CubeNode"
 
@@ -680,6 +727,22 @@ static int createCubeNode(lua_State *L)
 	return 1;
 }
 
+
+static int createParticleNode(lua_State *L)
+{
+	int top = lua_gettop(L);
+	if (top < 0){
+		luaL_error(L, "At least %d parameters for %s. %d would be best.", 0, __FUNCTION__, 1);
+	}
+	int p1;
+	if(top >= 1) { p1 = lua_tointeger(L, 1); }
+	else { p1 = 5000; }
+	// For now, we are all EsNode derives. No one is special.
+	ParticleNodeWrapper *rv = createUserData<ParticleNodeWrapper>(L);
+	rv->_ref = ParticleNode::create(p1);
+	return 1;
+}
+
 static luaL_Reg _ddStatics[] = {
   {"createBlenderNormal", createBlenderNormal },
   {"createBlenderNode", createBlenderNode },
@@ -688,6 +751,7 @@ static luaL_Reg _ddStatics[] = {
   {"createLightNode", createLightNode },
   {"createMimicNode", createMimicNode },
   {"createCubeNode", createCubeNode },
+  {"createParticleNode", createParticleNode },
   {NULL, NULL}
 };
 void load_ddStatics(){ _DeclareState() luaL_register(L, "dd", _ddStatics); }

@@ -138,6 +138,8 @@ function initView()
 	root:addSub(light)
 	ddcore.SetLight(light)
 
+	root:addSub(dd.createParticleNode(50000))
+
 	local colors = {
 		{0,0,1,0.5},
 		{0,1,1,1},
