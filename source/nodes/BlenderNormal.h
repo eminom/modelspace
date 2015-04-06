@@ -34,20 +34,29 @@ protected:
 		return rv;
 	}
 
+	template<class T, class _P1, class _P2>
+	static T* create(const char *path, bool complex, _P1 p1, _P2 p2)
+	{
+		T* rv = new T(p1,p2);
+		BlenderNormal *ptr = static_cast<BlenderNormal*>(rv);
+		ptr->init(path, complex);
+		return rv;
+	}
+
 protected:
 	bool init(const char *path, bool complex);
 	void draw(const glm::mat4 &mat)override;
 	void setColor(float r, float g, float b, float a)override;
 
-private:
-	bool initComplex(const char *path);
+protected:
+	virtual bool initComplex(const char *path);
 	bool initSimple(const char *path);
 
-	void drawComplex(const glm::mat4 &mat);
-	void drawSimple(const glm::mat4 &mat);
+	virtual void drawComplex(const glm::mat4 &mat);
+	virtual void drawSimple(const glm::mat4 &mat);
 	
 
-private:
+protected:
 	VDDPointEx _normal;
 	VDDColorEx _colors;
 

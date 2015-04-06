@@ -13,6 +13,7 @@
 #include "LightNode.h"
 #include "AxisNode.h"
 #include "effects/ParticleNode.h"
+#include "effects/BlenderParticle.h"
 
 
 #endif

@@ -31,6 +31,7 @@ void ShaderCacheEx::init()
 	AddS(Diffuse, "Diffuse.vsh", "Diffuse.fsh")
 	AddS(Wobbler, "Passthrough.vsh", "WobblyTexture.fsh")
 	AddS(Particle, "Particle.vsh", "Particle.fsh")
+	AddS(ParticleCube, "ParticleCube.vsh", "ParticleCube.fsh")
 }
 
 ExShader* ShaderCacheEx::shaderFor(ShaderType t)

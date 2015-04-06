@@ -16,7 +16,8 @@ enum class ShaderType{
 	Diffuse,
 	Mimic,
 	Wobbler,
-	Particle
+	Particle,
+	ParticleCube,
 };
 
 class ShaderCacheEx
