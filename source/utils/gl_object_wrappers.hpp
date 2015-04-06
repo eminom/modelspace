@@ -34,6 +34,7 @@ public:
 	void take(GLint obj)
 	{
 		deinit();
+		T::check(obj);
 		obj_ = obj;
 		refCounter_ = new int(1);
 	}
@@ -76,15 +77,16 @@ private:
 	int *refCounter_;
 };
 
-#define MakeClass(T, deletor)\
+#define MakeClass(T, deletor, checker)\
 class T:public ObjRef<T>{\
 public: static void destruct(GLuint &o){ deletor(1, &o); }\
+public: static void check(GLuint o){ assert(GL_TRUE == checker(o));}\
 };
 
-MakeClass(Texture, glDeleteTextures)
-MakeClass(Framebuffer, glDeleteFramebuffers)
-MakeClass(Renderbuffer, glDeleteRenderbuffers)
-MakeClass(ArrayBuffer, glDeleteBuffers)
+MakeClass(Texture, glDeleteTextures, glIsTexture)
+MakeClass(Framebuffer, glDeleteFramebuffers, glIsFramebuffer)
+MakeClass(Renderbuffer, glDeleteRenderbuffers, glIsRenderbuffer)
+MakeClass(ArrayBuffer, glDeleteBuffers, glIsBuffer)
 
 }	// End of namespace
 
