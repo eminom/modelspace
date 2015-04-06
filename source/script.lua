@@ -138,25 +138,25 @@ function initView()
 	root:addSub(light)
 	ddcore.SetLight(light)
 
-	root:addSub(dd.createParticleNode(50000))
+	-- root:addSub(dd.createParticleNode(50000))
 
 	local colors = {
 		{0,0,1,0.5},
 		{0,1,1,1},
 		{1,0,0,0.5}
 	}
-	if true then
-		for i=1, #colors do
-			-- print(i)
-			local v = i - 2
-			local box = dd.createBlenderNormal('objects/uvsphere.json')
-			box:setTransform( v * 0.75, 0, 0)
-			box:setScale(0.2, 0.2, 0.2)
-			box:setColor(colors[i][1], colors[i][2], colors[i][3], colors[i][4])
-			root:addSub(box)
-		end
-	end
-	root:addSub(dd.createAxisNode())
+	-- if true then
+	-- 	for i=1, #colors do
+	-- 		-- print(i)
+	-- 		local v = i - 2
+	-- 		local box = dd.createBlenderNormal('objects/uvsphere.json')
+	-- 		box:setTransform( v * 0.75, 0, 0)
+	-- 		box:setScale(0.2, 0.2, 0.2)
+	-- 		box:setColor(colors[i][1], colors[i][2], colors[i][3], colors[i][4])
+	-- 		root:addSub(box)
+	-- 	end
+	-- end
+	-- root:addSub(dd.createAxisNode())
 
 	-- 	for(int i=-5;i<=0;++i){
 	-- 	auto one = CubeNode::create(0.15 * i , 0.15 * i, 0.2, 0.2, 0.2);
@@ -166,19 +166,19 @@ function initView()
 	-- 	one->setColor(glm::vec4(0.7, 0.3, 0.3, 0.5));
 	-- 	root->addSub(one);
 	-- }
-	for i=-5,0 do
-		-- local cube = dd.createCubeNode(0.15 * i, 0.15 * i, 0.1, 0.1, 0.1)
-		cube = dd.createCubeNode(0.15 * i, 0.15 * i)  
-		-- print("Creating with default xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
-		cube:shiftXZ()
-		cube:setColor(0.7, 0.3, 0.3, 0.5)
-		root:addSub(cube)
-	end
+	-- for i=-5,0 do
+	-- 	-- local cube = dd.createCubeNode(0.15 * i, 0.15 * i, 0.1, 0.1, 0.1)
+	-- 	cube = dd.createCubeNode(0.15 * i, 0.15 * i)  
+	-- 	-- print("Creating with default xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+	-- 	cube:shiftXZ()
+	-- 	cube:setColor(0.7, 0.3, 0.3, 0.5)
+	-- 	root:addSub(cube)
+	-- end
 
-	local mimic = dd.createMimicNode()
-	mimic:setScale(0.025,0.025,0.025);
-	mimic:setTransform(0, 0, 0);
-	root:addSub(mimic)
+	-- local mimic = dd.createMimicNode()
+	-- mimic:setScale(0.025,0.025,0.025);
+	-- mimic:setTransform(0, 0, 0);
+	-- root:addSub(mimic)
 end
 --]]
 
