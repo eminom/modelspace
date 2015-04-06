@@ -41,16 +41,7 @@ static luaL_Reg entries[]={
 
 void doExports()
 {
-	loadEsNodeTmpIndex();
-	loadBlenderNodeTmpIndex();
-	loadBlenderNormalTmpIndex();
-	loadAxisNodeTmpIndex();
-	loadLightNodeTmpIndex();
-	loadFieldNodeTmpIndex();
-	loadMimicNodeTmpIndex();
-	loadCubeNodeTmpIndex();
-    loadParticleNodeTmpIndex();
-
+	EXPORT_LOADNODES()
 	load_ddStatics();
 	_DeclareState()
 	luaL_register(L, "ddcore", entries);
