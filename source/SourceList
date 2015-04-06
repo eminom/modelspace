@@ -91,7 +91,9 @@ set(FULL_SRC_LIST ${FULL_SRC_LIST} ${SRC_LIST})
 source_group(nodes FILES ${SRC_LIST})
 
 set(SRC_LIST
+./nodes/effects/BlenderParticle.h
 ./nodes/effects/ParticleNode.h
+./nodes/effects/BlenderParticle.cc
 ./nodes/effects/ParticleNode.cc
 )
 set(FULL_SRC_LIST ${FULL_SRC_LIST} ${SRC_LIST})
