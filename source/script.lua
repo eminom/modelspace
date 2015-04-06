@@ -133,12 +133,12 @@ end
 ---- [[
 function initView()
 	local root = ddcore.GetEsNodeRoot()
-	local light = dd.createLightNode(0.6, 0.6, 0.6)
+	local light = dd.createLightNode(0.8, 0.8, 0.8)
 	light:setScale(0.01,0.01, 0.01)
 	root:addSub(light)
 	ddcore.SetLight(light)
 
-	root:addSub(dd.createBlenderParticle("objects/uvsphere8.json", 60000, 0.1))
+	root:addSub(dd.createBlenderParticle("objects/uvsphere8.json", 60000, 0.03))
 	do return end
 	-- root:addSub(dd.createParticleNode(50000))
 
