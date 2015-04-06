@@ -45,15 +45,19 @@ bool BlenderParticle::initComplex(const char *path)
 	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(_vertex[0])*_vertex.size(), &_vertex[0], GL_STATIC_DRAW);
 	
-	glGenBuffers(1, &_normalVBO);
-	glBindBuffer(GL_ARRAY_BUFFER, _normalVBO);
+	GLuint normal = 0;
+	glGenBuffers(1, &normal);
+	glBindBuffer(GL_ARRAY_BUFFER, normal);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(_normal[0])*_normal.size(), &_normal[0], GL_STATIC_DRAW);
+	_normalVBO.take(normal);
 
 	// The particle scene
 	// Reuse
-	glGenBuffers(1, &_colorVBO);
-	glBindBuffer(GL_ARRAY_BUFFER, _colorVBO);
+	GLuint color = 0;
+	glGenBuffers(1, &color);
+	glBindBuffer(GL_ARRAY_BUFFER, color);
 	glBufferData(GL_ARRAY_BUFFER, particleMax_ * 4 * sizeof(GLfloat), 0, GL_STREAM_DRAW);
+	_colorVBO.take(color);
 
 	GLuint posfix = 0;
 	glGenBuffers(1, &posfix);

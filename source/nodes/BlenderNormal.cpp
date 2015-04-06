@@ -9,9 +9,6 @@
 
 BlenderNormal::BlenderNormal()
 {
-	_colorVBO = 0;
-	_normalVBO = 0;
-
 	_lightPosSlot = -1;
 	_modelSlot = -1;
 	_normalMatrixSlot = -1;
@@ -19,17 +16,6 @@ BlenderNormal::BlenderNormal()
 
 	_type = BlenderNormalType::Error;
 }
-
-BlenderNormal::~BlenderNormal()
-{
-	if(_colorVBO){
-		glDeleteBuffers(1, &_colorVBO);
-	}
-	if(_normalVBO){
-		glDeleteBuffers(1, &_normalVBO);
-	}
-}
-
 
 BlenderNormal* BlenderNormal::create(const char *path, bool complex)
 {
@@ -60,13 +46,17 @@ bool BlenderNormal::initComplex(const char *path){
 	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(_vertex[0])*_vertex.size(), &_vertex[0], GL_STATIC_DRAW);
 	
-	glGenBuffers(1, &_normalVBO);
-	glBindBuffer(GL_ARRAY_BUFFER, _normalVBO);
+	GLuint normal = 0;
+	glGenBuffers(1, &normal);
+	glBindBuffer(GL_ARRAY_BUFFER, normal);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(_normal[0])*_normal.size(), &_normal[0], GL_STATIC_DRAW);
+	_normalVBO.take(normal);
 
-	glGenBuffers(1, &_colorVBO);
-	glBindBuffer(GL_ARRAY_BUFFER, _colorVBO);
+	GLuint color = 0;
+	glGenBuffers(1, &color);
+	glBindBuffer(GL_ARRAY_BUFFER, color);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(_colors[0]) * _colors.size(), &_colors[0], GL_STATIC_DRAW);
+	_colorVBO.take(color);
 	return true;
 }
 

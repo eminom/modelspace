@@ -5,7 +5,7 @@
 
 #include "BlenderNode.h"
 #include "graphics/DDGraphics.h"
-
+#include "utils/gl_object_wrappers.hpp"
 
 enum class BlenderNormalType
 {
@@ -18,7 +18,6 @@ class BlenderNormal:public BlenderNode
 {
 protected:
 	BlenderNormal();
-	~BlenderNormal();
 
 public:
 	static BlenderNormal* create(const char *path, bool complex = true);
@@ -60,8 +59,8 @@ protected:
 	VDDPointEx _normal;
 	VDDColorEx _colors;
 
-	GLuint _normalVBO;
-	GLuint _colorVBO;
+	DD::ArrayBuffer _normalVBO;
+	DD::ArrayBuffer _colorVBO;
 
 	GLint _lightPosSlot;
 	GLint _modelSlot;
