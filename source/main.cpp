@@ -51,8 +51,8 @@ int main(void)
 		return -1;
 	}
 
-	BlenderParticle *particle = BlenderParticle::create("objects/uvsphere8.json", 10000, 0.01f, 0.5, 0.5, 0.5);
-	root->addSub(particle);
+//	BlenderParticle *particle = BlenderParticle::create("objects/uvsphere8.json", 10000, 0.01f, 0.5, 0.5, 0.5);
+//	root->addSub(particle);
 
 	//ParticleNode *particle = ParticleNode::create();
 	//root->addSub(particle);
