@@ -57,20 +57,12 @@
 //////////////////////////////////////////////////////////////////////////
 
 ParticleNode::ParticleNode()
-	:color_ptr_(nullptr),
-	poss_ptr_(nullptr)
 {
 	u_cameraRight_ = -1;
 	u_cameraUp_ = -1;
 	u_vp_ = -1;
 	max_particle_ = 0;
 	//initPV();
-}
-
-ParticleNode::~ParticleNode()
-{
-	delete [] color_ptr_;
-	delete [] poss_ptr_;
 }
 
 ParticleNode* ParticleNode::create(int pc)
@@ -113,8 +105,8 @@ bool ParticleNode::init()
 	glBufferData(GL_ARRAY_BUFFER, max_particle_ * sizeof(GLfloat) * 4, nullptr, GL_STREAM_DRAW);
 	poss_.take(poss);
 
-	color_ptr_ = new GLfloat[max_particle_ * 4];
-	poss_ptr_  = new GLfloat[max_particle_ * 4];
+	color_ptr_.alloc(max_particle_*4);
+	poss_ptr_.alloc(max_particle_*4);
 
 	return true;
 }
