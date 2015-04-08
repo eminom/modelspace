@@ -158,14 +158,8 @@ void ParticleNode::update(float dt)
 		//printf("position up to %f, %f, %f\n", p.pos.x, p.pos.y, p.pos.z);
 		//p.cameradistance = glm::length2( p.pos - CameraPosition );
 		// Fill the GPU buffer.
-		poss_ptr_[4*pcIndex+0] = p.pos.x;
-		poss_ptr_[4*pcIndex+1] = p.pos.y;
-		poss_ptr_[4*pcIndex+2] = p.pos.z;
-		poss_ptr_[4*pcIndex+3] = p.size;
-		color_ptr_[4*pcIndex+0] = p.r / 255.0f;
-		color_ptr_[4*pcIndex+1] = p.g / 255.0f;
-		color_ptr_[4*pcIndex+2] = p.b / 255.0f ;
-		color_ptr_[4*pcIndex+3] = p.a / 255.0f;
+		poss_ptr_.take(4 * pcIndex, p.pos.x, p.pos.y, p.pos.z, p.size);
+		color_ptr_.take(4 * pcIndex, p.r / 255.0f, p.g / 255.0f, p.b / 255.0f, p.a / 255.0f);
 		pcIndex++;
 	}
 
@@ -188,11 +182,11 @@ void ParticleNode::update(float dt)
 
 	glBindBuffer(GL_ARRAY_BUFFER, poss_);
 	glBufferData(GL_ARRAY_BUFFER, max_particle_ * 4 * sizeof(GLfloat), NULL, GL_STREAM_DRAW); // Buffer orphaning, a common way to improve streaming perf. See above link for details.
-	glBufferSubData(GL_ARRAY_BUFFER, 0, max_particle_ * 4 * sizeof(GLfloat), poss_ptr_);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, max_particle_ * 4 * sizeof(GLfloat), poss_ptr_.ptr());
 
 	glBindBuffer(GL_ARRAY_BUFFER, color_);
 	glBufferData(GL_ARRAY_BUFFER, max_particle_ * 4 * sizeof(GLfloat), NULL, GL_STREAM_DRAW); // Buffer orphaning, a common way to improve streaming perf. See above link for details.
-	glBufferSubData(GL_ARRAY_BUFFER, 0, max_particle_ * 4 * sizeof(GLfloat), color_ptr_);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, max_particle_ * 4 * sizeof(GLfloat), color_ptr_.ptr());
 }
 
 void ParticleNode::render(const glm::mat4 &transform)

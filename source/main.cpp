@@ -32,6 +32,17 @@
 #include "nodes/DDNodes.h"
 #include "interop/lua_core/lua_core.h"
 #include "interop/class/exports.h"
+#include "utils/raw_object_wrappers.hpp"
+
+
+void test()
+{
+	DD::RawMemo<GLfloat> k;
+	//k.alloc(1024);
+	//delete k;
+	//delete [] k;
+	//delete k;
+}
 
 int main(void)
 {
@@ -44,12 +55,21 @@ int main(void)
 	LuaCore::injectLuaCore();
 	doExports();
 
+	test();
+
 	EsNode* root = FieldNode::create(20);
 	EsDirector::instance()->setRoot(root);
 	if( !app.loadObject("script.lua") ){
 		fprintf(stderr, "Error loading objects\n");
 		return -1;
 	}
+	
+	app.mainLoop();
+	return 0;
+}
+
+
+////////Test code remains
 
 //	BlenderParticle *particle = BlenderParticle::create("objects/uvsphere8.json", 10000, 0.01f, 0.5, 0.5, 0.5);
 //	root->addSub(particle);
@@ -105,8 +125,4 @@ int main(void)
 	//sub->setColor(glm::vec4(0.8, 0, 0.8, 1));
 	//root->addSub(sub);
 
-	
-	app.mainLoop();
-	return 0;
-}
 
