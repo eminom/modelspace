@@ -138,9 +138,13 @@ function initView()
 	root:addSub(light)
 	ddcore.SetLight(light)
 
-	root:addSub(dd.createBlenderParticle("objects/uvsphere8.json", 60000, 0.03))
-	do return end
+	-- Test of BlenderParticle
+	-- root:addSub(dd.createBlenderParticle("objects/uvsphere8.json", 60000, 0.03))
+	-- do return end
 	-- root:addSub(dd.createParticleNode(50000))
+
+	root:addSub(dd.createParticleNode())
+	do return end
 
 	local colors = {
 		{0,0,1,0.5},
