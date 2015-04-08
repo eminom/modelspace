@@ -3,6 +3,8 @@
 #ifndef _RAW_OBJECT_WRAPPER_DEF__
 #define _RAW_OBJECT_WRAPPER_DEF__
 
+#include <cassert>
+
 namespace DD{
 
 
