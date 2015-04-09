@@ -200,7 +200,7 @@ void AppController::mainLoop()
 		}
 
 		accDT += dt;
-		if(accDT>5){
+		if(accDT>=2.0){
 			accDT = 0;
 			vm_.step();
 		}

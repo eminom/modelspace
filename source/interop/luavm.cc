@@ -68,6 +68,10 @@ void LuaVM::step()
 		lua_resume(S, 0);
 		finalize(S);
 	}
+	else
+	{
+		printf("LuaVM:step: No task for now\n");
+	}
 }
 
 

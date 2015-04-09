@@ -30,5 +30,6 @@ function step()
 		add()
 		exp.wait(100)
 	end
+	print("Step is finished")
 end
 print("Loads done")
