@@ -59,7 +59,7 @@ int main(void)
 
 	EsNode* root = FieldNode::create(20);
 	EsDirector::instance()->setRoot(root);
-	if( !app.loadObject("script.lua") ){
+	if( !app.loadObject("scripts/script.lua") ){
 		fprintf(stderr, "Error loading objects\n");
 		return -1;
 	}
