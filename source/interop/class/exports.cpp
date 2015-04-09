@@ -1,18 +1,22 @@
 
 
 #include "exports.h"
-#include "LuaScriptor.h"
-#include "Director.h"
-#include "nodes/DDNodes.h"
-#include "interop/lua_access/lua_access_macros.h"
-#include "interop/lua_core/lua_core.h"
-#include "lextension.h"
 
-extern "C" {
+
+extern "C" 
+{
 #include "lua.h"
 #include "lualib.h"
 #include "lauxlib.h"
 }
+
+
+#include "LuaScriptor.h"
+#include "Director.h"
+#include "nodes/DDNodes.h"
+#include "interop/lua_core/lua_core.h"
+#include "lextension.h"
+
 
 #include "EsNode.inc" 
 
@@ -39,10 +43,10 @@ static luaL_Reg entries[]={
 	{NULL, NULL},
 };
 
-void doExports()
+void doExports(lua_State *L)
 {
 	EXPORT_LOADNODES()
-	load_ddStatics();
-	_DeclareState()
+	load_ddStatics(L);
+	//_DeclareState()
 	luaL_register(L, "ddcore", entries);
 }

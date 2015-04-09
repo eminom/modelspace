@@ -10,8 +10,8 @@ extern "C" {
 
 namespace LuaCore{
 
-void injectLuaCore() {
-	lua_State *L = LuaScriptor::sharedInstance()->getLuaState();
+void injectLuaCore(lua_State *L) {
+	//lua_State *L = LuaScriptor::sharedInstance()->getLuaState();
 	installMDataExports(L);
 }
 

@@ -3,8 +3,10 @@
 #ifndef _CORE_LUA_DEF__H_
 #define _CORE_LUA_DEF__H_
 
+struct lua_State;
+
 namespace LuaCore{
-	void injectLuaCore();
+	void injectLuaCore(lua_State*);
 }
 
 // Use these template to make less error prone.

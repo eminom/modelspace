@@ -4,7 +4,7 @@
 
 //////////////////
 //These codes shall be generated automatically.
-//Mon Apr 06 2015 13:31:30 GMT+0800 (CST)
+//Thu Apr 09 2015 11:32:22 GMT+0800 (CST)
 
 #define _EsNodeMetaString	"DDGraphics_EsNode"
 
@@ -154,9 +154,9 @@ static luaL_Reg EsNodeTmpIndex[] = {
 
 //This is the only thing you need to code yourself.
 
-void loadEsNodeTmpIndex()
+void loadEsNodeTmpIndex(lua_State*L)
 {
-	_DeclareState()
+	//_DeclareState()
 	luaL_newmetatable(L, _EsNodeMetaString);	
 
 	// If it is necessary to get a GC for our class.
@@ -181,7 +181,7 @@ void loadEsNodeTmpIndex()
 
 //////////////////
 //These codes shall be generated automatically.
-//Mon Apr 06 2015 13:31:30 GMT+0800 (CST)
+//Thu Apr 09 2015 11:32:22 GMT+0800 (CST)
 
 #define _ParticleNodeMetaString	"DDGraphics_ParticleNode"
 
@@ -201,9 +201,9 @@ static luaL_Reg ParticleNodeTmpIndex[] = {
 
 //This is the only thing you need to code yourself.
 
-void loadParticleNodeTmpIndex()
+void loadParticleNodeTmpIndex(lua_State*L)
 {
-	_DeclareState()
+	//_DeclareState()
 	luaL_newmetatable(L, _ParticleNodeMetaString);	
 
 	// If it is necessary to get a GC for our class.
@@ -228,7 +228,7 @@ void loadParticleNodeTmpIndex()
 
 //////////////////
 //These codes shall be generated automatically.
-//Mon Apr 06 2015 13:31:30 GMT+0800 (CST)
+//Thu Apr 09 2015 11:32:22 GMT+0800 (CST)
 
 #define _BlenderNodeMetaString	"DDGraphics_BlenderNode"
 
@@ -271,9 +271,9 @@ static luaL_Reg BlenderNodeTmpIndex[] = {
 
 //This is the only thing you need to code yourself.
 
-void loadBlenderNodeTmpIndex()
+void loadBlenderNodeTmpIndex(lua_State*L)
 {
-	_DeclareState()
+	//_DeclareState()
 	luaL_newmetatable(L, _BlenderNodeMetaString);	
 
 	// If it is necessary to get a GC for our class.
@@ -298,7 +298,7 @@ void loadBlenderNodeTmpIndex()
 
 //////////////////
 //These codes shall be generated automatically.
-//Mon Apr 06 2015 13:31:30 GMT+0800 (CST)
+//Thu Apr 09 2015 11:32:22 GMT+0800 (CST)
 
 #define _BlenderNormalMetaString	"DDGraphics_BlenderNormal"
 
@@ -318,9 +318,9 @@ static luaL_Reg BlenderNormalTmpIndex[] = {
 
 //This is the only thing you need to code yourself.
 
-void loadBlenderNormalTmpIndex()
+void loadBlenderNormalTmpIndex(lua_State*L)
 {
-	_DeclareState()
+	//_DeclareState()
 	luaL_newmetatable(L, _BlenderNormalMetaString);	
 
 	// If it is necessary to get a GC for our class.
@@ -345,7 +345,7 @@ void loadBlenderNormalTmpIndex()
 
 //////////////////
 //These codes shall be generated automatically.
-//Mon Apr 06 2015 13:31:30 GMT+0800 (CST)
+//Thu Apr 09 2015 11:32:22 GMT+0800 (CST)
 
 #define _BlenderParticleMetaString	"DDGraphics_BlenderParticle"
 
@@ -365,9 +365,9 @@ static luaL_Reg BlenderParticleTmpIndex[] = {
 
 //This is the only thing you need to code yourself.
 
-void loadBlenderParticleTmpIndex()
+void loadBlenderParticleTmpIndex(lua_State*L)
 {
-	_DeclareState()
+	//_DeclareState()
 	luaL_newmetatable(L, _BlenderParticleMetaString);	
 
 	// If it is necessary to get a GC for our class.
@@ -392,7 +392,7 @@ void loadBlenderParticleTmpIndex()
 
 //////////////////
 //These codes shall be generated automatically.
-//Mon Apr 06 2015 13:31:30 GMT+0800 (CST)
+//Thu Apr 09 2015 11:32:22 GMT+0800 (CST)
 
 #define _AxisNodeMetaString	"DDGraphics_AxisNode"
 
@@ -412,9 +412,9 @@ static luaL_Reg AxisNodeTmpIndex[] = {
 
 //This is the only thing you need to code yourself.
 
-void loadAxisNodeTmpIndex()
+void loadAxisNodeTmpIndex(lua_State*L)
 {
-	_DeclareState()
+	//_DeclareState()
 	luaL_newmetatable(L, _AxisNodeMetaString);	
 
 	// If it is necessary to get a GC for our class.
@@ -439,7 +439,7 @@ void loadAxisNodeTmpIndex()
 
 //////////////////
 //These codes shall be generated automatically.
-//Mon Apr 06 2015 13:31:30 GMT+0800 (CST)
+//Thu Apr 09 2015 11:32:22 GMT+0800 (CST)
 
 #define _FieldNodeMetaString	"DDGraphics_FieldNode"
 
@@ -459,9 +459,9 @@ static luaL_Reg FieldNodeTmpIndex[] = {
 
 //This is the only thing you need to code yourself.
 
-void loadFieldNodeTmpIndex()
+void loadFieldNodeTmpIndex(lua_State*L)
 {
-	_DeclareState()
+	//_DeclareState()
 	luaL_newmetatable(L, _FieldNodeMetaString);	
 
 	// If it is necessary to get a GC for our class.
@@ -486,7 +486,7 @@ void loadFieldNodeTmpIndex()
 
 //////////////////
 //These codes shall be generated automatically.
-//Mon Apr 06 2015 13:31:30 GMT+0800 (CST)
+//Thu Apr 09 2015 11:32:22 GMT+0800 (CST)
 
 #define _LightNodeMetaString	"DDGraphics_LightNode"
 
@@ -526,9 +526,9 @@ static luaL_Reg LightNodeTmpIndex[] = {
 
 //This is the only thing you need to code yourself.
 
-void loadLightNodeTmpIndex()
+void loadLightNodeTmpIndex(lua_State*L)
 {
-	_DeclareState()
+	//_DeclareState()
 	luaL_newmetatable(L, _LightNodeMetaString);	
 
 	// If it is necessary to get a GC for our class.
@@ -553,7 +553,7 @@ void loadLightNodeTmpIndex()
 
 //////////////////
 //These codes shall be generated automatically.
-//Mon Apr 06 2015 13:31:30 GMT+0800 (CST)
+//Thu Apr 09 2015 11:32:22 GMT+0800 (CST)
 
 #define _MimicNodeMetaString	"DDGraphics_MimicNode"
 
@@ -573,9 +573,9 @@ static luaL_Reg MimicNodeTmpIndex[] = {
 
 //This is the only thing you need to code yourself.
 
-void loadMimicNodeTmpIndex()
+void loadMimicNodeTmpIndex(lua_State*L)
 {
-	_DeclareState()
+	//_DeclareState()
 	luaL_newmetatable(L, _MimicNodeMetaString);	
 
 	// If it is necessary to get a GC for our class.
@@ -600,7 +600,7 @@ void loadMimicNodeTmpIndex()
 
 //////////////////
 //These codes shall be generated automatically.
-//Mon Apr 06 2015 13:31:30 GMT+0800 (CST)
+//Thu Apr 09 2015 11:32:22 GMT+0800 (CST)
 
 #define _CubeNodeMetaString	"DDGraphics_CubeNode"
 
@@ -639,9 +639,9 @@ static luaL_Reg CubeNodeTmpIndex[] = {
 
 //This is the only thing you need to code yourself.
 
-void loadCubeNodeTmpIndex()
+void loadCubeNodeTmpIndex(lua_State*L)
 {
-	_DeclareState()
+	//_DeclareState()
 	luaL_newmetatable(L, _CubeNodeMetaString);	
 
 	// If it is necessary to get a GC for our class.
@@ -661,16 +661,16 @@ void loadCubeNodeTmpIndex()
 }
 
 #define EXPORT_LOADNODES()\
-  loadEsNodeTmpIndex();\
-  loadParticleNodeTmpIndex();\
-  loadBlenderNodeTmpIndex();\
-  loadBlenderNormalTmpIndex();\
-  loadBlenderParticleTmpIndex();\
-  loadAxisNodeTmpIndex();\
-  loadFieldNodeTmpIndex();\
-  loadLightNodeTmpIndex();\
-  loadMimicNodeTmpIndex();\
-  loadCubeNodeTmpIndex();\
+  loadEsNodeTmpIndex(L);\
+  loadParticleNodeTmpIndex(L);\
+  loadBlenderNodeTmpIndex(L);\
+  loadBlenderNormalTmpIndex(L);\
+  loadBlenderParticleTmpIndex(L);\
+  loadAxisNodeTmpIndex(L);\
+  loadFieldNodeTmpIndex(L);\
+  loadLightNodeTmpIndex(L);\
+  loadMimicNodeTmpIndex(L);\
+  loadCubeNodeTmpIndex(L);\
 
 
 static int createBlenderNormal(lua_State *L)
@@ -841,4 +841,4 @@ static luaL_Reg _ddStatics[] = {
   {"createBlenderParticle", createBlenderParticle },
   {NULL, NULL}
 };
-void load_ddStatics(){ _DeclareState() luaL_register(L, "dd", _ddStatics); }
+void load_ddStatics(lua_State*L){ luaL_register(L, "dd", _ddStatics); }
