@@ -20,6 +20,7 @@ extern "C" {
 
 #include "interop/lua_access/refobj.h"
 #include "FrameBufferObj.h"
+#include "interop/luavm.h"
 
 class InputHost;
 
@@ -70,7 +71,7 @@ private:
 	void finalizeFramebuffer();
 	FrameBufferObj framebuffer_;
 	DD::ArrayBuffer vertex_;
-	
+	DD::LuaVM vm_;
 
 private:
 	static const char *WindowsTitle;

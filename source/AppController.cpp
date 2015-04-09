@@ -167,15 +167,19 @@ void AppController::setDirector(EsDirector *director)
 void AppController::mainLoop()
 {
 	_appObjRef.execVoid("OnAppReady");
+	vm_.loadScript("exec/inprogress.lua");
 	CheckGL()
+
+	float accDT = 0;
 	do{
-		auto drawer = [this](){
+		double now = glfwGetTime();
+		float dt = float(now - _lastTime);
+		_lastTime = now;
+
+		auto drawer = [dt, this](){
 			glClear( GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT );
 			_appObjRef.execVoid("Update");
 			printText2D(_inPro->info(), 0 , 700, 30);
-			double now = glfwGetTime();
-			float dt = float(now - _lastTime);
-			_lastTime = now;
 			_director->updateNode(dt);
 			glm::mat4 mvp = getMVP();
 			_director->render(mvp);
@@ -187,6 +191,12 @@ void AppController::mainLoop()
 			finalizeFramebuffer();
 		} else {
 			drawer();
+		}
+
+		accDT += dt;
+		if(accDT>5){
+			accDT = 0;
+			vm_.step();
 		}
 
 		glfwSwapBuffers(_window);

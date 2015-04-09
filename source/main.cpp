@@ -3,6 +3,7 @@
 //    DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
 //                   Version 2, December 2004
 //
+//Copyright (C) 2015 Eminem Bai <hai.bai.cn@gmail.com>
 //Copyright (C) 2004 Sam Hocevar <sam@hocevar.net>
 //
 //Everyone is permitted to copy and distribute verbatim or modified
@@ -34,7 +35,6 @@
 #include "interop/class/exports.h"
 #include "utils/raw_object_wrappers.hpp"
 
-
 void test()
 {
 	DD::RawMemo<GLfloat> k;
@@ -42,6 +42,9 @@ void test()
 	//delete k;
 	//delete [] k;
 	//delete k;
+
+	//DD::LuaVM lv;
+	//lv.loadScript("exec/inprogress.lua");
 }
 
 int main(void)
@@ -55,10 +58,10 @@ int main(void)
 	app.setDirector(EsDirector::instance());
 	LuaCore::injectLuaCore(core);
 	LuaCore::doExports(core);
-
 	test();
 
 	EsNode* root = FieldNode::create(20);
+	root->setVisible(false);
 	EsDirector::instance()->setRoot(root);
 	if( !app.loadObject("exec/script.lua") ){
 		fprintf(stderr, "Error loading objects\n");
