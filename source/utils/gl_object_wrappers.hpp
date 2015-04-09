@@ -64,10 +64,11 @@ public:
 			--(*refCounter_);
 			if(0 == *refCounter_){
 				T::destruct(obj_);
-				obj_ = 0;
-				refCounter_ = 0;
+				delete refCounter_;
 			}
 		}
+		obj_ = 0;
+		refCounter_ = 0;
 	}
 
 	operator GLuint()const{return obj_;}
