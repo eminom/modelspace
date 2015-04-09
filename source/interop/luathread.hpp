@@ -62,6 +62,7 @@ namespace DD
 		{
 			const int top = lua_gettop(master);
 			lua_State *thread = lua_newthread(master);
+			assert( 0 == lua_gettop(thread));
 			ref_ = luaL_ref(master, LUA_REGISTRYINDEX);
 			counter_ = new int(1);
 			thread_ = new LuaThread(thread);
