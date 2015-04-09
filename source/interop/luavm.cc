@@ -70,7 +70,8 @@ void LuaVM::step()
 	}
 	else
 	{
-		printf("LuaVM:step: No task for now\n");
+		printf("LuaVM:step: No task for now.\n");
+		printf("ThreadPool: (%d)\n", pool_.size());
 	}
 }
 
