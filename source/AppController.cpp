@@ -174,6 +174,7 @@ void AppController::mainLoop()
 	}
 
 	vm_.start("step");
+	vm_.start("step");
 	CheckGL()
 
 	float accDT = 0;
