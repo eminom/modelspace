@@ -54,6 +54,7 @@ public:
 			if(0 == *_refCounter){
 				_DeclareState()
 				luaL_unref(L, LUA_REGISTRYINDEX, _ref);
+				delete _refCounter;
 			}
 		}
 		//detached
