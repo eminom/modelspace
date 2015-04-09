@@ -62,7 +62,7 @@ namespace DD
 		{
 			const int top = lua_gettop(master);
 			lua_State *thread = lua_newthread(master);
-			ref_ = luaL_ref(master, -1);
+			ref_ = luaL_ref(master, LUA_REGISTRYINDEX);
 			counter_ = new int(1);
 			thread_ = new LuaThread(thread);
 			assert(lua_gettop(master) == top);
@@ -83,6 +83,10 @@ namespace DD
 		}
 
 		LuaThreadRef(const LuaThreadRef&rhs)
+			:counter_(nullptr),
+			master_(nullptr),
+			thread_(nullptr),
+			ref_(LUA_REFNIL)
 		{
 			copy(rhs);
 		}

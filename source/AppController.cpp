@@ -167,7 +167,13 @@ void AppController::setDirector(EsDirector *director)
 void AppController::mainLoop()
 {
 	_appObjRef.execVoid("OnAppReady");
-	vm_.loadScript("exec/inprogress.lua");
+	CheckGL()
+
+	if( ! vm_.loadScript("exec/inprogress.lua") ){
+		return;
+	}
+
+	vm_.start("step");
 	CheckGL()
 
 	float accDT = 0;

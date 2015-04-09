@@ -26,6 +26,8 @@ LuaVM::~LuaVM()
 
 void LuaVM::purge()
 {
+	_task.clear();
+	pool_.clear();
 }
 
 bool LuaVM::loadScript(const char *path)
@@ -50,16 +52,22 @@ bool LuaVM::loadScript(const char *path)
 
 void LuaVM::step()
 {
-	//int status = thread_.thread_->status();
-	//if (0==status)
-	//{
-	//	printf("Already finished\n");
-	//} 
-	//else if( status == thread_.thread_->status())
-	//{
-	//	printf("Resume \n");
-	//	thread_.thread_->resume();
-	//}
+	lua_State *S = nullptr;
+	for(auto it=_task.begin();it!=_task.end();++it)
+	{
+		int status = lua_status(it->first);
+		if(LUA_YIELD == status)
+		{
+			S = it->first;
+			break;
+		}
+	}
+
+	if(S)
+	{
+		lua_resume(S, 0);
+		finalize(S);
+	}
 }
 
 
