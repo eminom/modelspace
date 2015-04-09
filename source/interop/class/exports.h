@@ -5,7 +5,12 @@
 
 struct lua_State;
 
+namespace LuaCore
+{
+
 //temporary name. 
 void doExports(lua_State*);
+
+}
 
 #endif

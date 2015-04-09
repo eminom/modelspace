@@ -43,10 +43,15 @@ static luaL_Reg entries[]={
 	{NULL, NULL},
 };
 
+namespace LuaCore
+{
+
 void doExports(lua_State *L)
 {
 	EXPORT_LOADNODES()
 	load_ddStatics(L);
 	//_DeclareState()
 	luaL_register(L, "ddcore", entries);
+}
+
 }

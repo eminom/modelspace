@@ -54,7 +54,7 @@ int main(void)
 	lua_State *core = LuaScriptor::sharedInstance()->getLuaState();
 	app.setDirector(EsDirector::instance());
 	LuaCore::injectLuaCore(core);
-	doExports(core);
+	LuaCore::doExports(core);
 
 	test();
 
