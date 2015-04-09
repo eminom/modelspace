@@ -22,9 +22,19 @@ source_group(Source FILES ${SRC_LIST})
 
 
 set(SRC_LIST
+./interop/luavm.h
+./interop/luathread.hpp
+./interop/luavm.cc
+)
+set(FULL_SRC_LIST ${FULL_SRC_LIST} ${SRC_LIST})
+source_group(interop FILES ${SRC_LIST})
+
+set(SRC_LIST
+./interop/class/experimental.h
 ./interop/class/exports.h
 ./interop/class/lextension.h
 ./interop/class/lextension.c
+./interop/class/experimental.cpp
 ./interop/class/exports.cpp
 )
 set(FULL_SRC_LIST ${FULL_SRC_LIST} ${SRC_LIST})
@@ -37,6 +47,7 @@ set(SRC_LIST
 ./interop/lua_access/refobj.h
 ./interop/lua_access/refproto.h
 ./interop/lua_access/refprotobase.h
+./interop/lua_access/lua_access_class.hpp
 ./interop/lua_access/lua_access.cpp
 ./interop/lua_access/refobj.cpp
 ./interop/lua_access/refproto.cpp
@@ -128,6 +139,7 @@ set(SRC_LIST
 ./utils/state_saver.h
 ./utils/gl_object_wrappers.hpp
 ./utils/memo_pool.hpp
+./utils/raw_object_wrappers.hpp
 )
 set(FULL_SRC_LIST ${FULL_SRC_LIST} ${SRC_LIST})
 source_group(utils FILES ${SRC_LIST})
