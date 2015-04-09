@@ -59,7 +59,7 @@ bool CubeNode::init(float x, float y, float width, float height, float vheight)
 	_vertexCount = _grids.size();
 	synthesizeMatrix();
 
-	_simpleNode.loadFromFunc("createSimpleNode");
+	_simpleNode.requireFuncDo("exec/SimpleNode.lua");
 	_simpleNode.execVoid("setHost","v", this);
 	_simpleNode.execVoid("setPos", "fff", x,0.0f,-y);
 	_simpleNode.execVoid("update", "f", 0.0f);
