@@ -275,7 +275,7 @@ int ljLoadObj(const char *name){
 	return rv;
 }
 
-int ljCreateTableFromFuncRef(int ref, int retvals, int(*checker)(lua_State *L, int n)=nullptr) {
+int ljCreateTableFromFuncRef(int ref, int retvals, int(*checker)(lua_State *L, int n)) {
 	_DeclareState()
 	lua_rawgeti(L, LUA_REGISTRYINDEX, ref);
 	if (!lua_isfunction(L,-1)){
@@ -375,45 +375,6 @@ int ljLoadFuncHandle(const char *name) {
 }
 
 
-//////////////////////
-FuncRef::FuncRef()
-	:_ref(LUA_REFNIL) {
-}
-
-FuncRef::FuncRef(const char *name)
-	:_ref(LUA_REFNIL) {
-	loadFunc(name);
-}
-
-FuncRef::~FuncRef() {
-	ljReleaseObj(_ref);
-}
-
-FuncRef::FuncRef(const FuncRef&rhs)
-	:_ref(LUA_REFNIL){
-	_ref = ljDuplicateObj(rhs._ref);
-}
-
-FuncRef& FuncRef::operator=(const FuncRef &rhs){
-	ljReleaseObj(_ref);
-	_ref = ljDuplicateObj(rhs._ref);
-	return *this;
-}
-
-void FuncRef::loadFunc(const char *name){
-	assert( LUA_REFNIL == _ref );
-	_ref = ljLoadFuncHandle(name);
-	assert( LUA_REFNIL != _ref);
-}
-
-int FuncRef::createObj(){
-	assert( LUA_REFNIL != _ref);
-	return ljCreateTableFromFuncRef(_ref, 1, [](lua_State *L, int n)->int{return lua_istable(L,n);});
-}
-
-void FuncRef::execute() {
-	ljCreateTableFromFuncRef(_ref, 0);
-}
 
 ObjContainer::ObjContainer():
 	_ref(LUA_REFNIL),

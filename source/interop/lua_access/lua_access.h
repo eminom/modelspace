@@ -311,27 +311,9 @@ void ljRunObjVoidSelfUserData(int ref, const char *funcName, bool *result, void 
 int ljDuplicateObj(int ref);
 void ljReleaseObj(int &ref);
 int ljLoadObj(const char *name);
-
+int ljLoadFuncHandle(const char *name);
+int ljCreateTableFromFuncRef(int ref, int retvals, int(*checker)(lua_State *L, int n)=nullptr);
 const char* toLuaType(lua_State *L, int index);
-
-///
-class FuncRef {
-
-public:
-	FuncRef();
-	FuncRef(const char*name);
-	~FuncRef();
-	FuncRef(const FuncRef&);
-	FuncRef& operator=(const FuncRef&);
-	int createObj();
-	void execute();
-
-private:
-	void loadFunc(const char *name);
-
-private:
-	int _ref;
-};
 
 class ObjContainer{
 public:
@@ -349,5 +331,7 @@ private:
 	ObjContainer(const ObjContainer&);
 	ObjContainer&operator=(const ObjContainer&);
 };
+
+#include "lua_access_class.hpp"
 
 #endif

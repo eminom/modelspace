@@ -15,6 +15,8 @@ public:
 	void loadRef(const char *name);
 	void loadFromFunc(const char *name);
 	bool require(const char *path);			//Always pop the stack by 1.
+	bool requireFunc(const char *path);
+	bool requireFuncDo(const char *path);
 
 public:
 	virtual int tableRef()const override;
