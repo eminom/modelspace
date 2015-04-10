@@ -4,7 +4,7 @@
 
 //////////////////
 //These codes shall be generated automatically.
-//Thu Apr 09 2015 11:32:22 GMT+0800 (CST)
+//Sat Apr 11 2015 00:04:40 GMT+0800 (CST)
 
 #define _EsNodeMetaString	"DDGraphics_EsNode"
 
@@ -181,7 +181,7 @@ void loadEsNodeTmpIndex(lua_State*L)
 
 //////////////////
 //These codes shall be generated automatically.
-//Thu Apr 09 2015 11:32:22 GMT+0800 (CST)
+//Sat Apr 11 2015 00:04:40 GMT+0800 (CST)
 
 #define _ParticleNodeMetaString	"DDGraphics_ParticleNode"
 
@@ -228,7 +228,7 @@ void loadParticleNodeTmpIndex(lua_State*L)
 
 //////////////////
 //These codes shall be generated automatically.
-//Thu Apr 09 2015 11:32:22 GMT+0800 (CST)
+//Sat Apr 11 2015 00:04:40 GMT+0800 (CST)
 
 #define _BlenderNodeMetaString	"DDGraphics_BlenderNode"
 
@@ -298,7 +298,7 @@ void loadBlenderNodeTmpIndex(lua_State*L)
 
 //////////////////
 //These codes shall be generated automatically.
-//Thu Apr 09 2015 11:32:22 GMT+0800 (CST)
+//Sat Apr 11 2015 00:04:40 GMT+0800 (CST)
 
 #define _BlenderNormalMetaString	"DDGraphics_BlenderNormal"
 
@@ -345,7 +345,7 @@ void loadBlenderNormalTmpIndex(lua_State*L)
 
 //////////////////
 //These codes shall be generated automatically.
-//Thu Apr 09 2015 11:32:22 GMT+0800 (CST)
+//Sat Apr 11 2015 00:04:40 GMT+0800 (CST)
 
 #define _BlenderParticleMetaString	"DDGraphics_BlenderParticle"
 
@@ -392,7 +392,7 @@ void loadBlenderParticleTmpIndex(lua_State*L)
 
 //////////////////
 //These codes shall be generated automatically.
-//Thu Apr 09 2015 11:32:22 GMT+0800 (CST)
+//Sat Apr 11 2015 00:04:40 GMT+0800 (CST)
 
 #define _AxisNodeMetaString	"DDGraphics_AxisNode"
 
@@ -439,7 +439,7 @@ void loadAxisNodeTmpIndex(lua_State*L)
 
 //////////////////
 //These codes shall be generated automatically.
-//Thu Apr 09 2015 11:32:22 GMT+0800 (CST)
+//Sat Apr 11 2015 00:04:40 GMT+0800 (CST)
 
 #define _FieldNodeMetaString	"DDGraphics_FieldNode"
 
@@ -486,7 +486,7 @@ void loadFieldNodeTmpIndex(lua_State*L)
 
 //////////////////
 //These codes shall be generated automatically.
-//Thu Apr 09 2015 11:32:22 GMT+0800 (CST)
+//Sat Apr 11 2015 00:04:40 GMT+0800 (CST)
 
 #define _LightNodeMetaString	"DDGraphics_LightNode"
 
@@ -497,6 +497,14 @@ struct LightNodeWrapper
   void setTimeScale(float p1)
   {
     static_cast<LightNode*>(_ref)->setTimeScale(p1);
+  }
+  void setVAngleSpeed(float p1)
+  {
+    static_cast<LightNode*>(_ref)->setVAngleSpeed(p1);
+  }
+  void setHAngleSpeed(float p1)
+  {
+    static_cast<LightNode*>(_ref)->setHAngleSpeed(p1);
   }
   static const char* MetaName;
 };
@@ -519,8 +527,40 @@ static int LightNode_setTimeScale(lua_State *L)
   return 0;
 }
 
+
+
+static int LightNode_setVAngleSpeed(lua_State *L) 
+{
+	if(lua_gettop(L)!=2){
+		luaL_error(L, "Need %d parameters for %s", 2, __FUNCTION__);
+	}
+
+
+  LightNodeWrapper* p1 = checkUserData<LightNodeWrapper>(L, 1);
+  float p2 = lua_tonumber(L, 2);
+  p1->setVAngleSpeed(p2);
+  return 0;
+}
+
+
+
+static int LightNode_setHAngleSpeed(lua_State *L) 
+{
+	if(lua_gettop(L)!=2){
+		luaL_error(L, "Need %d parameters for %s", 2, __FUNCTION__);
+	}
+
+
+  LightNodeWrapper* p1 = checkUserData<LightNodeWrapper>(L, 1);
+  float p2 = lua_tonumber(L, 2);
+  p1->setHAngleSpeed(p2);
+  return 0;
+}
+
 static luaL_Reg LightNodeTmpIndex[] = {
   {"setTimeScale", LightNode_setTimeScale},
+  {"setVAngleSpeed", LightNode_setVAngleSpeed},
+  {"setHAngleSpeed", LightNode_setHAngleSpeed},
   {NULL, NULL}
 };
 
@@ -553,7 +593,7 @@ void loadLightNodeTmpIndex(lua_State*L)
 
 //////////////////
 //These codes shall be generated automatically.
-//Thu Apr 09 2015 11:32:22 GMT+0800 (CST)
+//Sat Apr 11 2015 00:04:40 GMT+0800 (CST)
 
 #define _MimicNodeMetaString	"DDGraphics_MimicNode"
 
@@ -600,7 +640,7 @@ void loadMimicNodeTmpIndex(lua_State*L)
 
 //////////////////
 //These codes shall be generated automatically.
-//Thu Apr 09 2015 11:32:22 GMT+0800 (CST)
+//Sat Apr 11 2015 00:04:40 GMT+0800 (CST)
 
 #define _CubeNodeMetaString	"DDGraphics_CubeNode"
 

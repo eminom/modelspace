@@ -11,6 +11,8 @@ LightNode::LightNode()
 {
 	_timeScale = 1;
 	_mode = nullptr;
+	_vAngleSpeed = 1.20f;
+	_hAngleSpeed = 1.50f;
 }
 
 bool LightNode::init(const DDPoint &pos)
@@ -66,11 +68,21 @@ DDPoint LightNode::position()
 	return _position;
 }
 
+void LightNode::setVAngleSpeed(float val)
+{
+	_vAngleSpeed = val;
+}
+
+void LightNode::setHAngleSpeed(float val)
+{
+	_hAngleSpeed = val;
+}
+
 void LightNode::update(float dt)
 {
 	dt *= _timeScale;
-	_hAngle = fmodf(_hAngle + dt * 1.50f,2 * pi);
-	_vAngle = fmodf(_vAngle + dt * 1.201, 2 * pi);
+	_hAngle = fmodf(_hAngle + dt * _hAngleSpeed,2 * pi);
+	_vAngle = fmodf(_vAngle + dt * _vAngleSpeed, 2 * pi);
 	_position = DDPoint(
 		_radius * cosf(_vAngle) * sinf(_hAngle),
 		_radius * sinf(_vAngle),

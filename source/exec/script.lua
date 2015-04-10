@@ -84,6 +84,8 @@ end
 function initView()
 	local root = ddcore.GetEsNodeRoot()
 	local light = dd.createLightNode(0.8, 0.8, 0.8)
+	light:setVAngleSpeed(0.9)
+	light:setHAngleSpeed(0.6)
 	light:setScale(0.01,0.01, 0.01)
 	root:addSub(light)
 	ddcore.SetLight(light)
