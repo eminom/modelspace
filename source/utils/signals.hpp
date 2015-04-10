@@ -23,7 +23,7 @@ namespace DD
 		typedef Slot<void(ARG_SIGB)>* SlotPtr;
 
 	public:
-		Slot(int count=-1)
+		Slot(int count)
 			: count_(count)
 			, isNew_(false)			// turn when next trigger
 			, prev_(nullptr)
@@ -47,8 +47,8 @@ namespace DD
 	class FunctorSlot<FUNC, void(ARG_SIGB)>:public Slot<void(ARG_SIGB)>
 	{
 	public:
-		FunctorSlot(FUNC f)
-			:func_(f)
+		FunctorSlot(FUNC f, int count)
+			:func_(f), Slot<void(ARG_SIGB)>(count)
 		{
 
 		}
@@ -87,8 +87,8 @@ namespace DD
 		}
 
 		template<class T>
-		SlotHandle connect(T t) {
-			SlotPtr v = new FunctorSlot<T, void(ARG_SIGB)>(t);
+		SlotHandle connect(T t, int count=-1) {
+			SlotPtr v = new FunctorSlot<T, void(ARG_SIGB)>(t, count);
 			if(head_) {
 				head_->prev_ = v;
 			}

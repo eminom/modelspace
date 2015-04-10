@@ -50,6 +50,10 @@ void onDo1(int a)
 }
 
 
+
+DD::Signal<void(int)> s;
+DD::SlotHandle one;
+
 void s1(int a)
 {
 	printf("s1:%d\n",a);
@@ -63,7 +67,12 @@ void s2(int a)
 void s3(int a)
 {
 	printf("s3:%d\n", a);
+	if(one){
+		s.disconnect(one);
+		one = nullptr;
+	}
 }
+
 
 void test2()
 {
@@ -77,16 +86,14 @@ void test2()
 	using namespace std::placeholders;
 
 	do{
-		DD::Signal<void(int)> s;
-		s.connect(std::bind(&s1,_1));
-		auto one = s.connect(std::bind(&s2,_1));
+		s.connect(std::bind(&s1,_1), 1);
+		one = s.connect(std::bind(&s2,_1));
 		s.connect(std::bind(&s3,_1));
-
+		printf("############################\n\n");
 		s.trigger(101);
-		s.trigger(102);
-		s.disconnect(one);
-
-		s.trigger(103);
+		printf("############################\n\n");
+		s.trigger(101);
+		printf("############################\n\n");
 	}while(0);
 
 	do{

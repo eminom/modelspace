@@ -25,6 +25,9 @@ namespace DD
 
 	template<class T>
 	class Signal;
+
+
+	typedef void* SlotHandle;
 };
 //And do some template partialization
 //Four
