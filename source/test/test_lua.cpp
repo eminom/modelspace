@@ -34,6 +34,11 @@ int callFunc(lua_State *L)
 }
 
 
+void onDo3(unsigned a, int b, char c)
+{
+	printf("onDo3 %u, %d, %c\n", a,b,c);
+}
+
 void onDo2(int a, int b)
 {
 	printf("onDo2(%d,%d)\n", a,b);
@@ -62,9 +67,16 @@ void test2()
 	}while(0);
 
 	do{
-		DD::Signal<void(int,int)> s;
-		s.connect(std::bind(&onDo2, _1,_2));
-		s.trigger(201,302);
+		DD::Signal<void(int)> s;
+		s.connect(std::bind(&onDo2, 200,_1));
+		s.trigger(250);
+	}while(0);
+
+	do 
+	{
+		DD::Signal<void(unsigned,int,char)> s;
+		s.connect(std::bind(&onDo3, _1,_2,_3));
+		s.trigger(255, 100, 'c');
 	}while(0);
 }
 
