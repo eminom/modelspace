@@ -2,6 +2,8 @@
 #ifndef _SIGNAL_INC_DEF__
 #define _SIGNAL_INC_DEF__
 
+#include "signals_conf.h"
+
 namespace DD
 {
 	void incSlotCount();
