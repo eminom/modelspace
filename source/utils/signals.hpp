@@ -31,8 +31,7 @@ namespace DD
 			_TRACER_ADD()
 		}
 		// virtual can be removed.
-		virtual ~Slot()
-		{
+		virtual ~Slot()	{
 			_TRACER_SUB()
 		}
 		virtual void operator()(ARG_SIGV) = 0;
@@ -42,8 +41,6 @@ namespace DD
 		int count_;
 		SlotPtr prev_;
 		SlotPtr next_;
-
-		static int gCount;
 	};
 
 	template<typename FUNC ARG_SEP ARG_SIGT>
