@@ -90,7 +90,7 @@ namespace DD
 		}
 
 		template<class T>
-		void connect(T t) {
+		SlotHandle connect(T t) {
 			SlotPtr v = new FunctorSlot<T, void(ARG_SIGB)>(t);
 			if(head_) {
 				head_->prev_ = v;
@@ -101,6 +101,7 @@ namespace DD
 			if(dep_>1){
 				v->isNew_ = true;
 			}
+			return v;
 		}
 
 		void trigger(ARG_SIGV) {
