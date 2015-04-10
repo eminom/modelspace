@@ -6,6 +6,7 @@
 #include "InputProcessor.h"
 #include "interop/lua_access/lua_access_macros.h"
 #include <common/text2D.hpp>
+#include "EventCenter.h"
 
 #define DefaultScreenWidth	1024
 #define DefaultScreenHeight	768
@@ -174,7 +175,7 @@ void AppController::mainLoop()
 	}
 
 	vm_.start("step");
-	vm_.start("step");
+	//vm_.start("step");
 	CheckGL()
 
 	float accDT = 0;
@@ -203,7 +204,8 @@ void AppController::mainLoop()
 		accDT += dt;
 		if(accDT>=2.0){
 			accDT = 0;
-			vm_.step();
+			//vm_.step();
+			EventCenter::instance()->Go.trigger();
 		}
 
 		glfwSwapBuffers(_window);

@@ -10,10 +10,16 @@ extern "C" {
 #include <cstdio>
 #include <cstdlib>
 
+#include "EventCenter.h"
+#include "interop/luacomm.h"
+
+#include <functional>
+
 static int wait(lua_State *L)
 {
 	float waits = lua_tonumber(L, 1);
-	printf("You wait %f!\n", waits);
+	//printf("You wait %f!\n", waits);
+	EventCenter::instance()->Go.connect(std::bind(&DD::VmProcedure::resume, L), 1);
 	return lua_yield(L, 0);
 }
 
