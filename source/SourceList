@@ -1,6 +1,7 @@
 set(SRC_LIST
 ./AppController.h
 ./Director.h
+./EventCenter.h
 ./FrameBufferObj.h
 ./InputHost.h
 ./InputProcessor.h
@@ -12,6 +13,7 @@ set(SRC_LIST
 ./AppController.cpp
 ./AppControllerImpl.cpp
 ./Director.cpp
+./EventCenter.cpp
 ./InputProcessor.cpp
 ./InputStdProcessor.cpp
 ./LuaScriptor.cpp
@@ -22,8 +24,10 @@ source_group(Source FILES ${SRC_LIST})
 
 
 set(SRC_LIST
+./interop/luacomm.h
 ./interop/luavm.h
 ./interop/luathread.hpp
+./interop/luacomm.cc
 ./interop/luavm.cc
 )
 set(FULL_SRC_LIST ${FULL_SRC_LIST} ${SRC_LIST})
@@ -140,6 +144,9 @@ set(SRC_LIST
 ./utils/gl_object_wrappers.hpp
 ./utils/memo_pool.hpp
 ./utils/raw_object_wrappers.hpp
+./utils/signals.hpp
+./utils/signalsinc.hpp
+./utils/signalsinc.cc
 )
 set(FULL_SRC_LIST ${FULL_SRC_LIST} ${SRC_LIST})
 source_group(utils FILES ${SRC_LIST})
