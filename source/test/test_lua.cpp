@@ -49,6 +49,22 @@ void onDo1(int a)
 	printf("onDo1 : %d\n", a);
 }
 
+
+void s1(int a)
+{
+	printf("s1:%d\n",a);
+}
+
+void s2(int a)
+{
+	printf("s2:%d\n", a);
+}
+
+void s3(int a)
+{
+	printf("s3:%d\n", a);
+}
+
 void test2()
 {
 	//DD::Signal<void(int,int)> s;
@@ -59,6 +75,19 @@ void test2()
 	//s.trigger(20,30);
 
 	using namespace std::placeholders;
+
+	do{
+		DD::Signal<void(int)> s;
+		s.connect(std::bind(&s1,_1));
+		auto one = s.connect(std::bind(&s2,_1));
+		s.connect(std::bind(&s3,_1));
+
+		s.trigger(101);
+		s.trigger(102);
+		s.disconnect(one);
+
+		s.trigger(103);
+	}while(0);
 
 	do{
 		DD::Signal<void(int)> s;
