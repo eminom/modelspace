@@ -8,7 +8,7 @@
 class FuncRef
 {
 public:
-	FuncRef::FuncRef()
+	FuncRef()
 		:_ref(LUA_REFNIL)
 		,_refCounter(nullptr)
 	{
