@@ -49,6 +49,10 @@ void test()
 
 int main(void)
 {
+	extern void test2();
+	test2();
+
+
 	AppController app;
 	if (!app.initAppGL(4,1, GLFW_OPENGL_CORE_PROFILE))
 	{

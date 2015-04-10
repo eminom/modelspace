@@ -10,6 +10,9 @@ extern "C"{
 
 }
 
+#include <functional>
+#include "utils/signalsinc.hpp"
+
 int callFunc(lua_State *L)
 {
 	lua_getglobal(L, "f");
@@ -28,6 +31,41 @@ int callFunc(lua_State *L)
 	int z = lua_tonumber(L,-1);
 	lua_pop(L,1);
 	return z;
+}
+
+
+void onDo2(int a, int b)
+{
+	printf("onDo2(%d,%d)\n", a,b);
+}
+
+void onDo1(int a)
+{
+	printf("onDo1 : %d\n", a);
+}
+
+void test2()
+{
+	//DD::Signal<void(int,int)> s;
+	
+	//auto k = std::bind(&onDo,_1,_2);
+	////k(1,2);
+	//s.connect(std::bind(&onDo,_1,_2));
+	//s.trigger(20,30);
+
+	using namespace std::placeholders;
+
+	do{
+		DD::Signal<void(int)> s;
+		s.connect(std::bind(&onDo1,_1));
+		s.trigger(200);
+	}while(0);
+
+	do{
+		DD::Signal<void(int,int)> s;
+		s.connect(std::bind(&onDo2, _1,_2));
+		s.trigger(201,302);
+	}while(0);
 }
 
 int mainZ()
