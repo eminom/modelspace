@@ -26,7 +26,6 @@ namespace DD
 		Slot(int count=-1)
 			: count_(count)
 			, isNew_(false)			// turn when next trigger
-			, isObsolete_(false)	// active
 			, prev_(nullptr)
 			, next_(nullptr){
 			_TRACER_ADD()
@@ -40,7 +39,6 @@ namespace DD
 
 	public:
 		bool isNew_;
-		bool isObsolete_;
 		int count_;
 		SlotPtr prev_;
 		SlotPtr next_;
@@ -100,6 +98,9 @@ namespace DD
 			v->prev_ = nullptr;
 			v->next_ = head_;
 			head_ = v;
+			if(dep_>1){
+				v->isNew_ = true;
+			}
 		}
 
 		void trigger(ARG_SIGV) {
