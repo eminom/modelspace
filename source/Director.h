@@ -9,6 +9,7 @@
 #include "nodes/EsNode.h"
 #include "nodes/graphics/DDGraphics.h"
 #include "LightProtocol.h"
+#include <vector>
 
 class EsDirector
 {
@@ -23,7 +24,8 @@ public:
 	EsNode* root()const;
 	void render(const glm::mat4& MVP);
 	void updateNode(float dt);
-	DDPoint getLightPosition();
+	int lightCount()const;
+	DDPoint getLightPosition(int index);
 	void setLight(LightProtocol *light);
 
 public:
@@ -33,7 +35,7 @@ public:
 private:
 	EsNode *_root;
 	GLuint _vao;
-	LightProtocol *_light;
+	std::vector<LightProtocol*> _light;
 };
 
 #endif

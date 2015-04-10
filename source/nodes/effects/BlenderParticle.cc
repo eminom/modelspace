@@ -34,8 +34,7 @@ BlenderParticle* BlenderParticle::create(const char *path, int max, float fScale
 bool BlenderParticle::initComplex(const char *path)
 {
 	_program = ShaderCacheEx::instance()->shaderFor(ShaderType::ParticleCube);
-
-	_lightPosSlot = _program->getLocation("u_LightPosition");
+	loadLightUniforms();
 	_modelSlot = _program->getLocation("u_ModelMatrix");
 	_normalMatrixSlot = _program->getLocation("u_NormalMatrix");
 	_mvpSlot = _program->getLocation("u_MVP");
@@ -148,10 +147,10 @@ void BlenderParticle::drawComplex(const glm::mat4 &mat)
 {
 	glm::mat4 mvp = mat * _model;
 	glm::mat3 normalMatrix = glm::transpose(glm::inverse(glm::mat3(_model)));
-	glm::vec3 lightPos = EsDirector::instance()->getLightPosition();
+	
 	_program->use();
 	glUniformMatrix3fv(_normalMatrixSlot, 1, GL_FALSE, &normalMatrix[0][0]);
-	glUniform3f(_lightPosSlot, lightPos.x, lightPos.y, lightPos.z);
+	setLightUniforms();
 	glUniformMatrix4fv(_mvpSlot, 1, GL_FALSE, &mvp[0][0]);
 	glUniformMatrix4fv(_modelSlot, 1, GL_FALSE, &_model[0][0]);
 

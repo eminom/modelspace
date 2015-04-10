@@ -9,7 +9,9 @@
 
 BlenderNormal::BlenderNormal()
 {
-	_lightPosSlot = -1;
+	for(int i=0;i<sizeof(_lightPosSlot)/sizeof(*_lightPosSlot);++i){
+		_lightPosSlot[i] = -1;
+	}
 	_modelSlot = -1;
 	_normalMatrixSlot = -1;
 	_mvpSlot = -1;
@@ -34,9 +36,28 @@ bool BlenderNormal::init(const char *path, bool complex){
 	}
 }
 
+void BlenderNormal::loadLightUniforms(){
+	for(int i=0;i<sizeof(_lightPosSlot)/sizeof(*_lightPosSlot);++i){
+		char str[BUFSIZ];
+		sprintf(str, "u_LightPosition%d", i);
+		_lightPosSlot[i] = _program->getLocation(str);
+		//assert(_lightPosSlot[i]>=0);
+	}
+}
+
+void BlenderNormal::setLightUniforms(){
+	int lsize = EsDirector::instance()->lightCount();
+	for(int i=0;i<lsize;++i){
+		if(_lightPosSlot[i]>=0){
+			DDPoint lightPos = EsDirector::instance()->getLightPosition(i);
+			glUniform3f(_lightPosSlot[i], lightPos.x, lightPos.y, lightPos.z);
+		}
+	}
+}
+
 bool BlenderNormal::initComplex(const char *path){
 	_program = ShaderCacheEx::instance()->shaderFor(ShaderType::Diffuse);
-	_lightPosSlot = _program->getLocation("u_LightPosition");
+	loadLightUniforms();
 	_modelSlot = _program->getLocation("u_ModelMatrix");
 	_normalMatrixSlot = _program->getLocation("u_NormalMatrix");
 	_mvpSlot = _program->getLocation("u_MVP");
@@ -101,9 +122,8 @@ void BlenderNormal::drawComplex(const glm::mat4 &mat) {
 	glm::mat3 normalMatrix = glm::transpose(glm::inverse(glm::mat3(_model)));
 
 	//glUniform4f(_lightPosSlot, 0.5, 1.25, 0.3, 1);
+	setLightUniforms();
 
-	DDPoint lightPos = EsDirector::instance()->getLightPosition();
-	glUniform3f(_lightPosSlot, lightPos.x, lightPos.y, lightPos.z);
 	glUniformMatrix4fv(_modelSlot, 1, GL_FALSE, &_model[0][0]);
 	glUniformMatrix4fv(_mvpSlot, 1, GL_FALSE, &mvp[0][0]);
 	glUniformMatrix3fv(_normalMatrixSlot, 1, GL_FALSE, &normalMatrix[0][0]);

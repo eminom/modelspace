@@ -8,7 +8,7 @@ EsDirector::EsDirector()
 {
 	_vao = 0;
 	_root = nullptr;
-	_light = 0;
+	//_light = 0;
 }
 
 EsDirector::~EsDirector()
@@ -80,13 +80,19 @@ EsNode* EsDirector::root()const
 
 void EsDirector::setLight(LightProtocol *light)
 {
-	_light = light;
+	if(std::find(_light.begin(), _light.end(), light) == _light.end()){
+		_light.push_back(light);
+	}
 }
 
-DDPoint EsDirector::getLightPosition()
+int EsDirector::lightCount()const{
+	return _light.size();
+}
+
+DDPoint EsDirector::getLightPosition(int index)
 {
-	if(_light){
-		return _light->position();
+	if(index>=0&&index<_light.size()){
+		return _light[index]->position();
 	}
 	return DDPoint(1,1,1);
 }

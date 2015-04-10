@@ -16,6 +16,7 @@ enum class BlenderNormalType
 
 class BlenderNormal:public BlenderNode
 {
+	enum {MaxLightCount = 4};
 protected:
 	BlenderNormal();
 
@@ -54,6 +55,8 @@ protected:
 	virtual void drawComplex(const glm::mat4 &mat);
 	virtual void drawSimple(const glm::mat4 &mat);
 	
+	void loadLightUniforms();
+	void setLightUniforms();
 
 protected:
 	VDDPointEx _normal;
@@ -62,7 +65,7 @@ protected:
 	DD::ArrayBuffer _normalVBO;
 	DD::ArrayBuffer _colorVBO;
 
-	GLint _lightPosSlot;
+	GLint _lightPosSlot[MaxLightCount];
 	GLint _modelSlot;
 	GLint _normalMatrixSlot;
 

@@ -88,6 +88,11 @@ function initView()
 	root:addSub(light)
 	ddcore.SetLight(light)
 
+	light = dd.createLightNode(0.5, 0.6, 0.45)
+	light:setScale(0.01, 0.01, 0.01)
+	root:addSub(light)
+	ddcore.SetLight(light)
+
 	-- Test of BlenderParticle
 	-- root:addSub(dd.createBlenderParticle("objects/uvsphere8.json", 60000, 0.03))
 	-- do return end

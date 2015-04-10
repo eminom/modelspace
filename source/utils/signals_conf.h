@@ -1,5 +1,5 @@
 
-#ifdef _DEBUG
+#ifdef _DEBUGX
 #define _TRACER_ADD()\
 	DD::incSlotCount();
 

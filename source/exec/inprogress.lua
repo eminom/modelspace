@@ -4,7 +4,7 @@ local function add()
 	-- print("Site 1000")
 	local box = dd.createBlenderNormal('objects/uvsphere.json')
 	-- print("Site 2000")
-	box:setTransform( math.random(5) * 0.15, math.random(5) * 0.15, math.random(5) * 0.15)
+	box:setTransform( (math.random(10) - 5) * 0.15, (math.random(10) - 5) * 0.15, (math.random(10) - 5) * 0.15)
 	box:setScale(0.05, 0.05, 0.05)
 
 	local color = {
@@ -25,7 +25,7 @@ end
 function step()
 	-- print("Step !!!")
 	local root = ddcore.GetEsNodeRoot()
-	for i=1, 3 do
+	for i=1, 50 do
 		-- print(" >>> ", i)
 		add()
 		exp.wait(100)
