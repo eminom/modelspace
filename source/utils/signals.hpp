@@ -41,6 +41,9 @@ namespace DD
 		int count_;
 		SlotPtr prev_;
 		SlotPtr next_;
+	private:
+		Slot<void(ARG_SIGB)>(const Slot<void(ARG_SIGB)>&);
+		Slot<void(ARG_SIGB)>& operator=(const Slot<void(ARG_SIGB)>&);
 	};
 
 	template<typename FUNC ARG_SEP ARG_SIGT>
@@ -154,5 +157,8 @@ namespace DD
 		SlotPtr head_;
 		SlotPtr delete_;
 		int dep_;
+	private:
+		Signal<void(ARG_SIGB)>(const Signal<void(ARG_SIGB)>&);
+		Signal<void(ARG_SIGB)>& operator=(const Signal<void(ARG_SIGB)>&);
 	};
 }
