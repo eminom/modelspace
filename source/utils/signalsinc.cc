@@ -6,13 +6,13 @@ namespace DD{
 	void incSlotCount()
 	{
 		gCount++;
-		printf("gCount up to %d\n", gCount);
+		printf("Slots up to %d\n", gCount);
 	}
 
 	void decSlotCount()
 	{
 		gCount--;
-		printf("gCount down to %d\n", gCount);
+		printf("Slots down to %d\n", gCount);
 	}
 
 }
