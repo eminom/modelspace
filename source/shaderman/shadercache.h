@@ -18,6 +18,7 @@ enum class ShaderType{
 	Wobbler,
 	Particle,
 	ParticleCube,
+	ParticleTex,
 };
 
 class ShaderCacheEx

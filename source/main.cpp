@@ -35,6 +35,9 @@
 #include "interop/class/exports.h"
 #include "utils/raw_object_wrappers.hpp"
 
+#include "utils/io/FileLoader.h"
+#include "texture/TextureData.h"
+
 void test()
 {
 	DD::RawMemo<GLfloat> k;
@@ -54,8 +57,7 @@ int main(void)
 {
 	//extern void test2();
 	//test2();
-	test3();
-
+	//test3();
 
 	AppController app;
 	if (!app.initAppGL(4,1, GLFW_OPENGL_CORE_PROFILE))
@@ -70,6 +72,16 @@ int main(void)
 
 	EsNode* root = FieldNode::create(20);
 	root->setVisible(false);
+
+	PngImageData data;
+	data.load("../resource/Mario.png");
+	TextureData tex;
+	tex.initWithPngData(data);
+
+	ParticleTex *pt = ParticleTex::create();
+	pt->setTexture(tex.texture());
+	root->addSub(pt);
+
 	EsDirector::instance()->setRoot(root);
 	if( !app.loadObject("exec/script.lua") ){
 		fprintf(stderr, "Error loading objects\n");

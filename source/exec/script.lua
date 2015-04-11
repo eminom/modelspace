@@ -96,8 +96,10 @@ function initView()
 	ddcore.SetLight(light)
 
 	-- Test of BlenderParticle
-	-- root:addSub(dd.createBlenderParticle("objects/uvsphere8.json", 60000, 0.03))
-	-- do return end
+	--[[
+	root:addSub(dd.createBlenderParticle("objects/uvsphere8.json", 60000, 0.03))
+	do return end
+	--]]
 	-- root:addSub(dd.createParticleNode(50000))
 
 	-- ParticldeNode test

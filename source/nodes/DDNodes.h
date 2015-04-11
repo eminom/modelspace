@@ -14,6 +14,7 @@
 #include "AxisNode.h"
 #include "effects/ParticleNode.h"
 #include "effects/BlenderParticle.h"
+#include "effects/ParticleTex.h"
 
 
 #endif
