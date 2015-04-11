@@ -18,8 +18,14 @@ extern "C"{
 }
 
 CubeNode::CubeNode()
+	:_simpleNode(nullptr)
 {
 	_mvpSlot = -1;
+}
+
+CubeNode::~CubeNode()
+{
+	delete _simpleNode;
 }
 
 CubeNode* CubeNode::create(float x, float y, float width, float height, float vheight)
@@ -59,10 +65,12 @@ bool CubeNode::init(float x, float y, float width, float height, float vheight)
 	_vertexCount = _grids.size();
 	synthesizeMatrix();
 
-	_simpleNode.requireFuncDo("exec/SimpleNode.lua");
-	_simpleNode.execVoid("setHost","v", this);
-	_simpleNode.execVoid("setPos", "fff", x,0.0f,-y);
-	_simpleNode.execVoid("update", "f", 0.0f);
+	assert(!_simpleNode);
+	_simpleNode = new RefObject(LuaScriptor::sharedInstance()->getLuaState());
+	_simpleNode->requireFuncDo("exec/SimpleNode.lua");
+	_simpleNode->execVoid("setHost","v", this);
+	_simpleNode->execVoid("setPos", "fff", x,0.0f,-y);
+	_simpleNode->execVoid("update", "f", 0.0f);
 	return true;
 }
 
@@ -86,5 +94,5 @@ void CubeNode::draw(const glm::mat4 &matrix)
 
 void CubeNode::update(float dt)
 {
-	_simpleNode.execVoid("update", "f", dt);
+	_simpleNode->execVoid("update", "f", dt);
 }

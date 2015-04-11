@@ -11,6 +11,7 @@ class CubeNode:public GridNode
 {
 private:
 	CubeNode();
+	~CubeNode();
 
 public:
 
@@ -29,7 +30,7 @@ private:
 	float _width, _height, _vheight;
 	GLuint _mvpSlot;
 	int _vertexCount;
-	RefObject _simpleNode;
+	RefObject *_simpleNode;
 };
 
 

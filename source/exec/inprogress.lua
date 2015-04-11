@@ -24,12 +24,12 @@ end
 
 function step()
 	-- print("Step !!!")
-	local root = ddcore.GetEsNodeRoot()
-	for i=1, 50 do
-		-- print(" >>> ", i)
-		add()
-		exp.wait(100)
-	end
+	-- local root = ddcore.GetEsNodeRoot()
+	-- for i=1, 50 do
+	-- 	-- print(" >>> ", i)
+	-- 	add()
+	-- 	exp.wait(100)
+	-- end
 	print("Step is finished")
 end
 print("Loads done")

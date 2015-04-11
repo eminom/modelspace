@@ -29,6 +29,7 @@ AppController::~AppController()
 }
 
 AppController::AppController()
+	:_appObjRef(LuaScriptor::sharedInstance()->getLuaState())
 {
 	_window = nullptr;
 	_director = nullptr;
