@@ -7,24 +7,26 @@
 
 class DataBuff
 {
-	friend class FileLoader;
+	typedef unsigned char DataBuff_t;
+	//friend class FileLoader;
 public:
+	explicit DataBuff(std::size_t l);
 	DataBuff();
 	~DataBuff();
 
 	DataBuff(const DataBuff&);
 	DataBuff& operator=(const DataBuff&);
 
-	char *ptr();
+	DataBuff_t* ptr();
 	std::size_t size();
 
 private:
 	void deinit();
 	DataBuff& copy(const DataBuff&);
-	void take(char *data, std::size_t size);
+	void take(DataBuff_t *data, std::size_t size);
 
 private:
-	char *buff_;
+	DataBuff_t *buff_;
 	std::size_t size_;
 	int *_refCount;
 };

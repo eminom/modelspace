@@ -17,11 +17,10 @@ bool FileLoader::load(const char *path, DataBuff &output)
 	long sz = ftell(file);
 	fseek(file,0, SEEK_SET);
 
-	char *data = (char*)malloc(sizeof(unsigned char)*sz);
-	long read = fread(data, 1, sz, file);
+	output = DataBuff(sz);
+	char *data = (char*)output.ptr();
+	std::size_t read = fread(data, 1, sz, file);
 	assert( read == sz);
 	fclose(file);
-
-	output.take(data, read);
 	return true;
 }

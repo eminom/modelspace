@@ -17,7 +17,13 @@ DataBuff::~DataBuff() {
 	deinit();
 }
 
-void DataBuff::take(char *data, std::size_t size) {
+DataBuff::DataBuff(std::size_t l)
+	_ZERO_INITLIST()
+{
+	take((DataBuff_t*)malloc(sizeof(DataBuff_t)*l), l);
+}
+
+void DataBuff::take(DataBuff_t *data, std::size_t size) {
 	assert(!buff_);
 	assert(!size_);
 	assert(!_refCount);
@@ -61,7 +67,7 @@ DataBuff& DataBuff::operator=(const DataBuff&rhs)
 	return copy(rhs);
 }
 
-char* DataBuff::ptr()
+DataBuff::DataBuff_t* DataBuff::ptr()
 {
 	return buff_;
 }
