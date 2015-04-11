@@ -50,12 +50,11 @@ set(SRC_LIST
 ./interop/lua_access/lua_access_macros.h
 ./interop/lua_access/refobj.h
 ./interop/lua_access/refproto.h
-./interop/lua_access/refprotobase.h
 ./interop/lua_access/lua_access_class.hpp
+./interop/lua_access/lua_access_class.cc
 ./interop/lua_access/lua_access.cpp
 ./interop/lua_access/refobj.cpp
 ./interop/lua_access/refproto.cpp
-./interop/lua_access/refprotobase.cpp
 )
 set(FULL_SRC_LIST ${FULL_SRC_LIST} ${SRC_LIST})
 source_group(interop\\lua_access FILES ${SRC_LIST})
@@ -140,6 +139,7 @@ set(FULL_SRC_LIST ${FULL_SRC_LIST} ${SRC_LIST})
 source_group(test FILES ${SRC_LIST})
 
 set(SRC_LIST
+./utils/signals_conf.h
 ./utils/state_saver.h
 ./utils/gl_object_wrappers.hpp
 ./utils/memo_pool.hpp
@@ -150,4 +150,13 @@ set(SRC_LIST
 )
 set(FULL_SRC_LIST ${FULL_SRC_LIST} ${SRC_LIST})
 source_group(utils FILES ${SRC_LIST})
+
+set(SRC_LIST
+./utils/io/DataBuff.h
+./utils/io/FileLoader.h
+./utils/io/DataBuff.cc
+./utils/io/FileLoader.cc
+)
+set(FULL_SRC_LIST ${FULL_SRC_LIST} ${SRC_LIST})
+source_group(utils\\io FILES ${SRC_LIST})
 

@@ -8,6 +8,7 @@ add_subdirectory(../external/glm     ${CMAKE_BINARY_DIR}/lib/glm)
 add_subdirectory(../external/glfw-3.1.1 ${CMAKE_BINARY_DIR}/lib/glfw)
 add_subdirectory(../external/glew-1.12.0 ${CMAKE_BINARY_DIR}/lib/glew)
 add_subdirectory(../external/cJSON ${CMAKE_BINARY_DIR}/lib/cJSON)
+add_subdirectory(../external/lpng ${CMAKE_BINARY_DIR}/lib/png)
 
 #aux_source_directory(. MODELTEST_SRC)
 include(SourceList)
@@ -51,12 +52,15 @@ include_directories(../external/glew-1.12.0/include)
 include_directories(../external/cJSON)
 include_directories(../)
 include_directories(../source)
-
+include_directories(../external/lpng)
+include_directories(${CMAKE_BINARY_DIR}/lib/png)
 
 target_link_libraries(modelspace liblua)
 target_link_libraries(modelspace libglew_shared)
 target_link_libraries(modelspace glfw)
 target_link_libraries(modelspace libcjson)
+target_link_libraries(modelspace png16)
+
 
 set_target_properties(modelspace
     PROPERTIES

@@ -47,10 +47,14 @@ void test()
 	//lv.loadScript("exec/inprogress.lua");
 }
 
+void test2();
+void test3();
+
 int main(void)
 {
-	extern void test2();
-	test2();
+	//extern void test2();
+	//test2();
+	test3();
 
 
 	AppController app;

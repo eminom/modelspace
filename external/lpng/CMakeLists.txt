@@ -20,9 +20,19 @@ set(PNGLIB_RELEASE 17)
 set(PNGLIB_NAME libpng${PNGLIB_MAJOR}${PNGLIB_MINOR})
 set(PNGLIB_VERSION ${PNGLIB_MAJOR}.${PNGLIB_MINOR}.${PNGLIB_RELEASE})
 
+# OK
+SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/ )
+
+add_subdirectory(../zlib ${CMAKE_BINARY_DIR}/lib/zlib)
+
 # needed packages
-find_package(ZLIB REQUIRED)
+# find_package(ZLIB REQUIRED)
+
+# set manually.
+set(ZLIB_INCLUDE_DIR ../zlib)
+set(ZLIB_LIBRARY zlib)
 include_directories(${ZLIB_INCLUDE_DIR})
+include_directories(${CMAKE_BINARY_DIR}/lib/zlib)
 
 if(NOT WIN32)
   find_library(M_LIBRARY
@@ -40,7 +50,7 @@ endif()
 # COMMAND LINE OPTIONS
 option(PNG_SHARED "Build shared lib" ON)
 option(PNG_STATIC "Build static lib" ON)
-option(PNG_TESTS  "Build libpng tests" ON)
+option(PNG_TESTS  "Build libpng tests" OFF)
 
 # Many more configuration options could be added here
 option(PNG_FRAMEWORK "Build OS X framework" OFF)
@@ -356,9 +366,9 @@ endif()
 
 # On versions of CMake that support it, create an export file CMake
 # users can include() to import our targets
-if(PNG_EXPORT_RULE AND NOT SKIP_INSTALL_EXPORT AND NOT SKIP_INSTALL_ALL )
-  install(EXPORT libpng DESTINATION lib/libpng FILE lib${PNG_LIB_NAME}.cmake)
-endif()
+#if(PNG_EXPORT_RULE AND NOT SKIP_INSTALL_EXPORT AND NOT SKIP_INSTALL_ALL )
+#  install(EXPORT libpng DESTINATION lib/libpng FILE lib${PNG_LIB_NAME}.cmake)
+#endif()
 
 # what's with libpng-manual.txt and all the extra files?
 
