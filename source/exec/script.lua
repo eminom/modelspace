@@ -104,6 +104,7 @@ function initView()
 	-- root:addSub(dd.createParticleNode())
 	-- do return end
 
+	--[[
 	local colors = {
 		{0,0,1,0.5},
 		{0,1,1,1},
@@ -121,6 +122,7 @@ function initView()
 		end
 	end
 	root:addSub(dd.createAxisNode())
+	--]]
 
 	-- 	for(int i=-5;i<=0;++i){
 	-- 	auto one = CubeNode::create(0.15 * i , 0.15 * i, 0.2, 0.2, 0.2);
@@ -130,6 +132,7 @@ function initView()
 	-- 	one->setColor(glm::vec4(0.7, 0.3, 0.3, 0.5));
 	-- 	root->addSub(one);
 	-- }
+	--[[
 	for i=-5,0 do
 		-- local cube = dd.createCubeNode(0.15 * i, 0.15 * i, 0.1, 0.1, 0.1)
 		cube = dd.createCubeNode(0.15 * i, 0.15 * i)  
@@ -138,11 +141,14 @@ function initView()
 		cube:setColor(0.7, 0.3, 0.3, 0.5)
 		root:addSub(cube)
 	end
+	--]]
 
+	--[[
 	local mimic = dd.createMimicNode()
 	mimic:setScale(0.025,0.025,0.025);
 	mimic:setTransform(0, 0, 0);
 	root:addSub(mimic)
+	--]]
 end
 --]]
 
