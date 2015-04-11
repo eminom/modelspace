@@ -31,7 +31,7 @@ RefObject& RefObject::copy(const RefObject &rhs)
 		_ref = rhs._ref;
 		_ref_count = rhs._ref_count;
 		++(*_ref_count);
-		const_cast<lua_State*>(L_) = rhs.L_;
+		*(const_cast<lua_State**>(&L_)) = rhs.L_;
 	}
 	return *this;
 }
