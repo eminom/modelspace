@@ -11,7 +11,9 @@ class PngImageData:public ImageData
 public:
 	PngImageData();
 	virtual bool load(const char *path)override;
-
+	virtual int getWidth()override;
+	virtual int getHeight()override;
+	PixelFormat getRenderFormat();
 
 private:
 	void premultipliedAlpha();

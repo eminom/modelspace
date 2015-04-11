@@ -189,3 +189,18 @@ void PngImageData::premultipliedAlpha()
     
     _hasPremultipliedAlpha = true;
 }
+
+int PngImageData::getWidth()
+{
+	return _width;
+}
+
+int PngImageData::getHeight()
+{
+	return _height;
+}
+
+PixelFormat PngImageData::getRenderFormat()
+{
+	return _renderFormat;
+}

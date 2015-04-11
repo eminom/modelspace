@@ -9,6 +9,11 @@ class ImageData
 {
 public:
 	virtual bool load(const char *path)=0;
+	virtual int getWidth()=0;
+	virtual int getHeight()=0;
+
+	DataBuff& data(){ return data_;}
+
 protected:
 	DataBuff data_;
 };
@@ -75,5 +80,11 @@ enum class PixelFormat
     ((unsigned)((unsigned char)(vb) * ((unsigned char)(va) + 1) >> 8) << 16) | \
     ((unsigned)(unsigned char)(va) << 24))
 
+typedef struct _MipmapInfo
+{
+    unsigned char* address;
+    int len;
+    _MipmapInfo():address(NULL),len(0){}
+}MipmapInfo;
 
 #endif

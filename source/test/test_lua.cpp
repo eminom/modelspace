@@ -15,7 +15,7 @@ extern "C"{
 
 #include "png.h"
 #include "utils/io/FileLoader.h"
-
+#include "texture/TextureData.h"
 
 
 
@@ -81,7 +81,16 @@ void s3(int a)
 
 void test3()
 {
-	
+	PngImageData png;
+	if( !png.load("../resource/Mario.png")){
+		fprintf(stderr, "Failed to load so\n");
+		return;
+	}
+	TextureData t;
+	if( !t.initWithPngData(png)){
+		fprintf(stderr," Failed to load so\n");
+		return;
+	}
 }
 
 
