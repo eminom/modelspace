@@ -107,8 +107,10 @@ source_group(nodes FILES ${SRC_LIST})
 set(SRC_LIST
 ./nodes/effects/BlenderParticle.h
 ./nodes/effects/ParticleNode.h
+./nodes/effects/ParticleTex.h
 ./nodes/effects/BlenderParticle.cc
 ./nodes/effects/ParticleNode.cc
+./nodes/effects/ParticleTex.cc
 )
 set(FULL_SRC_LIST ${FULL_SRC_LIST} ${SRC_LIST})
 source_group(nodes\\effects FILES ${SRC_LIST})
@@ -137,6 +139,16 @@ set(SRC_LIST
 )
 set(FULL_SRC_LIST ${FULL_SRC_LIST} ${SRC_LIST})
 source_group(test FILES ${SRC_LIST})
+
+set(SRC_LIST
+./texture/ImageData.h
+./texture/PngImageData.h
+./texture/TextureData.h
+./texture/PngImageData.cc
+./texture/TextureData.cc
+)
+set(FULL_SRC_LIST ${FULL_SRC_LIST} ${SRC_LIST})
+source_group(texture FILES ${SRC_LIST})
 
 set(SRC_LIST
 ./utils/signals_conf.h
