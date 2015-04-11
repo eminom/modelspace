@@ -5,18 +5,33 @@
 //incuded by lua_access.h
 #include <cassert>
 
+//class LuaStateHost
+//{ 
+//public:
+//	LuaStateHost()
+//		:_S(nullptr)
+//	{
+//
+//	}
+//
+//private:
+//	lua_State *_S;
+//};
+
 class FuncRef
 {
 public:
-	FuncRef()
+	FuncRef(lua_State *L)
 		:_ref(LUA_REFNIL)
 		,_refCounter(nullptr)
+		,L_(L)
 	{
 	}
 
-	FuncRef(const char *name)
+	FuncRef(const char *name, lua_State *L)
 		:_ref(LUA_REFNIL)
 		,_refCounter(nullptr)
+		,L_(L)
 	{
 		loadFunc(name);
 	}
@@ -28,7 +43,8 @@ public:
 	
 	FuncRef(const FuncRef&rhs)
 		:_ref(LUA_REFNIL)
-		,_refCounter(nullptr){
+		,_refCounter(nullptr)
+		,L_(nullptr) {
 		copy(rhs);
 	}
 
@@ -52,8 +68,7 @@ public:
 		if(_refCounter){
 			--(*_refCounter);
 			if(0 == *_refCounter){
-				_DeclareState()
-				luaL_unref(L, LUA_REGISTRYINDEX, _ref);
+				luaL_unref(L_, LUA_REGISTRYINDEX, _ref);
 				delete _refCounter;
 			}
 		}
@@ -68,6 +83,7 @@ public:
 		if( rhs._refCounter){
 			_ref = rhs._ref;
 			_refCounter = rhs._refCounter;
+			L_ = rhs.L_;	//~ pure pointer.
 			++(*_refCounter);
 		}
 		return *this;
@@ -76,7 +92,8 @@ public:
 	bool require(const char *path)
 	{
 		deinit();
-		_DeclareState()
+		lua_State *L = L_;
+		const int top = lua_gettop(L);
 		int traceback = 0;
 		lua_getglobal(L, _GTrackBack);
 		if(lua_isfunction(L, -1)){
@@ -115,18 +132,37 @@ public:
 	void loadFunc(const char *name)
 	{
 		assert( LUA_REFNIL == _ref );
-		take(ljLoadFuncHandle(name));
+		take(ljLoadFuncHandle(L_, name));
 	}
 
 	int createObj()
 	{
 		assert( LUA_REFNIL != _ref);
-		return ljCreateTableFromFuncRef(_ref, 1, [](lua_State *L, int n)->int{return lua_istable(L,n);});
+		return ljCreateTableFromFuncRef(L_, _ref, 1, [](lua_State *L, int n)->int{return lua_istable(L,n);});
 	}
 
 private:
 	int _ref;
 	int *_refCounter;
+	lua_State *L_;
+};
+
+class ObjContainer{
+public:
+	ObjContainer(lua_State *L);
+	~ObjContainer();
+	bool addObject(int obj);
+	int tableRef();
+	void clear();
+
+private:
+	int _ref;
+	int _objCount;
+	lua_State *L_;
+
+private:
+	ObjContainer(const ObjContainer&);
+	ObjContainer&operator=(const ObjContainer&);
 };
 
 

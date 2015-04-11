@@ -12,7 +12,6 @@ extern "C" {
 #include "LuaScriptor.h"
 
 #define _DeclareState()	\
-	lua_State *L = LuaScriptor::sharedInstance()->getLuaState();\
 	int top = lua_gettop(L);
 
 #define _GTrackBack	"__G__TRACKBACK__"

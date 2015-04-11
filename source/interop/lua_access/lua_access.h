@@ -282,55 +282,39 @@ struct lua_State;
 	}
 
 
-void executeVoidFunc(const char *funcName, const char *format, ...);
-std::string executeStringFunc(const char *funcName, const char *format, ...);
-float executeNumberFunc(const char *funcName, const char *format,...);
-int executeIntegerFunc(const char *funcName, const char *format="",...);
-float executeFloatFunc(const char *funcName, const char *format,...);
-int executeTableFunc(const char *funcName, const char *format, ...);
+void executeVoidFunc(lua_State *L,const char *funcName, const char *format, ...);
+std::string executeStringFunc(lua_State *L,const char *funcName, const char *format, ...);
+float executeNumberFunc(lua_State *L,const char *funcName, const char *format,...);
+int executeIntegerFunc(lua_State *L,const char *funcName, const char *format="",...);
+float executeFloatFunc(lua_State *L,const char *funcName, const char *format,...);
+int executeTableFunc(lua_State *L,const char *funcName, const char *format, ...);
 
-void execVoidFunc(int ref, const char *format, ...);
+void execVoidFunc(lua_State *L, int ref, const char *format, ...);
 
 //Holding objects at C
-int ljMakeTable();
+int ljMakeTable(lua_State *L);
 //int ljLoadFuncHandle(const char *name);
 //int ljCreateTableFromFuncRef(int ref);
 
 //getters
-int ljGetTableInteger(int ref, const char *name, bool *result=nullptr);
-bool ljGetTableBoolean(int ref, const char *name, bool *result=nullptr);
-std::string	ljGetTableString(int ref, const char *name, bool *result=nullptr);
-float ljGetTableFloat(int ref, const char *name, bool *result=nullptr);
+int ljGetTableInteger(lua_State *L, int ref, const char *name, bool *result=nullptr);
+bool ljGetTableBoolean(lua_State *L, int ref, const char *name, bool *result=nullptr);
+std::string	ljGetTableString(lua_State *L, int ref, const char *name, bool *result=nullptr);
+float ljGetTableFloat(lua_State *L, int ref, const char *name, bool *result=nullptr);
 
 //execute some funcs on tab
-int ljRunObjInteger(int ref, const char *funcName, bool *result, const char *format, ...);
-void ljRunObjVoid(int ref, const char *funcName, bool *result, const char *format, ...);
-void ljRunObjVoidSelfUserData(int ref, const char *funcName, bool *result, void *p);
+int ljRunObjInteger(lua_State *L,int ref, const char *funcName, bool *result, const char *format, ...);
+void ljRunObjVoid(lua_State *L,int ref, const char *funcName, bool *result, const char *format, ...);
+void ljRunObjVoidSelfUserData(lua_State *L,int ref, const char *funcName, bool *result, void *p);
 
 
-int ljDuplicateObj(int ref);
-void ljReleaseObj(int &ref);
-int ljLoadObj(const char *name);
-int ljLoadFuncHandle(const char *name);
-int ljCreateTableFromFuncRef(int ref, int retvals, int(*checker)(lua_State *L, int n)=nullptr);
+int ljDuplicateObj(lua_State *L,int ref);
+void ljReleaseObj(lua_State *L,int &ref);
+int ljLoadObj(lua_State *L,const char *name);
+int ljLoadFuncHandle(lua_State *L,const char *name);
+int ljCreateTableFromFuncRef(lua_State *L,int ref, int retvals, int(*checker)(lua_State *L, int n)=nullptr);
 const char* toLuaType(lua_State *L, int index);
 
-class ObjContainer{
-public:
-	ObjContainer();
-	~ObjContainer();
-	bool addObject(int obj);
-	int tableRef();
-	void clear();
-
-private:
-	int _ref;
-	int _objCount;
-
-private:
-	ObjContainer(const ObjContainer&);
-	ObjContainer&operator=(const ObjContainer&);
-};
 
 #include "lua_access_class.hpp"
 

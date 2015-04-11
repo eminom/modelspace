@@ -6,11 +6,16 @@
 #include <cstdlib>
 #include <string>
 
+struct lua_State;
+
 class LuaRefProto
 {
 public:
 	virtual int tableRef()const = 0;
 	virtual void createTableRef() = 0;
+
+private:
+	virtual lua_State* state() = 0;
 
 public:	//Common codes
 	void loadWith(int ref);

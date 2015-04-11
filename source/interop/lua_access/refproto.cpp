@@ -21,14 +21,15 @@
 	}
 
 #define _PreBase()\
-	_DeclareState()\
+	lua_State *L = state();\
+	const int top = lua_gettop(L);\
 	int self_ = tableRef();\
 	assert (self_ != LUA_REFNIL);
 
 #define _Retri(name_, getter_)\
 	_PreBase()\
 	bool ok = false;\
-	auto rv = getter_(self_, name_, &ok);\
+	auto rv = getter_(L, self_, name_, &ok);\
 	assert(ok);\
 	return rv;
 
@@ -39,7 +40,7 @@ void LuaRefProto::loadWith(int ref) {
 void LuaRefProto::load() {
 	_PreBase()
 	bool ok = false;
-	int rv = ljRunObjInteger(self_, _ProtoLoader, &ok, "o", self_);
+	int rv = ljRunObjInteger(L, self_, _ProtoLoader, &ok, "o", self_);
 	assert(ok);
 	assert(1==rv);
 }
@@ -48,7 +49,7 @@ int LuaRefProto::mix(int ref, const char *name) {
 	_PreBase()
 	_CheckTableRef(ref)
 	bool ok = false;
-	int rv = ljRunObjInteger(self_, name, &ok, "oo", self_, ref);
+	int rv = ljRunObjInteger(L, self_, name, &ok, "oo", self_, ref);
 	assert(ok);
 	//assert(1==rv);
 	return rv;
@@ -57,7 +58,7 @@ int LuaRefProto::mix(int ref, const char *name) {
 void LuaRefProto::fireOn(const char *event) {
 	_PreBase()
 	bool ok = false;
-	int rv = ljRunObjInteger(self_, event, &ok, "o", self_);
+	int rv = ljRunObjInteger(L, self_, event, &ok, "o", self_);
 	assert(1==rv);
 }
 
@@ -79,7 +80,8 @@ float LuaRefProto::getFloat(const char *name){
 
 int LuaRefProto::getIntFormat(const char *name, bool *result, const char *format, va_list args) {
 	int ref = tableRef();
-	_DeclareState()
+	lua_State *L = state();
+	const int top = lua_gettop(L);
 	_get_table_field_onto_stack(lua_isfunction, 0)
 	const char *funcName = name;
 	lua_rawgeti(L, LUA_REGISTRYINDEX, ref);
@@ -115,7 +117,8 @@ int LuaRefProto::execInt(const char *name, const char *format, ...){
 
 std::string LuaRefProto::getStringFormat(const char *name, bool *result, const char *format, va_list args){
 	int ref = tableRef();
-	_DeclareState()
+	lua_State *L = state();
+	const int top = lua_gettop(L);
 	_get_table_field_onto_stack(lua_isfunction, "")
 	const char *funcName = name;
 	lua_rawgeti(L, LUA_REGISTRYINDEX, ref);
@@ -143,7 +146,8 @@ std::string LuaRefProto::getStringFormat(const char *name, bool *result, const c
 
 float LuaRefProto::getFloatFormat(const char *name, bool *result, const char *format, va_list args) {
 	int ref = tableRef();
-	_DeclareState()
+	lua_State *L = state();
+	const int top = lua_gettop(L);
 	_get_table_field_onto_stack(lua_isfunction, 0)
 	const char *funcName = name;
 	lua_rawgeti(L, LUA_REGISTRYINDEX, ref);
@@ -181,7 +185,8 @@ std::string LuaRefProto::execString(const char *name, const char *format, ...){
 void LuaRefProto::getVoidFormat(const char *name, bool *result, const char *format, va_list args) {
 	int ref = tableRef();
 	assert(ref != LUA_REFNIL);
-	_DeclareState()
+	lua_State *L = state();
+	const int top = lua_gettop(L);
 	_get_table_field_onto_stack(lua_isfunction)
 	const char *funcName = name;
 	lua_rawgeti(L, LUA_REGISTRYINDEX, ref);
@@ -209,7 +214,8 @@ void LuaRefProto::execVoid(const char *name, const char *format, ...) {
 void LuaRefProto::runVoidFormat(const char *name, bool *result, const char *format, ...) {
 	int ref = tableRef();
 	assert(ref != LUA_REFNIL);
-	_DeclareState()
+	lua_State *L = state();
+	const int top = lua_gettop(L);
 	_get_table_field_onto_stack(lua_isfunction)
 	const char *funcName = name;
 	va_list args;
@@ -224,7 +230,8 @@ void LuaRefProto::runVoidFormat(const char *name, bool *result, const char *form
 
 bool LuaRefProto::getBooleanFormat(const char *name, bool *result, const char *format, va_list args) {
 	int ref = tableRef();
-	_DeclareState()
+	lua_State *L = state();
+	const int top = lua_gettop(L);
 	_get_table_field_onto_stack(lua_isfunction, false)
 	const char *funcName = name;
 	lua_rawgeti(L, LUA_REGISTRYINDEX, ref);

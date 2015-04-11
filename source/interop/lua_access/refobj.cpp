@@ -2,14 +2,16 @@
 #include "lua_access.h"
 #include "refobj.h"
 
-RefObject::RefObject()
+RefObject::RefObject(lua_State *L)
 	:_ref(LUA_REFNIL),
-	_ref_count(nullptr){
+	_ref_count(nullptr),
+	L_(L){
 }
 
-RefObject::RefObject(const char *name)
+RefObject::RefObject(const char *name, lua_State *L)
 	:_ref(LUA_REFNIL),
-	_ref_count(nullptr)
+	_ref_count(nullptr),
+	L_(L)
 {
 	loadRef(name);
 }
@@ -28,6 +30,7 @@ RefObject& RefObject::copy(const RefObject &rhs)
 		_ref = rhs._ref;
 		_ref_count = rhs._ref_count;
 		++(*_ref_count);
+		L_ = rhs.L_;
 	}
 	return *this;
 }
@@ -45,7 +48,7 @@ void RefObject::deinit(){
 	if(_ref!=LUA_REFNIL){
 		--(*_ref_count);
 		if(0==*_ref_count){
-			ljReleaseObj(_ref);
+			ljReleaseObj(L_, _ref);
 			delete _ref_count;
 			_ref_count = 0;
 		}
@@ -63,12 +66,13 @@ void RefObject::take(int refIndex){
 
 void RefObject::loadRef(const char *name) {
 	deinit();	//`!
-	take(ljLoadObj(name));
+	take(ljLoadObj(L_, name));
 }
 
 bool RefObject::require(const char *path){
 	deinit();
-	_DeclareState()
+	lua_State *L = L_;
+	const int top = lua_gettop(L);
 	int traceback = 0;
 	lua_getglobal(L, _GTrackBack);
 	if( lua_isfunction(L, -1)){
@@ -95,7 +99,8 @@ bool RefObject::require(const char *path){
 
 bool RefObject::requireFunc(const char *path){
 	deinit();
-	_DeclareState()
+	lua_State *L = L_;
+	const int top = lua_gettop(L);
 	int traceback = 0;
 	lua_getglobal(L, _GTrackBack);
 	if(lua_isfunction(L, -1)){
@@ -122,7 +127,7 @@ bool RefObject::requireFunc(const char *path){
 
 bool RefObject::requireFuncDo(const char *path){
 	deinit();
-	FuncRef fr;
+	FuncRef fr(L_);
 	if(!fr.require(path)){
 		return false;
 	}
@@ -131,7 +136,8 @@ bool RefObject::requireFuncDo(const char *path){
 
 void RefObject::loadFromFunc(const char *name){
 	deinit();
-	_DeclareState()
+	lua_State *L = L_;
+	const int top = lua_gettop(L);
 	int traceback = 0;
 	lua_getglobal(L, _GTrackBack);
 	if(lua_isfunction(L, -1)){
@@ -164,4 +170,9 @@ int RefObject::tableRef()const {
 
 void RefObject::createTableRef() {
 	//~Do nothing at all.
+}
+
+
+lua_State* RefObject::state(){
+	return L_;
 }

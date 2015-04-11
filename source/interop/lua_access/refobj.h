@@ -8,8 +8,8 @@
 
 class RefObject: public LuaRefProto {
 public:
-	RefObject();
-	RefObject(const char *name);
+	RefObject(lua_State *L);
+	RefObject(const char *name, lua_State *L);
 	virtual ~RefObject();
 	RefObject& copy(const RefObject&);
 	void loadRef(const char *name);
@@ -17,6 +17,9 @@ public:
 	bool require(const char *path);			//Always pop the stack by 1.
 	bool requireFunc(const char *path);
 	bool requireFuncDo(const char *path);
+
+private:
+	virtual lua_State* state()override;
 
 public:
 	virtual int tableRef()const override;
@@ -33,6 +36,7 @@ private:
 private:
 	int _ref;
 	int *_ref_count;
+	lua_State *L_;
 };
 
 

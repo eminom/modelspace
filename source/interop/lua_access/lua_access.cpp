@@ -43,7 +43,7 @@ const char* toLuaType(lua_State *L, int index){
 }
 
 
-void executeVoidFunc(const char *funcName, const char *format, ...)
+void executeVoidFunc(lua_State *L,const char *funcName, const char *format, ...)
 {
 	_ExecuteBody(0)
 	lua_settop(L,top);
@@ -51,7 +51,7 @@ void executeVoidFunc(const char *funcName, const char *format, ...)
 
 
 //returns the table ref id(in LUA_REGISTRYINDEX)
-int executeTableFunc(const char *funcName, const char *format, ...) {
+int executeTableFunc(lua_State *L,const char *funcName, const char *format, ...) {
 	_ExecuteBody(1, LUA_REFNIL)
 	if (!lua_istable(L, -1) ) {
 		printf("Is not a table !!!\n");
@@ -61,7 +61,7 @@ int executeTableFunc(const char *funcName, const char *format, ...) {
 	return ref;
 }
 
-std::string executeStringFunc(const char *funcName, const char *format, ...)
+std::string executeStringFunc(lua_State *L,const char *funcName, const char *format, ...)
 {
 	_ExecuteBody(1, "")
 	if( !lua_isstring(L, -1) )
@@ -82,7 +82,7 @@ std::string executeStringFunc(const char *funcName, const char *format, ...)
 }
 
 
-float executeNumberFunc(const char *funcName, const char *format, ...)
+float executeNumberFunc(lua_State *L,const char *funcName, const char *format, ...)
 {
 	_ExecuteBody(1, 0)
 	if( !lua_isnumber(L,-1))
@@ -97,7 +97,7 @@ float executeNumberFunc(const char *funcName, const char *format, ...)
 	return rv;
 }
 
-int executeIntegerFunc(const char *funcName, const char *format,...)
+int executeIntegerFunc(lua_State *L,const char *funcName, const char *format,...)
 {
 	_ExecuteBody(1, 0)
 	if( !lua_isnumber(L,-1))
@@ -111,7 +111,7 @@ int executeIntegerFunc(const char *funcName, const char *format,...)
 	return rv;
 }
 
-float executeFloatFunc(const char *funcName, const char *format,...)
+float executeFloatFunc(lua_State *L,const char *funcName, const char *format,...)
 {
 	_ExecuteBody(1,0)
 	if( !lua_isnumber(L,-1))
@@ -125,9 +125,9 @@ float executeFloatFunc(const char *funcName, const char *format,...)
 	return rv;
 }
 
-void execVoidFunc(int ref, const char *format, ...)
+void execVoidFunc(lua_State *L, int ref, const char *format, ...)
 {
-	_DeclareState()
+	const int top = lua_gettop(L);
 	lua_rawgeti(L, LUA_REGISTRYINDEX, ref);
 	assert( lua_isfunction(L, -1) );
 	if (!lua_isfunction(L, -1)){
@@ -144,39 +144,39 @@ void execVoidFunc(int ref, const char *format, ...)
 }
 
 //These APIs are for retaining object at C
-int ljMakeTable() {
-	_DeclareState()
+int ljMakeTable(lua_State *L) {
+	const int top = lua_gettop(L);
 	lua_newtable(L);
 	int r = luaL_ref(L, LUA_REGISTRYINDEX);		//And the table is poped.
 	return r;
 }
 
-int ljGetTableInteger(int ref, const char *name, bool *result) {
-	_DeclareState()
+int ljGetTableInteger(lua_State *L, int ref, const char *name, bool *result) {
+	const int top = lua_gettop(L);
 	_get_table_field(lua_isnumber, lua_tointeger, 0)
 	return rv;
 }
 
-bool ljGetTableBoolean(int ref, const char *name, bool *result) {
-	_DeclareState() 
+bool ljGetTableBoolean(lua_State *L, int ref, const char *name, bool *result) {
+	const int top = lua_gettop(L);
 	_get_table_field(lua_isboolean, lua_toboolean, false)
 	return bool(rv);
 }
 
-std::string	ljGetTableString(int ref, const char *name, bool *result) {
-	_DeclareState()
+std::string	ljGetTableString(lua_State *L, int ref, const char *name, bool *result) {
+	const int top = lua_gettop(L);
 	_get_table_field(lua_isstring, lua_tostring, "")
 	return rv ? rv:"";
 }
 
-float ljGetTableFloat(int ref, const char *name, bool *result) {
-	_DeclareState()
+float ljGetTableFloat(lua_State*L, int ref, const char *name, bool *result) {
+	const int top = lua_gettop(L);
 	_get_table_field(lua_isnumber, lua_tonumber, 0)
 	return rv;
 }
 
-int ljRunObjInteger(int ref, const char *name, bool *result, const char *format, ...){
-	_DeclareState()
+int ljRunObjInteger(lua_State *L, int ref, const char *name, bool *result, const char *format, ...){
+	const int top = lua_gettop(L);
 	_get_table_field_onto_stack(lua_isfunction, 0)
 	const char *funcName = name;
 	va_list args;
@@ -197,8 +197,8 @@ int ljRunObjInteger(int ref, const char *name, bool *result, const char *format,
 	return rv;
 }
 
-void ljRunObjVoid(int ref, const char *name, bool *result, const char *format, ...) {
-	_DeclareState()
+void ljRunObjVoid(lua_State *L, int ref, const char *name, bool *result, const char *format, ...) {
+	const int top = lua_gettop(L);
 	_get_table_field_onto_stack(lua_isfunction)
 	const char *funcName = name;
 	va_list args;
@@ -211,8 +211,8 @@ void ljRunObjVoid(int ref, const char *name, bool *result, const char *format, .
 	lua_settop(L, top);
 }
 
-void ljRunObjVoidSelfUserData(int ref, const char *name, bool *result, void *p) {
-	_DeclareState()
+void ljRunObjVoidSelfUserData(lua_State *L, int ref, const char *name, bool *result, void *p) {
+	const int top = lua_gettop(L);
 	_get_table_field_onto_stack(lua_isfunction)
 	assert(lua_istable(L, -2));
 	lua_pushvalue(L, -2);
@@ -244,26 +244,24 @@ void ljRunObjVoidSelfUserData(int ref, const char *name, bool *result, void *p) 
 	return;
 }
 
-int ljDuplicateObj(int ref) {
+int ljDuplicateObj(lua_State *L, int ref) {
 	if (LUA_REFNIL == ref ){
 		return LUA_REFNIL;
 	}
-	_DeclareState()
 	lua_rawgeti(L, LUA_REGISTRYINDEX, ref);
 	return luaL_ref(L, LUA_REGISTRYINDEX);
 }
 
-void ljReleaseObj(int &ref){
+void ljReleaseObj(lua_State *L, int &ref){
 	if (LUA_REFNIL == ref) {
 		return;
 	}
-	_DeclareState()
 	luaL_unref(L, LUA_REGISTRYINDEX, ref);
 	ref = LUA_REFNIL;
 }
 
-int ljLoadObj(const char *name){
-	_DeclareState()
+int ljLoadObj(lua_State *L, const char *name){
+	const int top = lua_gettop(L);
 	lua_getglobal(L,name);
 	if( !lua_istable(L, -1)){
 		log("%s is not a table", name);
@@ -275,8 +273,8 @@ int ljLoadObj(const char *name){
 	return rv;
 }
 
-int ljCreateTableFromFuncRef(int ref, int retvals, int(*checker)(lua_State *L, int n)) {
-	_DeclareState()
+int ljCreateTableFromFuncRef(lua_State *L, int ref, int retvals, int(*checker)(lua_State *L, int n)) {
+	const int top = lua_gettop(L);
 	lua_rawgeti(L, LUA_REGISTRYINDEX, ref);
 	if (!lua_isfunction(L,-1)){
 		log("Ref %d is not a function", ref);
@@ -327,8 +325,8 @@ int ljCreateTableFromFuncRef(int ref, int retvals, int(*checker)(lua_State *L, i
 
 //The return value is a reference.
 //The invalid retval is LUA_REFNIL
-int ljLoadFuncHandle(const char *name) {
-	_DeclareState()
+int ljLoadFuncHandle(lua_State *L, const char *name) {
+	const int top = lua_gettop(L);
 	std::string cmd = "return require \"";
 	cmd.append(name);
 	cmd.append("\"");
@@ -375,42 +373,3 @@ int ljLoadFuncHandle(const char *name) {
 }
 
 
-
-ObjContainer::ObjContainer():
-	_ref(LUA_REFNIL),
-	_objCount(0) {
-	_ref = ljMakeTable();
-}
-
-ObjContainer::~ObjContainer(){
-	ljReleaseObj(_ref);
-}
-
-void ObjContainer::clear(){
-	ljReleaseObj(_ref);
-	_objCount = 0;	//From Zero;
-	assert( LUA_REFNIL == _ref);
-	_ref = ljMakeTable();	//Another table;
-}
-
-bool ObjContainer::addObject(int obj) {
-	_DeclareState()
-	lua_rawgeti(L, LUA_REGISTRYINDEX, _ref);
-	assert(lua_istable(L,-1)) ;
-	lua_rawgeti(L,LUA_REGISTRYINDEX, obj);
-	if (!lua_istable(L,-1)){
-		assert(false);
-		lua_pop(L, 2);
-		return false;
-	}
-	int indexKey = _objCount + 1;	//The last one
-	lua_rawseti(L, -2, indexKey);
-	lua_pop(L, 1);
-	assert( lua_gettop(L) == top);
-	_objCount++;
-	return true;
-}
-
-int ObjContainer::tableRef(){
-	return _ref;
-}
