@@ -36,7 +36,7 @@ private:
 private:
 	int _ref;
 	int *_ref_count;
-	lua_State *L_;
+	lua_State *const L_;
 };
 
 

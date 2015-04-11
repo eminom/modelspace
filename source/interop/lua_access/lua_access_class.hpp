@@ -42,7 +42,7 @@ public:
 private:
 	int _ref;
 	int *_refCounter;
-	lua_State *L_;
+	lua_State *const L_;
 };
 
 class ObjContainer{

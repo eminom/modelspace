@@ -63,7 +63,7 @@ FuncRef& FuncRef::copy(const FuncRef &rhs)
 	if( rhs._refCounter){
 		_ref = rhs._ref;
 		_refCounter = rhs._refCounter;
-		L_ = rhs.L_;	//~ pure pointer.
+		const_cast<lua_State*>(L_) = rhs.L_;	//~ pure pointer.
 		++(*_refCounter);
 	}
 	return *this;

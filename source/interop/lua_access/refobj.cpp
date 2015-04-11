@@ -18,7 +18,8 @@ RefObject::RefObject(const char *name, lua_State *L)
 
 RefObject::RefObject(const RefObject& rhs)
 	:_ref(LUA_REFNIL),
-	_ref_count(nullptr)
+	_ref_count(nullptr),
+	L_(nullptr)
 {
 	copy(rhs);
 }
@@ -30,7 +31,7 @@ RefObject& RefObject::copy(const RefObject &rhs)
 		_ref = rhs._ref;
 		_ref_count = rhs._ref_count;
 		++(*_ref_count);
-		L_ = rhs.L_;
+		const_cast<lua_State*>(L_) = rhs.L_;
 	}
 	return *this;
 }
