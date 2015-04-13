@@ -18,10 +18,10 @@ void main()
 	float angleSpanH = 4.0 * 3.14159265;
 	float uWidthSpan = 0.6;
 	float startX = -uWidthSpan / 2.0;
-	float curAngle = uStartAngle * 1.3 + ((squareVertex.x - startX) / uWidthSpan) * angleSpanH;
+	float curAngle = uStartAngle * 5.3 + ((squareVertex.x - startX) / uWidthSpan) * angleSpanH;
 	float tz = sin(curAngle) * 0.025;
 
-	float s = 1.0;
+	float s = 2.0;
 	vec3 v = vec3(Center_worldspace, tz)
 		+ CameraRight_worldspace *  squareVertex.x * s 
 		+ CameraUp_worldspace * squareVertex.y * s;

@@ -146,7 +146,7 @@ int AppController::initAppGL(int major, int minor, int hint)
 	glfwSetWindowUserPointer(window, this);
 
 	////////////////////
-	glClearColor(0, 0, 0.1f, 0.0f);
+	glClearColor(0.3f, 0.3f, 0.3f, 0.0f);
 	_lastTime = glfwGetTime();
 	setWindow(window);	//
 	initText2D("objects/Holstein.DDS");

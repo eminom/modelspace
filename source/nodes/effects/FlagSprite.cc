@@ -122,6 +122,7 @@ void FlagSprite::draw(const glm::mat4 &VP)
 	glUniform1i(u_ID, 0);	// Sample 0
 
 
+	glEnable(GL_BLEND);
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
