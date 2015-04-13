@@ -9,6 +9,7 @@ set(SRC_LIST
 ./LightProtocol.h
 ./LuaScriptor.h
 ./protocols.h
+./testcase.h
 ./FrameBufferObj.cc
 ./AppController.cpp
 ./AppControllerImpl.cpp
@@ -106,9 +107,11 @@ source_group(nodes FILES ${SRC_LIST})
 
 set(SRC_LIST
 ./nodes/effects/BlenderParticle.h
+./nodes/effects/FlagSprite.h
 ./nodes/effects/ParticleNode.h
 ./nodes/effects/ParticleTex.h
 ./nodes/effects/BlenderParticle.cc
+./nodes/effects/FlagSprite.cc
 ./nodes/effects/ParticleNode.cc
 ./nodes/effects/ParticleTex.cc
 )
