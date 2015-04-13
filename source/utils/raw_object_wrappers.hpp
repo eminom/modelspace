@@ -86,7 +86,7 @@ public:
 
 	void checkOffset(int offset, int count)
 	{
-		assert(offset >= 0 && offset + count <= size_);
+		assert(offset >= 0 && offset + count <= int(size_));
 	}
 
 private:
