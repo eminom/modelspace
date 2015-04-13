@@ -29,12 +29,14 @@ private:
 private:
 	std::vector<glm::vec2> _mesh;
 	int maxDepth_;
+	float uStartAngle_;
 
 	GLuint u_Center;
 	GLuint u_CameraRight;
 	GLuint u_CameraUp;
 	GLuint u_VP;
 	GLuint u_ID;
+	GLuint u_StartAngle;
 
 	DD::Texture tex_;
 };

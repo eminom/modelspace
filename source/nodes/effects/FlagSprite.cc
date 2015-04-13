@@ -12,11 +12,15 @@ FlagSprite::FlagSprite()
 	u_CameraRight = -1;
 	u_CameraUp = -1;
 	u_VP = -1;
+	u_ID = -1;
+	u_StartAngle = -1;
+
+	uStartAngle_ = 0.0f;
 }
 
 void FlagSprite::update(float dt)
 {
-
+	uStartAngle_ += dt;
 }
 
 FlagSprite* FlagSprite::create(const char *path)
@@ -48,6 +52,7 @@ bool FlagSprite::init()
 	u_CameraUp = glGetUniformLocation(program, "CameraUp_worldspace");
 	u_VP = glGetUniformLocation(program, "VP");
 	u_ID = glGetUniformLocation(program, "u_ID");
+	u_StartAngle = glGetUniformLocation(program, "uStartAngle");
 
 	GLuint vbo = 0;
 	glGenBuffers(1, &vbo);
@@ -113,7 +118,9 @@ void FlagSprite::draw(const glm::mat4 &VP)
 	glUniform3f(u_CameraRight, view[0][0], view[1][0], view[2][0]);
 	glUniform3f(u_CameraUp, view[0][1], view[1][1], view[2][1]);
 	glUniformMatrix4fv(u_VP, 1, GL_FALSE, &VP[0][0]);
+	glUniform1f(u_StartAngle, uStartAngle_);
 	glUniform1i(u_ID, 0);	// Sample 0
+
 
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
