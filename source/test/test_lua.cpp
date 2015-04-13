@@ -15,8 +15,19 @@ extern "C"{
 
 #include "png.h"
 #include "utils/io/FileLoader.h"
-#include "texture/TextureData.h"
+//#include "texture/TextureData.h"
+#include "utils/gl_object_wrappers.hpp"
 
+#include <GL/glew.h>
+
+void test4()
+{
+	//std::bind(glBindBuffer, GL_ARRAY_BUFFER, std::placeholders::_1)(0);
+	//std::bind(glBindFramebuffer, GL_FRAMEBUFFER, std::placeholders::_1)(0);
+	//std::bind(glBindRenderbuffer, GL_RENDERBUFFER, std::placeholders::_1)(0);
+	//std::bind(glBindTexture, GL_TEXTURE_2D, std::placeholders::_1)(0);		//~ only this line is error.
+	//glBindTexture(GL_TEXTURE_2D, 0);
+}
 
 
 int callFunc(lua_State *L)
@@ -78,20 +89,20 @@ void s3(int a)
 		one = nullptr;
 	}
 }
-
-void test3()
-{
-	PngImageData png;
-	if( !png.load("../resource/Mario.png")){
-		fprintf(stderr, "Failed to load so\n");
-		return;
-	}
-	TextureData t;
-	if( !t.initWithPngData(png)){
-		fprintf(stderr," Failed to load so\n");
-		return;
-	}
-}
+//
+//void test3()
+//{
+//	PngImageData png;
+//	if( !png.load("../resource/Mario.png")){
+//		fprintf(stderr, "Failed to load so\n");
+//		return;
+//	}
+//	TextureData t;
+//	if( !t.initWithPngData(png)){
+//		fprintf(stderr," Failed to load so\n");
+//		return;
+//	}
+//}
 
 
 void test2()

@@ -5,6 +5,7 @@
 
 #include <GL/glew.h>
 #include <cassert>
+#include <functional>
 
 namespace DD
 {
@@ -78,16 +79,26 @@ private:
 	int *refCounter_;
 };
 
-#define MakeClass(T, deletor, checker)\
+#define MakeBinder(func, p0)\
+	std::bind(func, p0, std::placeholders::_1)
+
+#define MakeClass(T, constructor, binder, binder_obj, deletor, checker)\
 class T:public ObjRef<T>{\
 public: static void destruct(GLuint &o){ deletor(1, &o); }\
 public: static void check(GLuint o){ assert(GL_TRUE == checker(o));}\
+public: static void construct(GLuint &o){ assert(!o); constructor(1, &o); binder(binder_obj,o);}\
 };
 
-MakeClass(Texture, glDeleteTextures, glIsTexture)
-MakeClass(Framebuffer, glDeleteFramebuffers, glIsFramebuffer)
-MakeClass(Renderbuffer, glDeleteRenderbuffers, glIsRenderbuffer)
-MakeClass(ArrayBuffer, glDeleteBuffers, glIsBuffer)
+MakeClass(Texture, glGenTextures, glBindTexture, GL_TEXTURE_2D, glDeleteTextures, glIsTexture)
+MakeClass(Framebuffer, glGenFramebuffers, glBindFramebuffer, GL_FRAMEBUFFER, glDeleteFramebuffers, glIsFramebuffer)
+MakeClass(Renderbuffer,glGenRenderbuffers, glBindRenderbuffer, GL_RENDERBUFFER, glDeleteRenderbuffers, glIsRenderbuffer)
+MakeClass(ArrayBuffer, glGenBuffers, glBindBuffer, GL_ARRAY_BUFFER, glDeleteBuffers, glIsBuffer)
+
+class VertexArrayObject:public ObjRef<VertexArrayObject>{
+public: static void destruct(GLuint &o){ glDeleteVertexArrays(1, &o);}
+public: static void check(GLuint o) { assert(GL_TRUE == glIsVertexArray(o));}
+public: static void construct(GLuint &o) { assert(!o); glGenVertexArrays(1, &o); glBindVertexArray(o);}
+};
 
 }	// End of namespace
 

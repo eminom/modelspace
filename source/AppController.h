@@ -11,6 +11,7 @@
 #include <glm/gtx/transform.hpp>
 
 #include "Director.h"
+#include "Macros.h"
 
 extern "C" {
 #include "lua.h"
@@ -76,10 +77,5 @@ private:
 private:
 	static const char *WindowsTitle;
 };
-
-#define CheckGL()\
-	if(auto err = glGetError()){\
-		fprintf(stderr, "OpenGL state error %d, %s in %s of line %d\n", err, __FILE__, __FUNCTION__, __LINE__);\
-	}
 
 #endif

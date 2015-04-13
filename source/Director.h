@@ -9,6 +9,7 @@
 #include "nodes/EsNode.h"
 #include "nodes/graphics/DDGraphics.h"
 #include "LightProtocol.h"
+#include "utils/gl_object_wrappers.hpp"
 #include <vector>
 
 class EsDirector
@@ -34,7 +35,7 @@ public:
 
 private:
 	EsNode *_root;
-	GLuint _vao;
+	DD::VertexArrayObject _vao;
 	std::vector<LightProtocol*> _light;
 };
 

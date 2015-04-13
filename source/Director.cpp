@@ -1,12 +1,11 @@
 
 
 #include "Director.h"
-
+#include "Macros.h"
 static EsDirector* _instance = nullptr;
 
 EsDirector::EsDirector()
 {
-	_vao = 0;
 	_root = nullptr;
 	//_light = 0;
 }
@@ -18,23 +17,26 @@ EsDirector::~EsDirector()
 
 void EsDirector::init()
 {
-	assert( !_vao);
-	glGenVertexArrays(1, &_vao);
-	glBindVertexArray(_vao);
-
+	GLuint vao;
+	glGenVertexArrays(1, &vao);
+	glBindVertexArray(vao);
+	_vao.take(vao);
+	
 	//~
 	glEnable(GL_DEPTH_TEST);
+	CheckGL()
 	glDepthFunc(GL_LESS);
+	CheckGL()
 	glEnable(GL_BLEND);
+	CheckGL()
 	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+	CheckGL()
 	glEnable(GL_ALPHA_TEST);
+	CheckGL()
 }
 
 void EsDirector::deinit()
 {
-	assert ( !_vao);
-	glDeleteVertexArrays(1, &_vao);
-	_vao = 0;
 }
 
 EsDirector* EsDirector::instance()
