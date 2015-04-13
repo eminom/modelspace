@@ -15,6 +15,7 @@
 #include "effects/ParticleNode.h"
 #include "effects/BlenderParticle.h"
 #include "effects/ParticleTex.h"
+#include "effects/FlagSprite.h"
 
 
 #endif

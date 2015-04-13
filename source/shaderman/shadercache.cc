@@ -33,6 +33,7 @@ void ShaderCacheEx::init()
 	AddS(Particle, "Particle.vsh", "Particle.fsh")
 	AddS(ParticleCube, "ParticleCube.vsh", "ParticleCube.fsh")
 	AddS(ParticleTex, "ParticleTex.vsh", "ParticleTex.fsh")
+	AddS(Flag, "Flag.vsh", "Flag.fsh")
 }
 
 ExShader* ShaderCacheEx::shaderFor(ShaderType t)

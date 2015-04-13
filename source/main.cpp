@@ -38,6 +38,9 @@
 #include "utils/io/FileLoader.h"
 #include "texture/TextureData.h"
 
+#include "testcase.h"
+
+
 void test()
 {
 	DD::RawMemo<GLfloat> k;
@@ -72,15 +75,8 @@ int main(void)
 
 	EsNode* root = FieldNode::create(20);
 	root->setVisible(false);
-
-	PngImageData data;
-	data.load("../resource/Mario.png");
-	TextureData tex;
-	tex.initWithPngData(data);
-
-	ParticleTex *pt = ParticleTex::create();
-	pt->setTexture(tex.texture());
-	root->addSub(pt);
+	//_TestParticleTex()
+	_TestFlagSprite()
 
 	EsDirector::instance()->setRoot(root);
 	if( !app.loadObject("exec/script.lua") ){

@@ -19,6 +19,7 @@ enum class ShaderType{
 	Particle,
 	ParticleCube,
 	ParticleTex,
+	Flag,
 };
 
 class ShaderCacheEx

@@ -43,3 +43,9 @@ GLint ExShader::getLocation(const char *name)
 	//}
 	return glGetUniformLocation(_theProgram, name); 
 }
+
+
+GLuint ExShader::program()const
+{
+	return _theProgram;
+}
