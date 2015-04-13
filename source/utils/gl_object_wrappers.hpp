@@ -40,6 +40,14 @@ public:
 		refCounter_ = new int(1);
 	}
 
+	void make()
+	{
+		deinit();
+		T::construct(obj_);
+		T::check(obj_);
+		refCounter_ = new int(1);
+	}
+
 	ObjRef& operator=(const ObjRef&rhs)
 	{
 		return copy(rhs);

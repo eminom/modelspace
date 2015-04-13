@@ -72,11 +72,8 @@ bool AppController::prepareFramebuffer()
 		{1, -1},
 		{1, 1}
 	};
-	GLuint buffer = 0;
-	glGenBuffers(1, &buffer);
-	glBindBuffer(GL_ARRAY_BUFFER, buffer);
+	vertex_.make();
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertice), vertice, GL_STATIC_DRAW);
-	vertex_.take(buffer);
 	return true;
 }
 

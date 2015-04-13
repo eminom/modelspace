@@ -17,10 +17,7 @@ EsDirector::~EsDirector()
 
 void EsDirector::init()
 {
-	GLuint vao;
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
-	_vao.take(vao);
+	_vao.make();
 	
 	//~
 	glEnable(GL_DEPTH_TEST);
