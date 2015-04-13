@@ -15,7 +15,7 @@ extern "C"{
 
 #include "png.h"
 #include "utils/io/FileLoader.h"
-//#include "texture/TextureData.h"
+#include "texture/TextureData.h"
 #include "utils/gl_object_wrappers.hpp"
 
 #include <GL/glew.h>
@@ -89,20 +89,20 @@ void s3(int a)
 		one = nullptr;
 	}
 }
-//
-//void test3()
-//{
-//	PngImageData png;
-//	if( !png.load("../resource/Mario.png")){
-//		fprintf(stderr, "Failed to load so\n");
-//		return;
-//	}
-//	TextureData t;
-//	if( !t.initWithPngData(png)){
-//		fprintf(stderr," Failed to load so\n");
-//		return;
-//	}
-//}
+
+void test3()
+{
+	PngImageData png;
+	if( !png.load("../resource/Mario.png")){
+		fprintf(stderr, "Failed to load so\n");
+		return;
+	}
+	TextureData t;
+	if( !t.initWithPngData(png)){
+		fprintf(stderr," Failed to load so\n");
+		return;
+	}
+}
 
 
 void test2()
