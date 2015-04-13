@@ -72,7 +72,7 @@ bool AppController::prepareFramebuffer()
 		{1, -1},
 		{1, 1}
 	};
-	vertex_.make();
+	vertex_.make_and_bind();
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertice), vertice, GL_STATIC_DRAW);
 	return true;
 }

@@ -40,7 +40,7 @@ public:
 		refCounter_ = new int(1);
 	}
 
-	void make()
+	void make_and_bind()
 	{
 		deinit();
 		T::construct(obj_);

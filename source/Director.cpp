@@ -17,7 +17,7 @@ EsDirector::~EsDirector()
 
 void EsDirector::init()
 {
-	_vao.make();
+	_vao.make_and_bind();
 	
 	//~
 	glEnable(GL_DEPTH_TEST);
