@@ -26,13 +26,13 @@ FrameBufferObj FrameBufferObj::create(int width, int height)
 	GLuint FramebufferName = 0;
 	glGenFramebuffers(1, &FramebufferName);
 	glBindFramebuffer(GL_FRAMEBUFFER, FramebufferName);
-	rv.framebuffer_.take(FramebufferName);
+	rv.framebuffer_.take_and_own(FramebufferName);
 
 	// The texture we're going to render to
 	GLuint renderedTexture = 0;
 	glGenTextures(1, &renderedTexture);	
 	glBindTexture(GL_TEXTURE_2D, renderedTexture);
-	rv.texture_.take(renderedTexture);
+	rv.texture_.take_and_own(renderedTexture);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -42,7 +42,7 @@ FrameBufferObj FrameBufferObj::create(int width, int height)
 	GLuint depthrenderbuffer = 0;
 	glGenRenderbuffers(1, &depthrenderbuffer);
 	glBindRenderbuffer(GL_RENDERBUFFER, depthrenderbuffer);
-	rv.renderbuffer_.take(depthrenderbuffer);
+	rv.renderbuffer_.take_and_own(depthrenderbuffer);
 	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, width, height);
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthrenderbuffer);
 

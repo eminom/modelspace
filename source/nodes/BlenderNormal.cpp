@@ -71,13 +71,13 @@ bool BlenderNormal::initComplex(const char *path){
 	glGenBuffers(1, &normal);
 	glBindBuffer(GL_ARRAY_BUFFER, normal);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(_normal[0])*_normal.size(), &_normal[0], GL_STATIC_DRAW);
-	_normalVBO.take(normal);
+	_normalVBO.take_and_own(normal);
 
 	GLuint color = 0;
 	glGenBuffers(1, &color);
 	glBindBuffer(GL_ARRAY_BUFFER, color);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(_colors[0]) * _colors.size(), &_colors[0], GL_STATIC_DRAW);
-	_colorVBO.take(color);
+	_colorVBO.take_and_own(color);
 	return true;
 }
 

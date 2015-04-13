@@ -32,7 +32,7 @@ public:
 		deinit();
 	}
 
-	void take(GLint obj)
+	void take_and_own(GLint obj)
 	{
 		deinit();
 		T::check(obj);

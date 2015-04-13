@@ -121,7 +121,7 @@ bool TextureData::initWithMipmaps(MipmapInfo* mipmaps, int mipmapsNum, PixelForm
 	GLuint name = 0;
     glGenTextures(1, &name);
 	glBindTexture(GL_TEXTURE_2D, name);
-	_tex.take(name);
+	_tex.take_and_own(name);
 
     if (mipmapsNum == 1)    {
         //glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, _antialiasEnabled ? GL_LINEAR : GL_NEAREST);

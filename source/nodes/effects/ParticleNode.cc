@@ -91,19 +91,19 @@ bool ParticleNode::init()
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertice), vertice, GL_STATIC_DRAW);
-	vbo_.take(vbo);
+	vbo_.take_and_own(vbo);
 
 	GLuint color = 0;
 	glGenBuffers(1, &color);
 	glBindBuffer(GL_ARRAY_BUFFER, color);
 	glBufferData(GL_ARRAY_BUFFER, max_particle_ * sizeof(GLfloat) * 4, nullptr, GL_STREAM_DRAW);
-	color_.take(color);
+	color_.take_and_own(color);
 
 	GLuint poss = 0;
 	glGenBuffers(1, &poss);
 	glBindBuffer(GL_ARRAY_BUFFER, poss);
 	glBufferData(GL_ARRAY_BUFFER, max_particle_ * sizeof(GLfloat) * 4, nullptr, GL_STREAM_DRAW);
-	poss_.take(poss);
+	poss_.take_and_own(poss);
 
 	color_ptr_.alloc(max_particle_*4);
 	poss_ptr_.alloc(max_particle_*4);
