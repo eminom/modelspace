@@ -1,0 +1,3 @@
+[submodule "third/linterop"]
+	path = third/linterop
+	url = https://github.com/eminom/linterop

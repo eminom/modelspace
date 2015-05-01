@@ -15,7 +15,7 @@ extern "C"
 #include "Director.h"
 #include "nodes/DDNodes.h"
 #include "interop/lua_core/lua_core.h"
-#include "lextension.h"
+#include "interop/lextension.h"
 
 
 #include "EsNode.inc" 

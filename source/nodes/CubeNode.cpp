@@ -9,7 +9,7 @@
 #include <vector>
 
 #include "common/shader.hpp"
-#include "interop/lua_access/lua_access.h"
+#include "interop/access/lua_access.h"
 
 extern "C"{
 #include "lua.h"

@@ -12,7 +12,7 @@ add_subdirectory(../external/lpng ${CMAKE_BINARY_DIR}/lib/png)
 
 #aux_source_directory(. MODELTEST_SRC)
 include(SourceList)
-
+include(../third/linterop/src/SourceExports)
 
 #############################
 #############################

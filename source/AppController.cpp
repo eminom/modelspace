@@ -4,7 +4,6 @@
 #include "LuaScriptor.h"
 #include "InputStdProcessor.h"
 #include "InputProcessor.h"
-#include "interop/lua_access/lua_access_macros.h"
 #include <common/text2D.hpp>
 #include "EventCenter.h"
 
