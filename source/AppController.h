@@ -19,7 +19,7 @@ extern "C" {
 #include "lualib.h"
 }
 
-#include "interop/lua_access/refobj.h"
+#include "interop/access/refobj.h"
 #include "FrameBufferObj.h"
 #include "interop/luavm.h"
 

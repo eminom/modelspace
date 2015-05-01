@@ -5,7 +5,7 @@
 
 #include "Common.h"
 #include "GridNode.h"
-#include "interop/lua_access/refobj.h"
+#include "interop/access/refobj.h"
 
 class CubeNode:public GridNode
 {
