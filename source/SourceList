@@ -25,6 +25,11 @@ set(FULL_SRC_LIST ${FULL_SRC_LIST} ${SRC_LIST})
 source_group(Source FILES ${SRC_LIST})
 
 
+set(SRC_LIST
+./interop/interopconf.h
+)
+set(FULL_SRC_LIST ${FULL_SRC_LIST} ${SRC_LIST})
+source_group(interop FILES ${SRC_LIST})
 
 set(SRC_LIST
 ./interop/class/experimental.h
