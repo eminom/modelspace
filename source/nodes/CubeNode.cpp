@@ -17,6 +17,8 @@ extern "C"{
 #include "lauxlib.h"
 }
 
+#include "LuaScriptor.h"
+
 CubeNode::CubeNode()
 	:_simpleNode(nullptr)
 {
