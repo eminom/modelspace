@@ -155,6 +155,7 @@ end
 --]]
 
 function AppObj:OnAppReady()
+	print("More version is coming up !!")
 	print('App is ready(Lua)')
 	printDebugInfo('ddcore')
 	printDebugInfo('DDGraphics_EsNode')
