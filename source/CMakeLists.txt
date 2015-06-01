@@ -62,6 +62,35 @@ target_link_libraries(modelspace libcjson)
 target_link_libraries(modelspace png16)
 
 
+############################
+#Define macros of my own
+macro(ADD_FRAMEWORK fwname appname)
+    find_library(FRAMEWORK_${fwname}
+    	NAMES ${fwname}
+    	PATHS ${CMAKE_OSX_SYSROOT}/System/Library
+    	PATH_SUFFIXES Frameworks
+    	NO_DEFAULT_PATH)
+    if( ${FRAMEWORK_${fwname}} STREQUAL FRAMEWORK_${fwname}-NOTFOUND)
+    	#SEND_ERROR must be called. (stop generating)
+        message(SEND_ERROR ": Framework ${fwname} not found")
+    else()
+        target_link_libraries(${appname} "${FRAMEWORK_${fwname}}/${fwname}")
+        message(STATUS "Framework ${fwname} found at ${FRAMEWORK_${fwname}}")
+    endif()
+endmacro(ADD_FRAMEWORK)
+
+###### Some must be appended to Xcode project.
+if(APPLE)
+	message(STATUS "Searching framework in: ${CMAKE_OSX_SYSROOT}/System/Library")
+	set(CMAKE_XCODE_ATTRIBUTE_CLANG_CXX_LANGUAGE_STANDARD "c++11")
+	message(STATUS "C++ Dialect to C++ 11")
+	ADD_FRAMEWORK(IOKit modelspace)
+	ADD_FRAMEWORK(CoreVideo modelspace)
+	ADD_FRAMEWORK(Cocoa modelspace)
+	ADD_FRAMEWORK(OpenGL modelspace)
+endif()
+
+
 set_target_properties(modelspace
     PROPERTIES
     ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/output"
