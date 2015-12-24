@@ -39,6 +39,7 @@
 #include "texture/TextureData.h"
 
 #include "testcase.h"
+#include "lua_ex.h"
 
 
 void test()
@@ -71,6 +72,7 @@ int main(void)
 	app.setDirector(EsDirector::instance());
 	LuaCore::injectLuaCore(core);
 	LuaCore::doExports(core);
+    luaopen_ex(core);
 	test();
 
 	EsNode* root = FieldNode::create(20);
