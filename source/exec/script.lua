@@ -7,6 +7,15 @@ local AppObj = {
 	name = 'eminem'
 }
 
+local function connectToDBGpS()
+	print("before connect DBGpS")
+	local connect = require "debugger"
+	connect("127.0.0.1", 9000, "luaidekey")
+	print("after connect DBGpS")
+end
+
+connectToDBGpS()
+
 function AppObj:Update()
 	-- mcore.test();
 	-- print('AppObj:Update')
