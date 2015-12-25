@@ -40,6 +40,7 @@
 
 #include "testcase.h"
 #include "lua_ex.h"
+#include "access/lua_access.h"
 
 
 void test()
@@ -69,6 +70,11 @@ int main(void)
 		return -1;
 	}
 	lua_State *core = LuaScriptor::sharedInstance()->getLuaState();
+	inspect_package_path(core);
+	extend_package_path(core, "exec");
+	extend_package_path(core, "exec" _SlashStr "libraries");
+	inspect_package_path(core);
+
 	app.setDirector(EsDirector::instance());
 	LuaCore::injectLuaCore(core);
 	LuaCore::doExports(core);
