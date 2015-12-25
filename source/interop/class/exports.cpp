@@ -16,7 +16,7 @@ extern "C"
 #include "nodes/DDNodes.h"
 #include "interop/lua_core/lua_core.h"
 #include "interop/lextension.h"
-
+#include "interop/access/check_stack.h"
 
 #include "EsNode.inc" 
 

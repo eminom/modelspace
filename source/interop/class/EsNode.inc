@@ -4,7 +4,7 @@
 
 //////////////////
 //These codes shall be generated automatically.
-//Sat Apr 11 2015 00:04:40 GMT+0800 (CST)
+//Thu Dec 24 2015 19:33:47 GMT-0800 (PST)
 
 #define _EsNodeMetaString	"DDGraphics_EsNode"
 
@@ -157,6 +157,7 @@ static luaL_Reg EsNodeTmpIndex[] = {
 void loadEsNodeTmpIndex(lua_State*L)
 {
 	//_DeclareState()
+	_BC(L);
 	luaL_newmetatable(L, _EsNodeMetaString);	
 
 	// If it is necessary to get a GC for our class.
@@ -173,6 +174,7 @@ void loadEsNodeTmpIndex(lua_State*L)
 	luaL_getmetatable(L, _${BaseClass}MetaString);
 	lua_setmetatable(L, -2);
 #endif
+	lua_pop(L, 1);
 }
 
 
@@ -181,7 +183,7 @@ void loadEsNodeTmpIndex(lua_State*L)
 
 //////////////////
 //These codes shall be generated automatically.
-//Sat Apr 11 2015 00:04:40 GMT+0800 (CST)
+//Thu Dec 24 2015 19:33:47 GMT-0800 (PST)
 
 #define _ParticleNodeMetaString	"DDGraphics_ParticleNode"
 
@@ -204,6 +206,7 @@ static luaL_Reg ParticleNodeTmpIndex[] = {
 void loadParticleNodeTmpIndex(lua_State*L)
 {
 	//_DeclareState()
+	_BC(L);
 	luaL_newmetatable(L, _ParticleNodeMetaString);	
 
 	// If it is necessary to get a GC for our class.
@@ -220,6 +223,7 @@ void loadParticleNodeTmpIndex(lua_State*L)
 	luaL_getmetatable(L, _EsNodeMetaString);
 	lua_setmetatable(L, -2);
 #endif
+	lua_pop(L, 1);
 }
 
 
@@ -228,7 +232,7 @@ void loadParticleNodeTmpIndex(lua_State*L)
 
 //////////////////
 //These codes shall be generated automatically.
-//Sat Apr 11 2015 00:04:40 GMT+0800 (CST)
+//Thu Dec 24 2015 19:33:47 GMT-0800 (PST)
 
 #define _BlenderNodeMetaString	"DDGraphics_BlenderNode"
 
@@ -274,6 +278,7 @@ static luaL_Reg BlenderNodeTmpIndex[] = {
 void loadBlenderNodeTmpIndex(lua_State*L)
 {
 	//_DeclareState()
+	_BC(L);
 	luaL_newmetatable(L, _BlenderNodeMetaString);	
 
 	// If it is necessary to get a GC for our class.
@@ -290,6 +295,7 @@ void loadBlenderNodeTmpIndex(lua_State*L)
 	luaL_getmetatable(L, _EsNodeMetaString);
 	lua_setmetatable(L, -2);
 #endif
+	lua_pop(L, 1);
 }
 
 
@@ -298,7 +304,7 @@ void loadBlenderNodeTmpIndex(lua_State*L)
 
 //////////////////
 //These codes shall be generated automatically.
-//Sat Apr 11 2015 00:04:40 GMT+0800 (CST)
+//Thu Dec 24 2015 19:33:47 GMT-0800 (PST)
 
 #define _BlenderNormalMetaString	"DDGraphics_BlenderNormal"
 
@@ -321,6 +327,7 @@ static luaL_Reg BlenderNormalTmpIndex[] = {
 void loadBlenderNormalTmpIndex(lua_State*L)
 {
 	//_DeclareState()
+	_BC(L);
 	luaL_newmetatable(L, _BlenderNormalMetaString);	
 
 	// If it is necessary to get a GC for our class.
@@ -337,6 +344,7 @@ void loadBlenderNormalTmpIndex(lua_State*L)
 	luaL_getmetatable(L, _BlenderNodeMetaString);
 	lua_setmetatable(L, -2);
 #endif
+	lua_pop(L, 1);
 }
 
 
@@ -345,7 +353,7 @@ void loadBlenderNormalTmpIndex(lua_State*L)
 
 //////////////////
 //These codes shall be generated automatically.
-//Sat Apr 11 2015 00:04:40 GMT+0800 (CST)
+//Thu Dec 24 2015 19:33:47 GMT-0800 (PST)
 
 #define _BlenderParticleMetaString	"DDGraphics_BlenderParticle"
 
@@ -368,6 +376,7 @@ static luaL_Reg BlenderParticleTmpIndex[] = {
 void loadBlenderParticleTmpIndex(lua_State*L)
 {
 	//_DeclareState()
+	_BC(L);
 	luaL_newmetatable(L, _BlenderParticleMetaString);	
 
 	// If it is necessary to get a GC for our class.
@@ -384,6 +393,7 @@ void loadBlenderParticleTmpIndex(lua_State*L)
 	luaL_getmetatable(L, _BlenderNormalMetaString);
 	lua_setmetatable(L, -2);
 #endif
+	lua_pop(L, 1);
 }
 
 
@@ -392,7 +402,7 @@ void loadBlenderParticleTmpIndex(lua_State*L)
 
 //////////////////
 //These codes shall be generated automatically.
-//Sat Apr 11 2015 00:04:40 GMT+0800 (CST)
+//Thu Dec 24 2015 19:33:47 GMT-0800 (PST)
 
 #define _AxisNodeMetaString	"DDGraphics_AxisNode"
 
@@ -415,6 +425,7 @@ static luaL_Reg AxisNodeTmpIndex[] = {
 void loadAxisNodeTmpIndex(lua_State*L)
 {
 	//_DeclareState()
+	_BC(L);
 	luaL_newmetatable(L, _AxisNodeMetaString);	
 
 	// If it is necessary to get a GC for our class.
@@ -431,6 +442,7 @@ void loadAxisNodeTmpIndex(lua_State*L)
 	luaL_getmetatable(L, _EsNodeMetaString);
 	lua_setmetatable(L, -2);
 #endif
+	lua_pop(L, 1);
 }
 
 
@@ -439,7 +451,7 @@ void loadAxisNodeTmpIndex(lua_State*L)
 
 //////////////////
 //These codes shall be generated automatically.
-//Sat Apr 11 2015 00:04:40 GMT+0800 (CST)
+//Thu Dec 24 2015 19:33:47 GMT-0800 (PST)
 
 #define _FieldNodeMetaString	"DDGraphics_FieldNode"
 
@@ -462,6 +474,7 @@ static luaL_Reg FieldNodeTmpIndex[] = {
 void loadFieldNodeTmpIndex(lua_State*L)
 {
 	//_DeclareState()
+	_BC(L);
 	luaL_newmetatable(L, _FieldNodeMetaString);	
 
 	// If it is necessary to get a GC for our class.
@@ -478,6 +491,7 @@ void loadFieldNodeTmpIndex(lua_State*L)
 	luaL_getmetatable(L, _EsNodeMetaString);
 	lua_setmetatable(L, -2);
 #endif
+	lua_pop(L, 1);
 }
 
 
@@ -486,7 +500,7 @@ void loadFieldNodeTmpIndex(lua_State*L)
 
 //////////////////
 //These codes shall be generated automatically.
-//Sat Apr 11 2015 00:04:40 GMT+0800 (CST)
+//Thu Dec 24 2015 19:33:47 GMT-0800 (PST)
 
 #define _LightNodeMetaString	"DDGraphics_LightNode"
 
@@ -569,6 +583,7 @@ static luaL_Reg LightNodeTmpIndex[] = {
 void loadLightNodeTmpIndex(lua_State*L)
 {
 	//_DeclareState()
+	_BC(L);
 	luaL_newmetatable(L, _LightNodeMetaString);	
 
 	// If it is necessary to get a GC for our class.
@@ -585,6 +600,7 @@ void loadLightNodeTmpIndex(lua_State*L)
 	luaL_getmetatable(L, _EsNodeMetaString);
 	lua_setmetatable(L, -2);
 #endif
+	lua_pop(L, 1);
 }
 
 
@@ -593,7 +609,7 @@ void loadLightNodeTmpIndex(lua_State*L)
 
 //////////////////
 //These codes shall be generated automatically.
-//Sat Apr 11 2015 00:04:40 GMT+0800 (CST)
+//Thu Dec 24 2015 19:33:47 GMT-0800 (PST)
 
 #define _MimicNodeMetaString	"DDGraphics_MimicNode"
 
@@ -616,6 +632,7 @@ static luaL_Reg MimicNodeTmpIndex[] = {
 void loadMimicNodeTmpIndex(lua_State*L)
 {
 	//_DeclareState()
+	_BC(L);
 	luaL_newmetatable(L, _MimicNodeMetaString);	
 
 	// If it is necessary to get a GC for our class.
@@ -632,6 +649,7 @@ void loadMimicNodeTmpIndex(lua_State*L)
 	luaL_getmetatable(L, _EsNodeMetaString);
 	lua_setmetatable(L, -2);
 #endif
+	lua_pop(L, 1);
 }
 
 
@@ -640,7 +658,7 @@ void loadMimicNodeTmpIndex(lua_State*L)
 
 //////////////////
 //These codes shall be generated automatically.
-//Sat Apr 11 2015 00:04:40 GMT+0800 (CST)
+//Thu Dec 24 2015 19:33:47 GMT-0800 (PST)
 
 #define _CubeNodeMetaString	"DDGraphics_CubeNode"
 
@@ -682,6 +700,7 @@ static luaL_Reg CubeNodeTmpIndex[] = {
 void loadCubeNodeTmpIndex(lua_State*L)
 {
 	//_DeclareState()
+	_BC(L);
 	luaL_newmetatable(L, _CubeNodeMetaString);	
 
 	// If it is necessary to get a GC for our class.
@@ -698,6 +717,7 @@ void loadCubeNodeTmpIndex(lua_State*L)
 	luaL_getmetatable(L, _EsNodeMetaString);
 	lua_setmetatable(L, -2);
 #endif
+	lua_pop(L, 1);
 }
 
 #define EXPORT_LOADNODES()\
