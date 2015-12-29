@@ -14,7 +14,7 @@ local function connectToDBGpS()
 	print("after connect DBGpS")
 end
 
--- connectToDBGpS()
+--connectToDBGpS()
 
 function AppObj:Update()
 	-- mcore.test();
@@ -91,6 +91,7 @@ end
 
 ---- [[
 function initView()
+  print("I shall break in here")
 	local root = ddcore.GetEsNodeRoot()
 	local light = dd.createLightNode(0.8, 0.8, 0.8)
 	light:setVAngleSpeed(0.9)
