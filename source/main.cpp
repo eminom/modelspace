@@ -40,7 +40,7 @@
 
 #include "testcase.h"
 #include "lua_ex.h"
-#include "access/lua_access.h"
+#include "interop/access/lua_access.h"
 
 
 void test()
@@ -84,7 +84,7 @@ int main(void)
 	EsNode* root = FieldNode::create(20);
 	root->setVisible(false);
 	//_TestParticleTex()
-	_TestFlagSprite()
+	//_TestFlagSprite()
 
 	EsDirector::instance()->setRoot(root);
 	if( !app.loadObject("exec/script.lua") ){

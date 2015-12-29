@@ -193,7 +193,7 @@ void AppController::mainLoop()
 			_director->render(mvp);
 		};
 
-		if(0){
+		if(1){
 			startFramebuffer();
 			drawer();
 			finalizeFramebuffer();

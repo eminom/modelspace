@@ -14,7 +14,7 @@ local function connectToDBGpS()
 	print("after connect DBGpS")
 end
 
-connectToDBGpS()
+-- connectToDBGpS()
 
 function AppObj:Update()
 	-- mcore.test();
@@ -109,13 +109,13 @@ function initView()
 	root:addSub(dd.createBlenderParticle("objects/uvsphere8.json", 60000, 0.03))
 	do return end
 	--]]
-	-- root:addSub(dd.createParticleNode(50000))
+	--root:addSub(dd.createParticleNode(50000))
 
 	-- ParticldeNode test
 	-- root:addSub(dd.createParticleNode())
 	-- do return end
 
-	--[[
+	----[[
 	local colors = {
 		{0,0,1,0.5},
 		{0,1,1,1},
@@ -132,7 +132,8 @@ function initView()
 			root:addSub(box)
 		end
 	end
-	root:addSub(dd.createAxisNode())
+	
+	-- root:addSub(dd.createAxisNode())
 	--]]
 
 	-- 	for(int i=-5;i<=0;++i){
@@ -143,10 +144,11 @@ function initView()
 	-- 	one->setColor(glm::vec4(0.7, 0.3, 0.3, 0.5));
 	-- 	root->addSub(one);
 	-- }
+	
 	--[[
 	for i=-5,0 do
 		-- local cube = dd.createCubeNode(0.15 * i, 0.15 * i, 0.1, 0.1, 0.1)
-		cube = dd.createCubeNode(0.15 * i, 0.15 * i)  
+		local cube = dd.createCubeNode(0.15 * i, 0.15 * i)  
 		-- print("Creating with default xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
 		cube:shiftXZ()
 		cube:setColor(0.7, 0.3, 0.3, 0.5)
