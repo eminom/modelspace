@@ -19,6 +19,7 @@ set(SRC_LIST
 ./InputProcessor.cpp
 ./InputStdProcessor.cpp
 ./LuaScriptor.cpp
+./lua_ex.cc
 ./main.cpp
 )
 set(FULL_SRC_LIST ${FULL_SRC_LIST} ${SRC_LIST})
