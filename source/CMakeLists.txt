@@ -3,7 +3,9 @@ project(modelspace)
 
 # Ignore tolua for now.
 
-add_subdirectory(../external/lua/src ${CMAKE_BINARY_DIR}/lib/lua)
+#add_subdirectory(../external/lua/src ${CMAKE_BINARY_DIR}/lib/lua)
+add_subdirectory(../third/lua5p1var/src ${CMAKE_BINARY_DIR}/lib/lua)
+add_subdirectory(../third/luasocket ${CMAKE_BINARY_DIR}/lib/luasocket)
 add_subdirectory(../external/glm     ${CMAKE_BINARY_DIR}/lib/glm)
 add_subdirectory(../external/glfw-3.1.1 ${CMAKE_BINARY_DIR}/lib/glfw)
 add_subdirectory(../external/glew-1.12.0 ${CMAKE_BINARY_DIR}/lib/glew)
@@ -52,6 +54,7 @@ include_directories(../external/glew-1.12.0/include)
 include_directories(../external/cJSON)
 include_directories(../)
 include_directories(../source)
+include_directories(../third)
 include_directories(../external/lpng)
 include_directories(${CMAKE_BINARY_DIR}/lib/png)
 
@@ -60,6 +63,11 @@ target_link_libraries(modelspace libglew_shared)
 target_link_libraries(modelspace glfw)
 target_link_libraries(modelspace libcjson)
 target_link_libraries(modelspace png16)
+target_link_libraries(modelspace libluasocket)
+
+if(WIN32)
+	target_link_libraries(modelspace ws2_32)
+endif()
 
 
 ############################
