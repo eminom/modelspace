@@ -3,4 +3,4 @@
 	url = https://github.com/eminom/linterop
 [submodule "third/lua5p1var"]
 	path = third/lua5p1var
-	url = https://eminom@github.com/eminom/lua5p1var.git
+	url = https://github.com/eminom/lua5p1var.git
